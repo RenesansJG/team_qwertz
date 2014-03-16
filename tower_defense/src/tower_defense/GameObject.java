@@ -1,6 +1,6 @@
 package tower_defense;
 
 public class GameObject {
-	double x;
-	double y;
+	protected int x;
+	protected int y;
 }
