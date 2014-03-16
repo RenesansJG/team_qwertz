@@ -8,6 +8,11 @@ public class Console {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private static int indent = 0;
 	
+	// print Geri
+	public static void printGeri(Object o) {
+		System.out.print("Geri");
+	}
+	
 	// print without indent
 	public static void print(Object o) {
 		System.out.print(o);
