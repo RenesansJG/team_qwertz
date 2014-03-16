@@ -75,6 +75,8 @@ public class Console {
 	
 	public static void main(String[] args) {
 		try {
+			int mainMenuChoice = Console.readChoice("Új játék", "Kilépés");
+			
 			br.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();

@@ -50,7 +50,7 @@ public abstract class GameObject implements ITickable {
 		int choice = Console.readChoice("igen", "nem");
 		
 		Console.deIndent();
-		return choice == 1 ? true : false;
+		return choice == 0 ? true : false;
 	}
 	
 	public final double getDistance(GameObject object) {
