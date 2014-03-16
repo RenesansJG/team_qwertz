@@ -53,9 +53,9 @@ public class Console {
 			println((i + 1) + " = " + choices[i]);
 		}
 		
-		int choice = 0;
+		int choice;
 		
-		while (choice == 0) {
+		do {
 			printi("Válasz: ");
 			
 			try {
@@ -68,7 +68,7 @@ public class Console {
 				print("Rossz válasz. ");
 				choice = 0;
 			}
-		}
+		} while (choice == 0);
 		
 		return choice - 1;
 	}
