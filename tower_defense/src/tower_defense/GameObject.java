@@ -47,8 +47,10 @@ public abstract class GameObject implements ITickable {
 		effect();
 		action();
 		
+		int choice = Console.readChoice("igen", "nem");
+		
 		Console.deIndent();
-		return false; // egyelõre nem törlünk, false-sal tér vissza
+		return choice == 1 ? true : false;
 	}
 	
 	public final double getDistance(GameObject object) {
