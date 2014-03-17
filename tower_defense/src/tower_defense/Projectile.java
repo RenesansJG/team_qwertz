@@ -17,19 +17,23 @@ public class Projectile extends MovableGameObject {
 	}
 	
 	@Override
-	public void action() throws IOException {
+	public boolean action() throws IOException {
 		Console.println(this + ".action()");
 		Console.indent();
 		
-		Console.println("Robbanjon a " + this + " lövedék?");
-		int choice = Console.readChoice("igen", "nem");
+		boolean ret = false;
+		
+		Console.println("Robbanjon a lövedék?");
+		int choice = Console.choose("igen", "nem");
 		
 		// Ha robban a lövedék
 		if (choice == 0) {
 			explode();
+			ret = true;
 		}
 		
 		Console.deIndent();
+		return ret;
 	}
 	
 	// lövedék robbanása
@@ -58,7 +62,7 @@ public class Projectile extends MovableGameObject {
 
 	@Override
 	public String toString() {
-		return "Projectile #" + id;
+		return "projectile#" + id;
 	}
 	
 }

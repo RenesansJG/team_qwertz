@@ -2,7 +2,8 @@ package tower_defense;
 
 import java.io.IOException;
 
-public abstract class Tower extends GameObject {
+public abstract class Trap extends GameObject {
+	private static final long serialVersionUID = -1174807768236727847L;
 
 	@Override
 	public boolean action() throws IOException {
@@ -13,9 +14,9 @@ public abstract class Tower extends GameObject {
 	@Override
 	public void affect(Effect effect) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public abstract String toString();
 }

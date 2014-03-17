@@ -14,9 +14,9 @@ public abstract class Enemy extends MovableGameObject {
 	}
 	
 	@Override
-	public void action() throws IOException {
+	public boolean action() throws IOException {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override

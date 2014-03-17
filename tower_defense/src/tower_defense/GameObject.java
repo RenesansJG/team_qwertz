@@ -1,19 +1,26 @@
 package tower_defense;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GameObject implements ITickable {
+public abstract class GameObject implements ITickable, Serializable {
+	private static final long serialVersionUID = 8508068704731173934L;
+	private static int count;
+	protected int id;
+	
 	protected double x;
 	protected double y;
 	protected final List<Effect> effects;
 	
 	protected GameObject() {
+		id = count++;
+		
 		effects = new ArrayList<Effect>();
 	}
 	
-	public abstract void action() throws IOException;
+	public abstract boolean action() throws IOException;
 	public abstract void affect(Effect effect);
 	
 	// összes effekt léptetése (applyTick minden effecten)
@@ -45,12 +52,10 @@ public abstract class GameObject implements ITickable {
 		Console.indent();
 		
 		effect();
-		action();
-		
-		int choice = Console.readChoice("igen", "nem");
+		boolean isToBeRemoved = action();
 		
 		Console.deIndent();
-		return choice == 0 ? true : false;
+		return isToBeRemoved;
 	}
 	
 	public final double getDistance(GameObject object) {

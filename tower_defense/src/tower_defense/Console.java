@@ -8,17 +8,12 @@ public class Console {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private static int indent = 0;
 	
-	// print Geri
-	public static void printGeri(Object o) {
-		System.out.print("Geri");
-	}
-	
-	// print without indent
+	// kiírás tabok nélkül (sor közepéhez, végéhez)
 	public static void print(Object o) {
 		System.out.print(o);
 	}
 	
-	// print with indent
+	// kiírás elején tabokkal (sor elejéhez)
 	public static void printi(Object o) {
 		for (int i = 0; i < indent; i++) {
 			System.out.print("  ");
@@ -27,7 +22,7 @@ public class Console {
 		System.out.print(o);
 	}
 	
-	// print line with indent
+	// teljes sor kiírása elején tabokkal
 	public static void println(Object o) {
 		for (int i = 0; i < indent; i++) {
 			System.out.print("  ");
@@ -36,16 +31,40 @@ public class Console {
 		System.out.println(o);
 	}
 	
+	// üres sor kiírása
+	public static void println() {
+		System.out.println();
+	}
+	
+	// eggyel beljebb kezdés (+tab)
 	public static void indent() {
 		indent++;
 	}
 	
+	// eggyel kijjeb kezdés (-tab)
 	public static void deIndent() {
 		if (indent > 0)
 			indent--;
 	}
 	
-	public static int readChoice(String... choices) throws IOException {
+	// egy egész szám beolvasása
+	public static int readInt() throws IOException {
+		try {
+			return Integer.parseInt(readLine());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+	
+	// egy sor beolvasása
+	public static String readLine() throws IOException {
+		return br.readLine();
+	}
+	
+	// listából választás
+	// paraméterek: a lista elemei
+	// visszatérés: hanyadik elemet választotta a felhasználó (0-tól indexelünk)
+	public static int choose(String... choices) throws IOException {
 		if (choices == null || choices.length == 0)
 			return 0;
 		
@@ -53,33 +72,209 @@ public class Console {
 			println((i + 1) + " = " + choices[i]);
 		}
 		
-		int choice;
+		printi("Válasz: ");
+		int choice = readInt();
 		
-		do {
-			printi("Válasz: ");
-			
-			try {
-				choice = Integer.parseInt(br.readLine());
-			} catch (NumberFormatException nfe) {
-				choice = 0;
-			}
-			
-			if (choice < 1 || choice > choices.length) {
-				print("Rossz válasz. ");
-				choice = 0;
-			}
-		} while (choice == 0);
+		while (choice < 1 || choice > choices.length) {
+			printi("Rossz válasz. Válasz: ");
+			choice = readInt();
+		}
 		
 		return choice - 1;
 	}
 	
+	// eldöntendõ kérdés
+	// visszatérés: igaz, ha az igent választotta a felhasználó,
+	//              hamis ha a nemet
+	public static boolean chooseYesNo() throws IOException {
+		return choose("Igen", "Nem") == 0 ? true : false;
+	}
+	
+	// main
 	public static void main(String[] args) {
 		try {
-			int mainMenuChoice = Console.readChoice("Új játék", "Kilépés");
+			// welcome üzenet
+			println("A két torony");
+			println("© 2014 team_qwertz");
+			println();
+			
+			// inicializáció
+			init();
+			
+			while (true) {
+				println();
+				
+				// fõmenü
+				int choice = choose(
+						"Objektum hozzáadása",
+						"Objektumok listázása",
+						"Objektum eltávolítása",
+						"Objektum léptetése",
+						"Torony fejlesztése",
+						"Kristály alkalmazása tornyon vagy akadályon",
+						"Játék mentése",
+						"Másik játék betöltése",
+						"Kilépés");
+				
+				switch (choice) {
+				case 0: // add object
+					addObject();
+					break;
+				case 1: // list objects
+					listObjects();
+					break;
+				case 2: // remove object
+					break;
+				case 3: // apply tick
+					break;
+				case 4: // upgrade tower
+					break;
+				case 5: // apply crystal
+					break;
+				case 6: // save game
+					saveGame();
+					break;
+				case 7: // load game
+					loadGame();
+					break;
+				case 8: // exit
+					if (exit()) {
+						return;
+					}
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// inicializáció
+	public static void init() {
+		// új játék indítása
+		Game.newGame();
+	}
+	
+	// add object menüpont
+	public static void addObject() throws IOException {
+		println();
+		println("Milyen objektum legyen?");
+		
+		int choice = choose("Torony", "Akadály", "Ellenség");
+		
+		switch (choice) {
+		case 0: // tower
+			addTower();
+			break;
+		case 1: // trap
+			addTrap();
+			break;
+		case 2: // enemy
+			addEnemy();
+			break;
+		}
+	}
+	
+	// add tower menüpont
+	public static void addTower() throws IOException {
+		println();
+		println("Milyen torony legyen?");
+		
+		int choice = choose("Piros", "Kék", "Zöld");
+		
+		switch (choice) {
+		case 0: // redTower
+			Game.getMap().addObject(new RedTower());
+			break;
+		case 1: // greenTower
+			Game.getMap().addObject(new GreenTower());
+			break;
+		case 2: // blueTower
+			Game.getMap().addObject(new BlueTower());
+			break;
+		}
+	}
+	
+	// add trap menüpont
+	public static void addTrap() throws IOException {
+		println();
+		println("Milyen akadály legyen?");
+		
+		int choice = choose("Sebzõ", "Lassító");
+		
+		switch (choice) {
+		case 0: // damageTrap
+			Game.getMap().addObject(new DamageTrap());
+			break;
+		case 1: // slowTrap
+			Game.getMap().addObject(new SlowTrap());
+			break;
+		}
+	}
+	
+	// add enemy menüpont
+	public static void addEnemy() {
+		// TODO method stub
+	}
+	
+	// list objects menüpont
+	public static void listObjects() {
+		for (GameObject object : Game.getMap().getObjects()) {
+			println(object);
+		}
+	}
+	
+	// save game menüpont
+	public static void saveGame() throws IOException {
+		while (true) {
+			printi("Mentés fájlneve: ");
+			String file = readLine();
+			boolean saved = Game.saveGame(file);
+			
+			if (saved) {
+				break;
+			} else {
+				println("Hiba a mentéskor!");
+			}
+		}
+	}
+	
+	// load game menüpont
+	public static void loadGame() throws IOException {
+		println();
+		println("Mented a játékot?");
+		
+		if (chooseYesNo()) {
+			saveGame();
+		}
+		
+		println();
+		
+		while (true) {
+			printi("Betöltés fájlneve: ");
+			String file = readLine();
+			boolean loaded = Game.loadGame(file);
+			
+			if (loaded) {
+				break;
+			} else {
+				println("Hiba a betöltéskor!");
+			}
+		}
+	}
+	
+	public static boolean exit() throws IOException {
+		println();
+		println("Biztosan kilépsz?");
+		
+		if (chooseYesNo()) {
+			println();
+			println("Köszönjük a játékot!");
 			
 			br.close();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			return true;
 		}
+		
+		return false;
 	}
 }
