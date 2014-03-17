@@ -262,8 +262,23 @@ public class Console {
 	}
 	
 	// apply tick menüpont
-	public static void applyTick() {
-		// TODO method stub
+	public static void applyTick() throws IOException {
+		// TODO 
+		printi("ID: ");
+		GameObject object = null;
+		
+		do {
+			int id = readInt();
+			
+			for (GameObject currObject : Game.getMap().getObjects()) {
+				if (currObject.id == id) {
+					object = currObject;
+					break;
+				}
+			}
+		} while (object == null);
+		
+		object.applyTick();
 	}
 	
 	// upgrade tower menüpont
@@ -330,5 +345,25 @@ public class Console {
 		}
 		
 		return false;
+	}
+	
+	public static GameObject getObjectFromUser() throws IOException {
+		GameObject object = null;
+		
+		do {
+			int id = Console.readInt();
+			
+			if (id == -1)
+				return null;
+			
+			for (GameObject currObject : Game.getMap().getObjects()) {
+				if (currObject.id == id) {
+					object = currObject;
+					break;
+				}
+			}
+		} while (object == null);
+		
+		return object;
 	}
 }

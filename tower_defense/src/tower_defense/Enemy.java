@@ -11,8 +11,13 @@ public abstract class Enemy extends MovableGameObject {
 	}
 	
 	// ha lesz takeDamage method és/vagy visitor pattern a damagere is akkor nem kell!
-	public HP getHP() {
-		return hp;
+	public final void takeDamage(Damage damage) {
+		Console.println(this + ".takeDamage(" + damage + ")");
+		Console.indent();
+		
+		hp.takeDamage(damage);
+		
+		Console.deIndent();
 	}
 	
 	@Override
@@ -42,4 +47,6 @@ public abstract class Enemy extends MovableGameObject {
 		
 		return true; // az enemy ellenséges
 	}
+	
+	
 }

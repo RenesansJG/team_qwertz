@@ -8,6 +8,11 @@ public class HP implements Serializable {
 	// resistMap (?)
 	
 	public void takeDamage(Damage damage) {
-		
+		Console.println(this + ".damage(" + damage + ")");
+	}
+	
+	@Override
+	public String toString() {
+		return ("hp");
 	}
 }

@@ -1,6 +1,7 @@
 package tower_defense;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Projectile extends MovableGameObject {
@@ -33,14 +34,29 @@ public class Projectile extends MovableGameObject {
 	}
 	
 	// lövedék robbanása
-	public void explode() {
+	public void explode() throws IOException {
 		Console.println(this + ".explode()");
 		Console.indent();
 		
-		for (GameObject object : Game.getMap().getObjects()) {
+		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
+		
+		Console.println("Melyik objektumok vannak a lövedék AoE-jében? (-1 = vége)");
+		
+		while (true) {
+			GameObject object = Console.getObjectFromUser();
+			
+			if (object == null) {
+				break;
+			}
+			
+			objectsToDamage.add(object);
+		}
+		
+		
+		for (GameObject object : objectsToDamage) {
 			if (object.isEnemy()) {
 				Enemy enemy = (Enemy) object;
-				enemy.getHP().takeDamage(damage);
+				enemy.takeDamage(damage);
 			}
 		}
 		
