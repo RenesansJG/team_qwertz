@@ -268,7 +268,9 @@ public class Console {
 	
 	// upgrade tower menüpont
 	public static void upgradeTower() {
-		// TODO method stub
+		printi("ID: "); println();
+		
+		
 	}
 	
 	// apply crystal menüpont
