@@ -37,10 +37,7 @@ public class Projectile extends MovableGameObject {
 		Console.println(this + ".explode()");
 		Console.indent();
 		
-		// objektumok listájának lekérése
-		List<GameObject> objects = Game.getMap().getObjects();
-		
-		for (GameObject object : objects) {
+		for (GameObject object : Game.getMap().getObjects()) {
 			if (object.isEnemy()) {
 				Enemy enemy = (Enemy) object;
 				enemy.getHP().takeDamage(damage);

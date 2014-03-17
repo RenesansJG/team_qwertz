@@ -249,8 +249,16 @@ public class Console {
 	}
 	
 	// remove object menüpont
-	public static void removeObject() {
-		// TODO method stub
+	public static void removeObject() throws IOException {
+		printi("ID: ");
+		
+		GameMap gameMap = Game.getMap();
+		boolean removed = gameMap.removeObject(readInt());
+		
+		while (removed != true) {
+			printi("Nincs ilyen ID. ID: ");
+			removed = gameMap.removeObject(readInt());
+		}
 	}
 	
 	// apply tick menüpont

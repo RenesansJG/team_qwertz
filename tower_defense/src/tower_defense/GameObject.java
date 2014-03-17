@@ -8,7 +8,7 @@ import java.util.List;
 public abstract class GameObject implements ITickable, Serializable {
 	private static final long serialVersionUID = 8508068704731173934L;
 	private static int count;
-	protected int id;
+	protected final int id;
 	
 	protected double x;
 	protected double y;

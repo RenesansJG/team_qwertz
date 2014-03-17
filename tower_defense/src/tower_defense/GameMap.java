@@ -2,20 +2,23 @@ package tower_defense;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameMap implements Serializable {
 	private static final long serialVersionUID = -2497706162553103752L;
 	private final List<Node> nodes;         // node-ok listája
-	private final List<GameObject> objects; // objektumok listája
+	private final Map<Integer, GameObject> objects; // objektumok mapje, a kulcs az objektum id-je
 	
 	// map konstruktor
 	public GameMap() {
 		Console.println("new GameMap()");
 		
 		nodes = new ArrayList<Node>();
-		objects = new ArrayList<GameObject>();
+		objects = new HashMap<Integer, GameObject>();
 	}
 	
 	// node hozzáadása a maphez
@@ -26,24 +29,31 @@ public class GameMap implements Serializable {
 	}
 	
 	// az összes objektum listájának lekérése
-	public List<GameObject> getObjects() {
+	public Collection<GameObject> getObjects() {
 		Console.println(this + ".getObjects()");
 		
-		return Collections.unmodifiableList(objects);
+		return Collections.unmodifiableCollection(objects.values());
 	}
 	
 	// objektum hozzáadása a maphez
 	public void addObject(GameObject object) {
 		Console.println(this + ".addObject(" + object + ")");
 		
-		objects.add(object);
+		objects.put(object.id, object);
 	}
 	
 	// objektum eltávolítása a maprõl
-	public void removeObject(GameObject object) {
+	public boolean removeObject(GameObject object) {
 		Console.println(this + ".removeObject(" + object + ")");
 		
-		objects.remove(object);
+		return objects.remove(object.id) != null;
+	}
+	
+	// adott id-jû objektum eltávolítása a maprõl
+	public boolean removeObject(int id) {
+		Console.println(this + ".removeObject(" + id + ")");
+		
+		return objects.remove(id) != null;
 	}
 	
 	// toString függvény kiíratáshoz
