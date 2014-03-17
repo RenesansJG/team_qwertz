@@ -1,26 +1,40 @@
 package tower_defense;
 
-public abstract class Effect implements ITickable {
-	private static int cnt = 0;
+import java.io.Serializable;
+
+public abstract class Effect implements ITickable, Serializable {
+	private static final long serialVersionUID = -1973848083850121683L;
+	private static int count = 0;
 	protected final int id;
 	
-	private int remainingTicks;
+	//private int remainingTicks;
 	
 	protected Effect() {
-		id = cnt++;
+		id = count++;
 	}
 	
 	@Override
 	public final boolean applyTick() {
 		Console.println(this + ".applyTick()");
 		
-		return false;
+		return true; // az effekteket egyelõre mindig töröljük
 	}
 	
-	public void apply(Tower tower) {}
-	public void apply(DamageTrap damageTrap) {}
-	public void apply(SlowTrap slowTrap) {}
-	public void apply(Enemy enemy) {}
+	public void apply(Tower tower) {
+		Console.println(this + ".apply(" + tower + ")");
+	}
+	
+	public void apply(DamageTrap damageTrap) {
+		Console.println(this + ".apply(" + damageTrap + ")");
+	}
+	
+	public void apply(SlowTrap slowTrap) {
+		Console.println(this + ".apply(" + slowTrap + ")");
+	}
+	
+	public void apply(Enemy enemy) {
+		Console.println(this + ".apply(" + enemy + ")");
+	}
 	
 	@Override
 	public abstract String toString();

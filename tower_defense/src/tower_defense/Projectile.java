@@ -4,30 +4,26 @@ import java.io.IOException;
 import java.util.List;
 
 public class Projectile extends MovableGameObject {
-	private static int cnt;
-	private final int id;
+	private static final long serialVersionUID = -3507357373445026085L;
 	
 	private Damage damage;
-	private double AoE;
+	//private double AoE;
 	
 	public Projectile() {
-		id = cnt++;
-		
 		damage = new Damage();
 	}
 	
 	@Override
-	public boolean action() throws IOException {
+	public final boolean action() throws IOException {
 		Console.println(this + ".action()");
 		Console.indent();
 		
 		boolean ret = false;
 		
 		Console.println("Robbanjon a lövedék?");
-		int choice = Console.choose("igen", "nem");
 		
 		// Ha robban a lövedék
-		if (choice == 0) {
+		if (Console.chooseYesNo()) {
 			explode();
 			ret = true;
 		}
@@ -57,7 +53,11 @@ public class Projectile extends MovableGameObject {
 	@Override
 	public void affect(Effect effect) {
 		Console.println(this + ".affect(" + effect + ")");
+		Console.indent();
+		
 		// nem ad ki effektet
+		
+		Console.deIndent();
 	}
 
 	@Override

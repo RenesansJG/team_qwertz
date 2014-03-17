@@ -124,12 +124,16 @@ public class Console {
 					listObjects();
 					break;
 				case 2: // remove object
+					removeObject();
 					break;
 				case 3: // apply tick
+					applyTick();
 					break;
 				case 4: // upgrade tower
+					upgradeTower();
 					break;
 				case 5: // apply crystal
+					applyCrystal();
 					break;
 				case 6: // save game
 					saveGame();
@@ -213,15 +217,55 @@ public class Console {
 	}
 	
 	// add enemy menüpont
-	public static void addEnemy() {
-		// TODO method stub
+	public static void addEnemy() throws IOException {
+		println();
+		println("Milyen ellenség legyen?");
+		
+		int choice = choose("Ember", "Tünde", "Törp", "Hobbit");
+		
+		switch (choice) {
+		case 0: // human
+			Game.getMap().addObject(new Human());
+			break;
+		case 1: // elf
+			Game.getMap().addObject(new Elf());
+			break;
+		case 2: // dwarf
+			Game.getMap().addObject(new Dwarf());
+			break;
+		case 3: // hobit
+			Game.getMap().addObject(new Hobbit());
+			break;
+		}
 	}
 	
 	// list objects menüpont
 	public static void listObjects() {
+		println();
+		
 		for (GameObject object : Game.getMap().getObjects()) {
 			println(object);
 		}
+	}
+	
+	// remove object menüpont
+	public static void removeObject() {
+		// TODO method stub
+	}
+	
+	// apply tick menüpont
+	public static void applyTick() {
+		// TODO method stub
+	}
+	
+	// upgrade tower menüpont
+	public static void upgradeTower() {
+		// TODO method stub
+	}
+	
+	// apply crystal menüpont
+	public static void applyCrystal() {
+		// TODO method stub
 	}
 	
 	// save game menüpont
