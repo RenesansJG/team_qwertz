@@ -137,6 +137,7 @@ public class Console {
 						"Kristály alkalmazása tornyon vagy akadályon",
 						"Játék mentése",
 						"Másik játék betöltése",
+						"Silent mód",
 						"Kilépés");
 				
 				switch (choice) {
@@ -164,7 +165,10 @@ public class Console {
 				case 7: // load game
 					loadGame();
 					break;
-				case 8: // exit
+				case 8: // silent mode switch
+					silent = !silent;
+					break;
+				case 9: // exit
 					if (exit()) {
 						return;
 					}
@@ -338,11 +342,51 @@ public class Console {
 	}
 	
 	// apply crystal menüpont
-	public static void applyCrystal() {
+	public static void applyCrystal() throws IOException {
 		Console.println("Console.applyCrystal()");
 		Console.indent();
 		
+		printlnMsg("Milyen kristály legyen?");
+		
+		int choice = choose("Piros", "Zöld", "Kék");
+		
+		switch (choice) {
+		case 0: // redCrystal
+			applyRedCrystal();
+			break;
+		case 1: // greenCrystal
+			applyGreenCrystal();
+			break;
+		case 2: // blueCrystal
+			applyBlueCrystal();
+			break;
+		}
+		
 		Console.deIndent();
+	}
+	
+	// apply red crystal menüpont
+	public static void applyRedCrystal() throws IOException {
+		Effect effect = new RedCrystalEffect();
+		GameObject object = getObjectFromUser();
+		object.addEffect(effect);
+		object.affect(effect);
+	}
+	
+	// apply green crystal menüpont
+	public static void applyGreenCrystal() throws IOException {
+		Effect effect = new GreenCrystalEffect();
+		GameObject object = getObjectFromUser();
+		object.addEffect(effect);
+		object.affect(effect);
+	}
+		
+	// apply blue crystal menüpont
+	public static void applyBlueCrystal() throws IOException {
+		Effect effect = new BlueCrystalEffect();
+		GameObject object = getObjectFromUser();
+		object.addEffect(effect);
+		object.affect(effect);
 	}
 	
 	// save game menüpont
