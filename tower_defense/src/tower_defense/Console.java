@@ -321,9 +321,15 @@ public class Console {
 	}
 	
 	// upgrade tower menüpont
-	public static void upgradeTower() {
+	public static void upgradeTower() throws IOException {
 		Console.println("Console.upgradeTower()");
 		Console.indent();
+		
+		GameObject object = getObjectFromUser();
+		
+		if (object instanceof Tower) {
+			((Tower)object).upgrade();
+		}
 		
 		Console.deIndent();
 	}

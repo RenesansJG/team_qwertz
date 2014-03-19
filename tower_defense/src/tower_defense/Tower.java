@@ -40,4 +40,8 @@ public abstract class Tower extends GameObject {
 		
 		Console.deIndent();
 	}
+	
+	public void upgrade() {
+		Console.println(this + ".upgrade()");
+	}
 }
