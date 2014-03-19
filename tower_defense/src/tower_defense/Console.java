@@ -7,20 +7,7 @@ import java.io.InputStreamReader;
 public class Console {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private static int indent = 0;
-	
-	// kiírás tabok nélkül (sor közepéhez, végéhez)
-	public static void print(Object o) {
-		System.out.print(o);
-	}
-	
-	// kiírás elején tabokkal (sor elejéhez)
-	public static void printi(Object o) {
-		for (int i = 0; i < indent; i++) {
-			System.out.print("  ");
-		}
-		
-		System.out.print(o);
-	}
+	private static boolean silent = false;
 	
 	// teljes sor kiírása elején tabokkal
 	public static void println(Object o) {
@@ -31,9 +18,26 @@ public class Console {
 		System.out.println(o);
 	}
 	
-	// üres sor kiírása
-	public static void println() {
-		System.out.println();
+	// felhasználónak szóló üzenet kiírása (teljes sor)
+	public static void printlnMsg(Object o) {
+		if (!silent) {
+			for (int i = 0; i < indent; i++) {
+				System.out.print("  ");
+			}
+			
+			System.out.println(o);
+		}
+	}
+	
+	// felhasználónak szóló üzenet kiírása (elején tabokkal)
+	public static void printMsg(Object o) {
+		if (!silent) {
+			for (int i = 0; i < indent; i++) {
+				System.out.print("  ");
+			}
+			
+			System.out.print(o);
+		}
 	}
 	
 	// eggyel beljebb kezdés (+tab)
@@ -69,14 +73,14 @@ public class Console {
 			return 0;
 		
 		for (int i = 0; i < choices.length; i++) {
-			println((i + 1) + " = " + choices[i]);
+			printlnMsg((i + 1) + " = " + choices[i]);
 		}
 		
-		printi("Válasz: ");
+		printMsg("Válasz: ");
 		int choice = readInt();
 		
 		while (choice < 1 || choice > choices.length) {
-			printi("Rossz válasz. Válasz: ");
+			printMsg("Rossz válasz. Válasz: ");
 			choice = readInt();
 		}
 		
@@ -95,7 +99,7 @@ public class Console {
 		GameObject object = null;
 		
 		do {
-			printi("ID (-1 = mégsem): ");
+			printMsg("ID (-1 = mégsem): ");
 			int id = Console.readInt();
 			
 			if (id == -1)
@@ -116,9 +120,8 @@ public class Console {
 	public static void main(String[] args) {
 		try {
 			// welcome üzenet
-			println("A két torony");
-			println("© 2014 team_qwertz");
-			println();
+			printlnMsg("A két torony");
+			printlnMsg("© 2014 team_qwertz");
 			
 			// inicializáció
 			init();
@@ -184,7 +187,7 @@ public class Console {
 		Console.println("Console.addObject()");
 		Console.indent();
 		
-		println("Milyen objektum legyen?");
+		printlnMsg("Milyen objektum legyen?");
 		
 		int choice = choose("Torony", "Akadály", "Ellenség");
 		
@@ -208,7 +211,7 @@ public class Console {
 		Console.println("Console.addTower()");
 		Console.indent();
 		
-		println("Milyen torony legyen?");
+		printlnMsg("Milyen torony legyen?");
 		
 		int choice = choose("Piros", "Zöld", "Kék");
 		
@@ -232,7 +235,7 @@ public class Console {
 		Console.println("Console.addTrap()");
 		Console.indent();
 		
-		println("Milyen akadály legyen?");
+		printlnMsg("Milyen akadály legyen?");
 		
 		int choice = choose("Sebzõ", "Lassító");
 		
@@ -253,7 +256,7 @@ public class Console {
 		Console.println("Console.addObject()");
 		Console.indent();
 		
-		println("Milyen ellenség legyen?");
+		printlnMsg("Milyen ellenség legyen?");
 		
 		int choice = choose("Ember", "Tünde", "Törp", "Hobbit");
 		
@@ -292,7 +295,7 @@ public class Console {
 		Console.println("Console.removeObject()");
 		Console.indent();
 		
-		println("Írd be a törlendõ objektum ID-jét!");
+		printlnMsg("Írd be a törlendõ objektum ID-jét!");
 		
 		GameObject objectToRemove = getObjectFromUser();
 		
@@ -308,7 +311,7 @@ public class Console {
 		Console.println("Console.applyTick()");
 		Console.indent();
 		
-		print("Add meg az objektum ID-jét!");
+		printlnMsg("Add meg az objektum ID-jét!");
 		GameObject object = getObjectFromUser();
 		
 		boolean isToBeRemoved = object.applyTick();
@@ -348,14 +351,14 @@ public class Console {
 		Console.indent();
 		
 		while (true) {
-			printi("Mentés fájlneve: ");
+			printlnMsg("Mentés fájlneve: ");
 			String file = readLine();
 			boolean saved = Game.saveGame(file);
 			
 			if (saved) {
 				break;
 			} else {
-				println("Hiba a mentéskor!");
+				printlnMsg("Hiba a mentéskor!");
 			}
 		}
 		
@@ -367,21 +370,21 @@ public class Console {
 		Console.println("Console.loadGame()");
 		Console.indent();
 		
-		println("Mented a játékot?");
+		printlnMsg("Mented a játékot?");
 		
 		if (chooseYesNo()) {
 			saveGame();
 		}
 		
 		while (true) {
-			printi("Betöltés fájlneve: ");
+			printlnMsg("Betöltés fájlneve: ");
 			String file = readLine();
 			boolean loaded = Game.loadGame(file);
 			
 			if (loaded) {
 				break;
 			} else {
-				println("Hiba a betöltéskor!");
+				printlnMsg("Hiba a betöltéskor!");
 			}
 		}
 		
@@ -392,10 +395,10 @@ public class Console {
 	public static boolean exit() throws IOException {
 		Console.println("Console.exit()");
 		
-		println("Biztosan kilépsz?");
+		printlnMsg("Biztosan kilépsz?");
 		
 		if (chooseYesNo()) {
-			println("Köszönjük a játékot!");
+			printlnMsg("Köszönjük a játékot!");
 			
 			br.close();
 			return true;

@@ -10,16 +10,16 @@ public abstract class Tower extends GameObject {
 		Console.println(this + ".action()");
 		Console.indent();
 		
-		Console.println("Lõjön a torony?");
+		Console.printlnMsg("Lõjön a torony?");
 		
 		if (Console.chooseYesNo()) {
-			Console.println("Melyik a legközelebbi ellenség? (-1 = nincs)");
-			Console.printi("ID: ");
+			Console.printlnMsg("Melyik a legközelebbi ellenség? (-1 = nincs)");
+			Console.printMsg("ID: ");
 			
 			GameObject object = Console.getObjectFromUser();
 			
 			if (object != null && object.isEnemy()) {
-				Console.println("Benne van a hatókörben?");
+				Console.printlnMsg("Benne van a hatókörben?");
 				
 				if (Console.chooseYesNo()) {
 					Game.getMap().addObject(new Projectile());
