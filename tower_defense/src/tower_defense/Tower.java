@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public abstract class Tower extends GameObject {
 	private static final long serialVersionUID = 641853699471809737L;
-
+	
 	@Override
 	public final boolean action() throws IOException {
 		Console.println(this + ".action()");
@@ -30,7 +30,7 @@ public abstract class Tower extends GameObject {
 		Console.deIndent();
 		return false;
 	}
-
+	
 	@Override
 	public final void affect(Effect effect) {
 		Console.println(this + ".affect(" + effect + ")");
