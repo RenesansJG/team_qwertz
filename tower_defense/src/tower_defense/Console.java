@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Console {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private static int indent = 0;
-	private static boolean silent = false;
+	private static boolean silent;
 	
 	// teljes sor kiírása elején tabokkal
 	public static void println(Object o) {
@@ -118,6 +118,12 @@ public class Console {
 	
 	// main
 	public static void main(String[] args) {
+		if (args.length >= 1 && args[0].equals("silent")) {
+			silent = true;
+		} else {
+			silent = false;
+		}
+		
 		try {
 			// welcome üzenet
 			printlnMsg("A két torony");
@@ -138,6 +144,7 @@ public class Console {
 						"Játék mentése",
 						"Másik játék betöltése",
 						"Silent mód",
+						"Tesztesetek",
 						"Kilépés");
 				
 				switch (choice) {
@@ -168,7 +175,10 @@ public class Console {
 				case 8: // silent mode switch
 					silent = !silent;
 					break;
-				case 9: // exit
+				case 9: // test
+					test();
+					break;
+				case 10: // exit
 					if (exit()) {
 						return;
 					}
@@ -257,7 +267,7 @@ public class Console {
 	
 	// add enemy menüpont
 	public static void addEnemy() throws IOException {
-		Console.println("Console.addObject()");
+		Console.println("Console.addEnemy()");
 		Console.indent();
 		
 		printlnMsg("Milyen ellenség legyen?");
@@ -288,7 +298,7 @@ public class Console {
 		Console.indent();
 		
 		for (GameObject object : Game.getMap().getObjects()) {
-			println(object);
+			printlnMsg(object);
 		}
 		
 		Console.deIndent();
@@ -367,26 +377,41 @@ public class Console {
 	
 	// apply red crystal menüpont
 	public static void applyRedCrystal() throws IOException {
+		Console.println("Console.applyRedCrystal()");
+		Console.indent();
+		
 		Effect effect = new RedCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
+		
+		Console.deIndent();
 	}
 	
 	// apply green crystal menüpont
 	public static void applyGreenCrystal() throws IOException {
+		Console.println("Console.applyGreenCrystal()");
+		Console.indent();
+		
 		Effect effect = new GreenCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
+		
+		Console.deIndent();
 	}
 		
 	// apply blue crystal menüpont
 	public static void applyBlueCrystal() throws IOException {
+		Console.println("Console.applyBlueCrystal()");
+		Console.indent();
+		
 		Effect effect = new BlueCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
+		
+		Console.deIndent();
 	}
 	
 	// save game menüpont
@@ -397,7 +422,14 @@ public class Console {
 		while (true) {
 			printlnMsg("Mentés fájlneve: ");
 			String file = readLine();
-			boolean saved = Game.saveGame(file);
+			
+			boolean saved;
+			
+			if (file.equals("")) {
+				saved = true;
+			} else {
+				saved = Game.saveGame(file);
+			}
 			
 			if (saved) {
 				break;
@@ -423,13 +455,42 @@ public class Console {
 		while (true) {
 			printlnMsg("Betöltés fájlneve: ");
 			String file = readLine();
-			boolean loaded = Game.loadGame(file);
+			
+			boolean loaded;
+			
+			if (file.equals("")) {
+				loaded = true;
+			} else {
+				loaded = Game.loadGame(file);
+			}
 			
 			if (loaded) {
 				break;
 			} else {
 				printlnMsg("Hiba a betöltéskor!");
 			}
+		}
+		
+		Console.deIndent();
+	}
+	
+	// teszt menüpont
+	public static void test() throws IOException {
+		Console.println("Console.test()");
+		Console.indent();
+		
+		int testChoice = choose(
+				"1. teszteset",
+				"2. teszteset",
+				"3. teszteset");
+		
+		switch (testChoice) {
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
 		}
 		
 		Console.deIndent();
