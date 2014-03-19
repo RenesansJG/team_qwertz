@@ -3,7 +3,6 @@ package tower_defense;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class GameMap implements Serializable {
@@ -45,24 +44,6 @@ public class GameMap implements Serializable {
 		Console.println(this + ".removeObject(" + object + ")");
 		
 		return objects.remove(object);
-	}
-	
-	// adott id-jû objektum eltávolítása a maprõl
-	public boolean removeObject(int id) {
-		Console.println(this + ".removeObject(" + id + ")");
-		
-		Iterator<GameObject> iter = objects.iterator();
-		
-		while (iter.hasNext()) {
-			GameObject object = iter.next();
-			
-			if (object.id == id) {
-				iter.remove();
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	// toString függvény kiíratáshoz
