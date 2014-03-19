@@ -1,12 +1,17 @@
 package tower_defense;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DamageTrap extends Trap {
 	private static final long serialVersionUID = 9047501422958390396L;
+	private final Damage damage;
 	
 	public DamageTrap() {
 		Console.println(this + " = new DamageTrap()");
+		
+		damage = new Damage();
 	}
 	
 	@Override
@@ -14,7 +19,27 @@ public class DamageTrap extends Trap {
 		Console.println(this + ".action()");
 		Console.indent();
 		
-		// TODO Auto-generated method stub
+		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
+		
+		Console.println("Melyik objektumok vannak az akadály hatókörében? (-1 = vége)");
+		
+		while (true) {
+			GameObject object = Console.getObjectFromUser();
+			
+			if (object == null) {
+				break;
+			}
+			
+			objectsToDamage.add(object);
+		}
+		
+		
+		for (GameObject object : objectsToDamage) {
+			if (object.isEnemy()) {
+				Enemy enemy = (Enemy) object;
+				enemy.takeDamage(damage);
+			}
+		}
 		
 		Console.deIndent();
 		return false;

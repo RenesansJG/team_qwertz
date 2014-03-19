@@ -1,6 +1,8 @@
 package tower_defense;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlowTrap extends Trap {
 	private static final long serialVersionUID = 8010869721215614573L;
@@ -10,11 +12,31 @@ public class SlowTrap extends Trap {
 	}
 	
 	@Override
-	public boolean action() throws IOException {
+	public final boolean action() throws IOException {
 		Console.println(this + ".action()");
 		Console.indent();
 		
-		// TODO Auto-generated method stub
+		List<GameObject> objectsToSlow = new ArrayList<GameObject>();
+		
+		Console.println("Melyik objektumok vannak az akadály hatókörében? (-1 = vége)");
+		
+		while (true) {
+			GameObject object = Console.getObjectFromUser();
+			
+			if (object == null) {
+				break;
+			}
+			
+			objectsToSlow.add(object);
+		}
+		
+		
+		for (GameObject object : objectsToSlow) {
+			Effect effect = new SlowEffect();
+			
+			object.addEffect(effect);
+			object.affect(effect);
+		}
 		
 		Console.deIndent();
 		return false;

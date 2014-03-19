@@ -27,6 +27,7 @@ public abstract class Enemy extends MovableGameObject {
 		
 		// TODO Auto-generated method stub
 		
+		
 		Console.deIndent();
 		return false;
 	}

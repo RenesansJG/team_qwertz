@@ -90,6 +90,28 @@ public class Console {
 		return choose("Igen", "Nem") == 0 ? true : false;
 	}
 	
+	// objektum lekérése usertõl
+	public static GameObject getObjectFromUser() throws IOException {
+		GameObject object = null;
+		
+		do {
+			printi("ID (-1 = mégsem): ");
+			int id = Console.readInt();
+			
+			if (id == -1)
+				return null;
+			
+			for (GameObject currObject : Game.getMap().getObjects()) {
+				if (currObject.id == id) {
+					object = currObject;
+					break;
+				}
+			}
+		} while (object == null);
+		
+		return object;
+	}
+	
 	// main
 	public static void main(String[] args) {
 		try {
@@ -102,8 +124,6 @@ public class Console {
 			init();
 			
 			while (true) {
-				println();
-				
 				// fõmenü
 				int choice = choose(
 						"Objektum hozzáadása",
@@ -161,7 +181,9 @@ public class Console {
 	
 	// add object menüpont
 	public static void addObject() throws IOException {
-		println();
+		Console.println("Console.addObject()");
+		Console.indent();
+		
 		println("Milyen objektum legyen?");
 		
 		int choice = choose("Torony", "Akadály", "Ellenség");
@@ -177,14 +199,18 @@ public class Console {
 			addEnemy();
 			break;
 		}
+		
+		Console.deIndent();
 	}
 	
 	// add tower menüpont
 	public static void addTower() throws IOException {
-		println();
+		Console.println("Console.addTower()");
+		Console.indent();
+		
 		println("Milyen torony legyen?");
 		
-		int choice = choose("Piros", "Kék", "Zöld");
+		int choice = choose("Piros", "Zöld", "Kék");
 		
 		switch (choice) {
 		case 0: // redTower
@@ -197,11 +223,15 @@ public class Console {
 			Game.getMap().addObject(new BlueTower());
 			break;
 		}
+		
+		Console.deIndent();
 	}
 	
 	// add trap menüpont
 	public static void addTrap() throws IOException {
-		println();
+		Console.println("Console.addTrap()");
+		Console.indent();
+		
 		println("Milyen akadály legyen?");
 		
 		int choice = choose("Sebzõ", "Lassító");
@@ -214,11 +244,15 @@ public class Console {
 			Game.getMap().addObject(new SlowTrap());
 			break;
 		}
+		
+		Console.deIndent();
 	}
 	
 	// add enemy menüpont
 	public static void addEnemy() throws IOException {
-		println();
+		Console.println("Console.addObject()");
+		Console.indent();
+		
 		println("Milyen ellenség legyen?");
 		
 		int choice = choose("Ember", "Tünde", "Törp", "Hobbit");
@@ -237,64 +271,76 @@ public class Console {
 			Game.getMap().addObject(new Hobbit());
 			break;
 		}
+		
+		Console.deIndent();
 	}
 	
 	// list objects menüpont
 	public static void listObjects() {
-		println();
+		Console.println("Console.listObjects()");
+		Console.indent();
 		
 		for (GameObject object : Game.getMap().getObjects()) {
 			println(object);
 		}
+		
+		Console.deIndent();
 	}
 	
 	// remove object menüpont
 	public static void removeObject() throws IOException {
-		printi("ID: ");
+		Console.println("Console.removeObject()");
+		Console.indent();
 		
-		GameMap gameMap = Game.getMap();
-		boolean removed = gameMap.removeObject(readInt());
+		println("Írd be a törlendõ objektum ID-jét!");
 		
-		while (removed != true) {
-			printi("Nincs ilyen ID. ID: ");
-			removed = gameMap.removeObject(readInt());
+		GameObject objectToRemove = getObjectFromUser();
+		
+		if (objectToRemove != null) {
+			Game.getMap().removeObject(objectToRemove);
 		}
+		
+		Console.deIndent();
 	}
 	
 	// apply tick menüpont
 	public static void applyTick() throws IOException {
-		// TODO 
-		printi("ID: ");
-		GameObject object = null;
+		Console.println("Console.applyTick()");
+		Console.indent();
 		
-		do {
-			int id = readInt();
-			
-			for (GameObject currObject : Game.getMap().getObjects()) {
-				if (currObject.id == id) {
-					object = currObject;
-					break;
-				}
-			}
-		} while (object == null);
+		print("Add meg az objektum ID-jét!");
+		GameObject object = getObjectFromUser();
 		
-		object.applyTick();
+		boolean isToBeRemoved = object.applyTick();
+		
+		if (isToBeRemoved) {
+			Game.getMap().removeObject(object);
+		}
+		
+		Console.deIndent();
 	}
 	
 	// upgrade tower menüpont
 	public static void upgradeTower() {
-		printi("ID: "); println();
+		Console.println("Console.upgradeTower()");
+		Console.indent();
 		
-		
+		Console.deIndent();
 	}
 	
 	// apply crystal menüpont
 	public static void applyCrystal() {
-		// TODO method stub
+		Console.println("Console.applyCrystal()");
+		Console.indent();
+		
+		Console.deIndent();
 	}
 	
 	// save game menüpont
 	public static void saveGame() throws IOException {
+		Console.println("Console.saveGame()");
+		Console.indent();
+		
 		while (true) {
 			printi("Mentés fájlneve: ");
 			String file = readLine();
@@ -306,18 +352,20 @@ public class Console {
 				println("Hiba a mentéskor!");
 			}
 		}
+		
+		Console.deIndent();
 	}
 	
 	// load game menüpont
 	public static void loadGame() throws IOException {
-		println();
+		Console.println("Console.loadGame()");
+		Console.indent();
+		
 		println("Mented a játékot?");
 		
 		if (chooseYesNo()) {
 			saveGame();
 		}
-		
-		println();
 		
 		while (true) {
 			printi("Betöltés fájlneve: ");
@@ -330,40 +378,24 @@ public class Console {
 				println("Hiba a betöltéskor!");
 			}
 		}
+		
+		Console.deIndent();
 	}
 	
+	// exit menüpont
 	public static boolean exit() throws IOException {
-		println();
+		Console.println("Console.exit()");
+		
 		println("Biztosan kilépsz?");
 		
 		if (chooseYesNo()) {
-			println();
 			println("Köszönjük a játékot!");
 			
 			br.close();
 			return true;
 		}
 		
+		Console.deIndent();
 		return false;
-	}
-	
-	public static GameObject getObjectFromUser() throws IOException {
-		GameObject object = null;
-		
-		do {
-			int id = Console.readInt();
-			
-			if (id == -1)
-				return null;
-			
-			for (GameObject currObject : Game.getMap().getObjects()) {
-				if (currObject.id == id) {
-					object = currObject;
-					break;
-				}
-			}
-		} while (object == null);
-		
-		return object;
 	}
 }
