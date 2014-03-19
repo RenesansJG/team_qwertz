@@ -46,11 +46,13 @@ public abstract class GameObject implements ITickable, Serializable {
 		effects.add(effect);
 	}
 	
+	// tick alkalmazása
 	@Override
 	public final boolean applyTick() throws IOException {
 		Console.println(this + ".applyTick()");
 		Console.indent();
 		
+		// effektek léptetése és az objektum tevékenységének meghívása
 		effect();
 		boolean isToBeRemoved = action();
 		
