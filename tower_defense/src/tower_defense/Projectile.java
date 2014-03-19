@@ -21,7 +21,7 @@ public class Projectile extends MovableGameObject {
 		
 		boolean ret = false;
 		
-		Console.println("Robbanjon a lövedék?");
+		Console.printlnMsg("Robbanjon a lövedék?");
 		
 		// Ha robban a lövedék
 		if (Console.chooseYesNo()) {
@@ -40,7 +40,7 @@ public class Projectile extends MovableGameObject {
 		
 		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
 		
-		Console.println("Melyik objektumok vannak a lövedék AoE-jében? (-1 = vége)");
+		Console.printlnMsg("Melyik objektumok vannak a lövedék AoE-jében? (-1 = vége)");
 		
 		while (true) {
 			GameObject object = Console.getObjectFromUser();

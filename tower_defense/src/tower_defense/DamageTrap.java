@@ -21,7 +21,7 @@ public class DamageTrap extends Trap {
 		
 		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
 		
-		Console.println("Melyik objektumok vannak az akadály hatókörében? (-1 = vége)");
+		Console.printlnMsg("Melyik objektumok vannak az akadály hatókörében?");
 		
 		while (true) {
 			GameObject object = Console.getObjectFromUser();
