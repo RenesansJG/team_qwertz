@@ -2,12 +2,9 @@ package tower_defense;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class GameMap implements Serializable {
 	private static final long serialVersionUID = -2497706162553103752L;
