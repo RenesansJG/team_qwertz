@@ -3,11 +3,14 @@ package tower_defense;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
 
 public class Console {
-	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private static final Deque<String> commands = new ArrayDeque<String>();
 	private static int indent = 0;
-	private static boolean silent;
 	
 	// teljes sor kiírása elején tabokkal
 	public static void println(Object o) {
@@ -20,7 +23,7 @@ public class Console {
 	
 	// felhasználónak szóló üzenet kiírása (teljes sor)
 	public static void printlnMsg(Object o) {
-		if (!silent) {
+		if (commands.isEmpty()) {
 			for (int i = 0; i < indent; i++) {
 				System.out.print("  ");
 			}
@@ -31,7 +34,7 @@ public class Console {
 	
 	// felhasználónak szóló üzenet kiírása (elején tabokkal)
 	public static void printMsg(Object o) {
-		if (!silent) {
+		if (commands.isEmpty()) {
 			for (int i = 0; i < indent; i++) {
 				System.out.print("  ");
 			}
@@ -62,7 +65,12 @@ public class Console {
 	
 	// egy sor beolvasása
 	public static String readLine() throws IOException {
-		return br.readLine();
+		String line = commands.poll();
+		
+		if (line == null)
+			line = br.readLine();
+		
+		return line;
 	}
 	
 	// listából választás
@@ -100,7 +108,7 @@ public class Console {
 		
 		do {
 			printMsg("ID (-1 = mégsem): ");
-			int id = Console.readInt();
+			int id = readInt();
 			
 			if (id == -1)
 				return null;
@@ -118,12 +126,6 @@ public class Console {
 	
 	// main
 	public static void main(String[] args) {
-		if (args.length >= 1 && args[0].equals("silent")) {
-			silent = true;
-		} else {
-			silent = false;
-		}
-		
 		try {
 			// welcome üzenet
 			printlnMsg("A két torony");
@@ -143,7 +145,6 @@ public class Console {
 						"Kristály alkalmazása tornyon vagy akadályon",
 						"Játék mentése",
 						"Másik játék betöltése",
-						"Silent mód",
 						"Tesztesetek",
 						"Kilépés");
 				
@@ -172,13 +173,10 @@ public class Console {
 				case 7: // load game
 					loadGame();
 					break;
-				case 8: // silent mode switch
-					silent = !silent;
-					break;
-				case 9: // test
+				case 8: // test
 					test();
 					break;
-				case 10: // exit
+				case 9: // exit
 					if (exit()) {
 						return;
 					}
@@ -198,8 +196,8 @@ public class Console {
 	
 	// add object menüpont
 	public static void addObject() throws IOException {
-		Console.println("Console.addObject()");
-		Console.indent();
+		println("Console.addObject()");
+		indent();
 		
 		printlnMsg("Milyen objektum legyen?");
 		
@@ -217,13 +215,13 @@ public class Console {
 			break;
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// add tower menüpont
 	public static void addTower() throws IOException {
-		Console.println("Console.addTower()");
-		Console.indent();
+		println("Console.addTower()");
+		indent();
 		
 		printlnMsg("Milyen torony legyen?");
 		
@@ -241,13 +239,13 @@ public class Console {
 			break;
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// add trap menüpont
 	public static void addTrap() throws IOException {
-		Console.println("Console.addTrap()");
-		Console.indent();
+		println("Console.addTrap()");
+		indent();
 		
 		printlnMsg("Milyen akadály legyen?");
 		
@@ -262,13 +260,13 @@ public class Console {
 			break;
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// add enemy menüpont
 	public static void addEnemy() throws IOException {
-		Console.println("Console.addEnemy()");
-		Console.indent();
+		println("Console.addEnemy()");
+		indent();
 		
 		printlnMsg("Milyen ellenség legyen?");
 		
@@ -289,25 +287,25 @@ public class Console {
 			break;
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// list objects menüpont
 	public static void listObjects() {
-		Console.println("Console.listObjects()");
-		Console.indent();
+		println("Console.listObjects()");
+		indent();
 		
 		for (GameObject object : Game.getMap().getObjects()) {
 			printlnMsg(object);
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// remove object menüpont
 	public static void removeObject() throws IOException {
-		Console.println("Console.removeObject()");
-		Console.indent();
+		println("Console.removeObject()");
+		indent();
 		
 		printlnMsg("Írd be a törlendõ objektum ID-jét!");
 		
@@ -317,13 +315,13 @@ public class Console {
 			Game.getMap().removeObject(objectToRemove);
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// apply tick menüpont
 	public static void applyTick() throws IOException {
-		Console.println("Console.applyTick()");
-		Console.indent();
+		println("Console.applyTick()");
+		indent();
 		
 		printlnMsg("Add meg az objektum ID-jét!");
 		GameObject object = getObjectFromUser();
@@ -334,13 +332,13 @@ public class Console {
 			Game.getMap().removeObject(object);
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// upgrade tower menüpont
 	public static void upgradeTower() throws IOException {
-		Console.println("Console.upgradeTower()");
-		Console.indent();
+		println("Console.upgradeTower()");
+		indent();
 		
 		GameObject object = getObjectFromUser();
 		
@@ -348,13 +346,13 @@ public class Console {
 			((Tower)object).upgrade();
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// apply crystal menüpont
 	public static void applyCrystal() throws IOException {
-		Console.println("Console.applyCrystal()");
-		Console.indent();
+		println("Console.applyCrystal()");
+		indent();
 		
 		printlnMsg("Milyen kristály legyen?");
 		
@@ -372,52 +370,52 @@ public class Console {
 			break;
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// apply red crystal menüpont
 	public static void applyRedCrystal() throws IOException {
-		Console.println("Console.applyRedCrystal()");
-		Console.indent();
+		println("Console.applyRedCrystal()");
+		indent();
 		
 		Effect effect = new RedCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// apply green crystal menüpont
 	public static void applyGreenCrystal() throws IOException {
-		Console.println("Console.applyGreenCrystal()");
-		Console.indent();
+		println("Console.applyGreenCrystal()");
+		indent();
 		
 		Effect effect = new GreenCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
 		
-		Console.deIndent();
+		deIndent();
 	}
 		
 	// apply blue crystal menüpont
 	public static void applyBlueCrystal() throws IOException {
-		Console.println("Console.applyBlueCrystal()");
-		Console.indent();
+		println("Console.applyBlueCrystal()");
+		indent();
 		
 		Effect effect = new BlueCrystalEffect();
 		GameObject object = getObjectFromUser();
 		object.addEffect(effect);
 		object.affect(effect);
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// save game menüpont
 	public static void saveGame() throws IOException {
-		Console.println("Console.saveGame()");
-		Console.indent();
+		println("Console.saveGame()");
+		indent();
 		
 		while (true) {
 			printlnMsg("Mentés fájlneve: ");
@@ -438,13 +436,13 @@ public class Console {
 			}
 		}
 		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// load game menüpont
 	public static void loadGame() throws IOException {
-		Console.println("Console.loadGame()");
-		Console.indent();
+		println("Console.loadGame()");
+		indent();
 		
 		printlnMsg("Mented a játékot?");
 		
@@ -471,34 +469,40 @@ public class Console {
 			}
 		}
 		
-		Console.deIndent();
+		deIndent();
+	}
+	
+	// tesztesetek
+	private static final String[][] tests = {
+		{"1", "1", "2", "9", "1"}
+	};
+	
+	// választási lehetõségek a tesztesetekhez
+	private static final String[] choices = new String[tests.length];
+	
+	static {
+		for (int i = 0; i < choices.length; i++) {
+			choices[i] = (i + 1) + ". teszteset";
+		}
 	}
 	
 	// teszt menüpont
 	public static void test() throws IOException {
-		Console.println("Console.test()");
-		Console.indent();
+		println("Console.test()");
+		indent();
 		
-		int testChoice = choose(
-				"1. teszteset",
-				"2. teszteset",
-				"3. teszteset");
+		if (commands.isEmpty())
+			commands.addAll(Arrays.asList(tests[choose(choices)]));
+		else
+			readLine();
 		
-		switch (testChoice) {
-		case 0:
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		}
-		
-		Console.deIndent();
+		deIndent();
 	}
 	
 	// exit menüpont
 	public static boolean exit() throws IOException {
-		Console.println("Console.exit()");
+		println("Console.exit()");
+		indent();
 		
 		printlnMsg("Biztosan kilépsz?");
 		
@@ -509,7 +513,7 @@ public class Console {
 			return true;
 		}
 		
-		Console.deIndent();
+		deIndent();
 		return false;
 	}
 }
