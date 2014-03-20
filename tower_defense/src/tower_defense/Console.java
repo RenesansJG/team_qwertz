@@ -85,21 +85,33 @@ public class Console {
 		}
 		
 		printMsg("Válasz: ");
+		
 		int choice = readInt();
 		
-		while (choice < 1 || choice > choices.length) {
+		while (choice != -1 && choice < 1 || choice > choices.length) {
 			printMsg("Rossz válasz. Válasz: ");
 			choice = readInt();
 		}
 		
-		return choice - 1;
+		return (choice != - 1) ? choice - 1 : choice;
 	}
 	
 	// eldöntendõ kérdés
 	// visszatérés: igaz, ha az igent választotta a felhasználó,
 	//              hamis ha a nemet
 	public static boolean chooseYesNo() throws IOException {
-		return choose("Igen", "Nem") == 0 ? true : false;
+		printlnMsg("1 = Igen");
+		printlnMsg("2 = Nem");
+		printMsg("Válasz: ");
+		
+		int choice = readInt();
+		
+		while (choice != 1 && choice != 2) {
+			printMsg("Rossz válasz. Válasz: ");
+			choice = readInt();
+		}
+		
+		return choice == 1;
 	}
 	
 	// objektum lekérése usertõl
@@ -107,7 +119,7 @@ public class Console {
 		GameObject object = null;
 		
 		do {
-			printMsg("ID (-1 = mégsem): ");
+			printMsg("ID (-1 = vissza): ");
 			int id = readInt();
 			
 			if (id == -1)
@@ -213,6 +225,8 @@ public class Console {
 		case 2: // enemy
 			addEnemy();
 			break;
+		default: // vissza
+			break;
 		}
 		
 		deIndent();
@@ -237,6 +251,8 @@ public class Console {
 		case 2: // blueTower
 			Game.getMap().addObject(new BlueTower());
 			break;
+		default: // vissza
+			break;
 		}
 		
 		deIndent();
@@ -257,6 +273,8 @@ public class Console {
 			break;
 		case 1: // slowTrap
 			Game.getMap().addObject(new SlowTrap());
+			break;
+		default: // vissza
 			break;
 		}
 		
@@ -284,6 +302,8 @@ public class Console {
 			break;
 		case 3: // hobit
 			Game.getMap().addObject(new Hobbit());
+			break;
+		default: // vissza
 			break;
 		}
 		
@@ -368,6 +388,8 @@ public class Console {
 		case 2: // blueCrystal
 			applyBlueCrystal();
 			break;
+		default: // vissza
+			break;
 		}
 		
 		deIndent();
@@ -418,7 +440,7 @@ public class Console {
 		indent();
 		
 		while (true) {
-			printlnMsg("Mentés fájlneve: ");
+			printMsg("Mentés fájlneve: ");
 			String file = readLine();
 			
 			boolean saved;
@@ -451,7 +473,7 @@ public class Console {
 		}
 		
 		while (true) {
-			printlnMsg("Betöltés fájlneve: ");
+			printMsg("Betöltés fájlneve: ");
 			String file = readLine();
 			
 			boolean loaded;
@@ -478,14 +500,12 @@ public class Console {
 	};
 	
 	// választási lehetõségek a tesztesetekhez
-	private static final String[] choices = new String[tests.length + 1];
+	private static final String[] choices = new String[tests.length];
 	
 	static {
 		for (int i = 0; i < choices.length; i++) {
 			choices[i] = (i + 1) + ". teszteset";
 		}
-		
-		choices[choices.length - 1] = "Vissza";
 	}
 	
 	// teszt menüpont
@@ -496,7 +516,7 @@ public class Console {
 		if (commands.isEmpty()) {
 			int choice = choose(choices);
 			
-			if (choice < tests.length) {
+			if (choice != -1) {
 				commands.addAll(Arrays.asList(tests[choice]));
 			}
 		} else {

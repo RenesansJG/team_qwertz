@@ -13,8 +13,7 @@ public abstract class Tower extends GameObject {
 		Console.printlnMsg("Lõjön a torony?");
 		
 		if (Console.chooseYesNo()) {
-			Console.printlnMsg("Melyik a legközelebbi ellenség? (-1 = nincs)");
-			Console.printMsg("ID: ");
+			Console.printlnMsg("Melyik a legközelebbi ellenség?");
 			
 			GameObject object = Console.getObjectFromUser();
 			
