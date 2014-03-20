@@ -474,16 +474,18 @@ public class Console {
 	
 	// tesztesetek
 	private static final String[][] tests = {
-		{"1", "1", "2", "9", "1"}
+		{"1", "1", "2", "9"}
 	};
 	
 	// választási lehetõségek a tesztesetekhez
-	private static final String[] choices = new String[tests.length];
+	private static final String[] choices = new String[tests.length + 1];
 	
 	static {
 		for (int i = 0; i < choices.length; i++) {
 			choices[i] = (i + 1) + ". teszteset";
 		}
+		
+		choices[choices.length - 1] = "Vissza";
 	}
 	
 	// teszt menüpont
@@ -491,10 +493,15 @@ public class Console {
 		println("Console.test()");
 		indent();
 		
-		if (commands.isEmpty())
-			commands.addAll(Arrays.asList(tests[choose(choices)]));
-		else
-			readLine();
+		if (commands.isEmpty()) {
+			int choice = choose(choices);
+			
+			if (choice < tests.length) {
+				commands.addAll(Arrays.asList(tests[choice]));
+			}
+		} else {
+			choose(choices);
+		}
 		
 		deIndent();
 	}
