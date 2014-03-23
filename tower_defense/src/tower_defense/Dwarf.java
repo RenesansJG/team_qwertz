@@ -7,6 +7,7 @@ public class Dwarf extends Enemy {
 		Console.println(this + " = new Dwarf()");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "dwarf#" + id;

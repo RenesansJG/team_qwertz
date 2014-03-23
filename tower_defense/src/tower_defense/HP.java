@@ -7,10 +7,12 @@ public class HP implements Serializable {
 	// private double HP;
 	// resistMap (?)
 	
+	// sebzõdés
 	public void takeDamage(Damage damage) {
 		Console.println(this + ".damage(" + damage + ")");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return ("hp");

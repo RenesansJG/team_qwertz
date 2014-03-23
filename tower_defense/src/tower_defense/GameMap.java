@@ -7,22 +7,26 @@ import java.util.List;
 
 public class GameMap implements Serializable {
 	private static final long serialVersionUID = -2497706162553103752L;
-	private final List<Node> nodes;         // node-ok listája
+	private final List<Node> nodes;         // gyökér node-ok listája
 	private final List<GameObject> objects; // objektumok listája
 	
 	// map konstruktor
 	public GameMap() {
 		Console.println("new GameMap()");
+		Console.indent();
 		
 		nodes = new ArrayList<Node>();
+		nodes.add(new Node());
 		objects = new ArrayList<GameObject>();
+		
+		Console.deIndent();
 	}
 	
-	// node hozzáadása a maphez
-	public void addNode(Node node) {
-		Console.println(this + ".addNode(" + node + ")");
+	// az összes gyökér node listájának lekérése
+	public List<Node> getNodes() {
+		Console.println(this + ".getNodes()");
 		
-		nodes.add(node);
+		return Collections.unmodifiableList(nodes);
 	}
 	
 	// az összes objektum listájának lekérése

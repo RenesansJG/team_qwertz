@@ -9,9 +9,10 @@ import java.io.Serializable;
 
 public class Game implements Serializable {
 	private static final long serialVersionUID = -2262641899325571201L;
-	private static Game currentGame;
-	private final GameMap gameMap;
+	private static Game currentGame; // aktuális játék
+	private final GameMap gameMap;   // referencia a mapre
 	
+	// játék konstruktor
 	private Game() {
 		Console.println("new Game()");
 		Console.indent();
@@ -39,6 +40,7 @@ public class Game implements Serializable {
 	public static boolean loadGame(String file) {
 		Console.println("Game.loadGame(" + file + ")");
 		
+		// szerializálást használ
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 			
@@ -60,6 +62,7 @@ public class Game implements Serializable {
 	public static boolean saveGame(String file) {
 		Console.println("Game.saveGame(" + file + ")");
 		
+		// szerializálást használ
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(currentGame);

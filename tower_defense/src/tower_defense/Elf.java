@@ -7,6 +7,7 @@ public class Elf extends Enemy {
 		Console.println(this + " = new Elf()");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "elf#" + id;

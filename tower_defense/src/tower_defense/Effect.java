@@ -13,6 +13,7 @@ public abstract class Effect implements ITickable, Serializable {
 		id = count++;
 	}
 	
+	// tick alkalmazása effekten
 	@Override
 	public final boolean applyTick() {
 		Console.println(this + ".applyTick()");
@@ -36,6 +37,7 @@ public abstract class Effect implements ITickable, Serializable {
 		Console.println(this + ".apply(" + enemy + ")");
 	}
 	
+	// kötelezõ toString függvény kiíratáshoz
 	@Override
 	public abstract String toString();
 }

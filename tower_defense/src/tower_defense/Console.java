@@ -21,7 +21,7 @@ public class Console {
 		System.out.println(o);
 	}
 	
-	// felhasználónak szóló üzenet kiírása (teljes sor)
+	// felhasználónak szóló üzenet kiírása (teljes sor, elején tabokkal)
 	public static void printlnMsg(Object o) {
 		if (commands.isEmpty()) {
 			for (int i = 0; i < indent; i++) {
@@ -65,8 +65,10 @@ public class Console {
 	
 	// egy sor beolvasása
 	public static String readLine() throws IOException {
+		// ha van a commands sorban elem, azt olvassuk be
 		String line = commands.poll();
 		
+		// ha nincs, a felhasználótól kérünk egy sort
 		if (line == null)
 			line = br.readLine();
 		
@@ -346,8 +348,10 @@ public class Console {
 		printlnMsg("Add meg az objektum ID-jét!");
 		GameObject object = getObjectFromUser();
 		
+		// alkalmazzuk a ticket az objektumon, és eltároljuk, törlendõ-e
 		boolean isToBeRemoved = object.applyTick();
 		
+		// ha törlendõ az objektum, töröljük
 		if (isToBeRemoved) {
 			Game.getMap().removeObject(object);
 		}
@@ -496,7 +500,7 @@ public class Console {
 	
 	// tesztesetek
 	private static final String[][] tests = {
-		{"1", "1", "2", "9"}
+		{"1", "1", "2"}
 	};
 	
 	// választási lehetõségek a tesztesetekhez

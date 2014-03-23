@@ -7,6 +7,7 @@ public class Human extends Enemy {
 		Console.println(this + " = new Human()");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "human#" + id;

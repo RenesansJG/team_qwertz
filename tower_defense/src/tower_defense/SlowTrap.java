@@ -7,19 +7,23 @@ import java.util.List;
 public class SlowTrap extends Trap {
 	private static final long serialVersionUID = 8010869721215614573L;
 	
+	// lassító csapda konstruktor
 	public SlowTrap() {
 		Console.println(this + " = new SlowTrap()");
 	}
 	
+	// lassító csapda tevékenysége
 	@Override
 	public final boolean action() throws IOException {
 		Console.println(this + ".action()");
 		Console.indent();
 		
+		// lassítandó objektumok listája
 		List<GameObject> objectsToSlow = new ArrayList<GameObject>();
 		
-		Console.println("Melyik objektumok vannak az akadály hatókörében? (-1 = vége)");
+		Console.println("Melyik objektumok vannak az akadály hatókörében?");
 		
+		// objektumok bekérése a user-tõl
 		while (true) {
 			GameObject object = Console.getObjectFromUser();
 			
@@ -27,13 +31,15 @@ public class SlowTrap extends Trap {
 				break;
 			}
 			
+			// a bekért objektumot hozzáadjuk a listához
 			objectsToSlow.add(object);
 		}
 		
-		
+		// végigmegyünk a lassítandó objektumokon
 		for (GameObject object : objectsToSlow) {
 			Effect effect = new SlowEffect();
 			
+			// mindegyiket lelassítjuk egy-egy SlowEffect-tel
 			object.addEffect(effect);
 			object.affect(effect);
 		}
@@ -52,6 +58,7 @@ public class SlowTrap extends Trap {
 		Console.deIndent();
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "slowTrap#" + id;

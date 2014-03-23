@@ -7,6 +7,7 @@ public class Hobbit extends Enemy {
 		Console.println(this + " = new Hobbit()");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "hobbit#" + id;

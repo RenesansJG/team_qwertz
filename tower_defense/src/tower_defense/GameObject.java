@@ -10,8 +10,8 @@ public abstract class GameObject implements ITickable, Serializable {
 	private static int count;
 	protected final int id;
 	
-	protected double x;
-	protected double y;
+	//protected double x;
+	//protected double y;
 	protected final List<Effect> effects;
 	
 	protected GameObject() {
@@ -20,17 +20,20 @@ public abstract class GameObject implements ITickable, Serializable {
 		effects = new ArrayList<Effect>();
 	}
 	
-	public abstract boolean action() throws IOException;
-	public abstract void affect(Effect effect);
+	public abstract boolean action() throws IOException; // tevékenység
+	public abstract void affect(Effect effect);          // accept függvény visitor patternhez
 	
 	// összes effekt léptetése (applyTick minden effecten)
 	public final void effect() {
 		Console.println(this + ".effect()");
 		Console.indent();
 		
+		// minden effektre a listában
 		for (Effect effect : effects) {
+			// alkalmazzuk a ticket, és megnézzük hogy lejárt-e
 			boolean effectIsToBeRemoved = effect.applyTick();
 			
+			// ha lejárt, töröljük
 			if (effectIsToBeRemoved) {
 				effects.remove(effect);
 			}
@@ -53,19 +56,21 @@ public abstract class GameObject implements ITickable, Serializable {
 		Console.indent();
 		
 		// effektek léptetése és az objektum tevékenységének meghívása
-		effect();
-		boolean isToBeRemoved = action();
+		effect();                         // léptetés
+		boolean isToBeRemoved = action(); // tevékenység, visszatér, hogy törlendõ-e az objektum
 		
 		Console.deIndent();
-		return isToBeRemoved;
+		return isToBeRemoved; // visszatérünk, hogy törlendõ-e
 	}
 	
+	// távolság számítása
 	public final double getDistance(GameObject object) {
 		Console.println(this + ".getDistance(" + object + ")");
 		
 		return 0; // egyelõre nem számolunk távolságot, 0-val tér vissza
 	}
 	
+	// ellenséges-e a gameObject
 	public boolean isEnemy() {
 		Console.println(this + ".isEnemy()");
 		

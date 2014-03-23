@@ -14,6 +14,7 @@ public class Projectile extends MovableGameObject {
 		damage = new Damage();
 	}
 	
+	// lövedék tevékenysége
 	@Override
 	public final boolean action() throws IOException {
 		Console.println(this + ".action()");
@@ -38,10 +39,12 @@ public class Projectile extends MovableGameObject {
 		Console.println(this + ".explode()");
 		Console.indent();
 		
+		// megsebzendõ objektumok
 		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
 		
-		Console.printlnMsg("Melyik objektumok vannak a lövedék AoE-jében? (-1 = vége)");
+		Console.printlnMsg("Melyik objektumok vannak a lövedék AoE-jében?");
 		
+		// objektumok kérése a user-tõl
 		while (true) {
 			GameObject object = Console.getObjectFromUser();
 			
@@ -49,11 +52,13 @@ public class Projectile extends MovableGameObject {
 				break;
 			}
 			
+			// lekért objektum hozzáadása a listához
 			objectsToDamage.add(object);
 		}
 		
-		
+		// minden sebzendõ objektumon végigmegyünk
 		for (GameObject object : objectsToDamage) {
+			// csak akkor sebzünk ha ellenséges
 			if (object.isEnemy()) {
 				Enemy enemy = (Enemy) object;
 				enemy.takeDamage(damage);
@@ -72,7 +77,8 @@ public class Projectile extends MovableGameObject {
 		
 		Console.deIndent();
 	}
-
+	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "projectile#" + id;

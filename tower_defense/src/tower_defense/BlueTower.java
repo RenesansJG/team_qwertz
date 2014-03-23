@@ -7,6 +7,7 @@ public class BlueTower extends Tower {
 		Console.println(this + " = new BlueTower()");
 	}
 	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "blueTower#" + id;

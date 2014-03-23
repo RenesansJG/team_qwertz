@@ -7,6 +7,13 @@ public class SlowEffect extends Effect {
 		Console.println(this + " = new SlowEffect()");
 	}
 	
+	// effekt alkalmazása ellenségen
+	@Override
+	public void apply(Enemy enemy) {
+		Console.println(this + ".apply(" + enemy + ")");
+	}
+	
+	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
 		return "slowEffect#" + id;
