@@ -21,7 +21,7 @@ public class SlowTrap extends Trap {
 		// lassítandó objektumok listája
 		List<GameObject> objectsToSlow = new ArrayList<GameObject>();
 		
-		Console.println("Melyik objektumok vannak az akadály hatókörében?");
+		Console.printlnMsg("Melyik objektumok vannak az akadály hatókörében?");
 		
 		// objektumok bekérése a user-tõl
 		while (true) {

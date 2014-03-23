@@ -4,13 +4,12 @@ import java.io.Serializable;
 
 public abstract class Effect implements ITickable, Serializable {
 	private static final long serialVersionUID = -1973848083850121683L;
-	private static int count = 0;
 	protected final int id;
 	
 	//private int remainingTicks;
 	
 	protected Effect() {
-		id = count++;
+		id = Game.getNextEffectId();
 	}
 	
 	// tick alkalmazása effekten

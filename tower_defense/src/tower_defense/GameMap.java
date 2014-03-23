@@ -16,7 +16,6 @@ public class GameMap implements Serializable {
 		Console.indent();
 		
 		nodes = new ArrayList<Node>();
-		nodes.add(new Node());
 		objects = new ArrayList<GameObject>();
 		
 		Console.deIndent();
@@ -27,6 +26,13 @@ public class GameMap implements Serializable {
 		Console.println(this + ".getNodes()");
 		
 		return Collections.unmodifiableList(nodes);
+	}
+	
+	// node hozzáadása a maphez
+	public void addNode(Node node) {
+		Console.println(this + ".addNode(" + node + ")");
+		
+		nodes.add(node);
 	}
 	
 	// az összes objektum listájának lekérése

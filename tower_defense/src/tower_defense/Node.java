@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Node implements Serializable {
 	private static final long serialVersionUID = 6423495891562787370L;
-	private static int count;
 	protected final int id;
 	
 	//private final double x;
@@ -16,7 +15,7 @@ public class Node implements Serializable {
 	
 	public Node() {
 		Console.println("new Node()");
-		id = count++;
+		id = Game.getNextNodeId();
 		
 		nextNodes = new ArrayList<Node>();
 	}

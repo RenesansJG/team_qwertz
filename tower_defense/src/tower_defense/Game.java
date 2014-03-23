@@ -12,12 +12,34 @@ public class Game implements Serializable {
 	private static Game currentGame; // aktuális játék
 	private final GameMap gameMap;   // referencia a mapre
 	
+	// *** darabszámok szkelentonhoz ***
+	private int objectCount;
+	private int effectCount;
+	private int nodeCount;
+	
+	public static int getNextObjectId() {
+		return currentGame.objectCount++;
+	}
+	
+	public static int getNextEffectId() {
+		return currentGame.effectCount++;
+	}
+	
+	public static int getNextNodeId() {
+		return currentGame.nodeCount++;
+	}
+	// *********************************
+	
 	// játék konstruktor
 	private Game() {
 		Console.println("new Game()");
 		Console.indent();
 		
 		gameMap = new GameMap();
+		
+		objectCount = 0;
+		effectCount = 0;
+		nodeCount = 0;
 		
 		Console.deIndent();
 	}
@@ -32,8 +54,13 @@ public class Game implements Serializable {
 	// új játék indítása
 	public static void newGame() {
 		Console.println("Game.newGame()");
+		Console.indent();
 		
 		currentGame = new Game();
+		
+		Game.getMap().addNode(new Node());
+		
+		Console.deIndent();
 	}
 	
 	// játék betöltése fájlból

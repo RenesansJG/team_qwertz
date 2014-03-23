@@ -21,6 +21,25 @@ public class Console {
 		System.out.println(o);
 	}
 	
+	// üres sor kiírása
+	public static void println() {
+		System.out.println();
+	}
+	
+	// kiírás elején tabokkal
+	public static void printi(Object o) {
+		for (int i = 0; i < indent; i++) {
+			System.out.print("  ");
+		}
+		
+		System.out.print(o);
+	}
+	
+	// kiírás tabok nélkül
+	public static void print(Object o) {
+		System.out.print(o);
+	}
+	
 	// felhasználónak szóló üzenet kiírása (teljes sor, elején tabokkal)
 	public static void printlnMsg(Object o) {
 		if (commands.isEmpty()) {
@@ -79,6 +98,20 @@ public class Console {
 	// paraméterek: a lista elemei
 	// visszatérés: hanyadik elemet választotta a felhasználó (0-tól indexelünk)
 	public static int choose(String... choices) throws IOException {
+		printi("Console.choose(");
+		
+		for (int i = 0; i < choices.length - 1; i++) {
+			print(choices[i] + ", ");
+		}
+		
+		if (choices.length > 0) {
+			print(choices[choices.length - 1]);
+		}
+		
+		print(")");
+		println();
+		indent();
+		
 		if (choices == null || choices.length == 0)
 			return 0;
 		
@@ -95,6 +128,7 @@ public class Console {
 			choice = readInt();
 		}
 		
+		deIndent();
 		return (choice != - 1) ? choice - 1 : choice;
 	}
 	
@@ -102,6 +136,9 @@ public class Console {
 	// visszatérés: igaz, ha az igent választotta a felhasználó,
 	//              hamis ha a nemet
 	public static boolean chooseYesNo() throws IOException {
+		println("Console.chooseYesNo()");
+		indent();
+		
 		printlnMsg("1 = Igen");
 		printlnMsg("2 = Nem");
 		printMsg("Válasz: ");
@@ -113,6 +150,7 @@ public class Console {
 			choice = readInt();
 		}
 		
+		deIndent();
 		return choice == 1;
 	}
 	
@@ -157,6 +195,7 @@ public class Console {
 						"Objektum léptetése",
 						"Torony fejlesztése",
 						"Kristály alkalmazása tornyon vagy akadályon",
+						"Új játék",
 						"Játék mentése",
 						"Másik játék betöltése",
 						"Tesztesetek",
@@ -181,16 +220,19 @@ public class Console {
 				case 5: // apply crystal
 					applyCrystal();
 					break;
-				case 6: // save game
+				case 6: // new game
+					newGame();
+					break;
+				case 7: // save game
 					saveGame();
 					break;
-				case 7: // load game
+				case 8: // load game
 					loadGame();
 					break;
-				case 8: // test
+				case 9: // test
 					test();
 					break;
-				case 9: // exit
+				case 10: // exit
 					if (exit()) {
 						return;
 					}
@@ -204,8 +246,13 @@ public class Console {
 	
 	// inicializáció
 	public static void init() {
+		println("Console.init()");
+		indent();
+		
 		// új játék indítása
 		Game.newGame();
+		
+		deIndent();
 	}
 	
 	// add object menüpont
@@ -348,12 +395,14 @@ public class Console {
 		printlnMsg("Add meg az objektum ID-jét!");
 		GameObject object = getObjectFromUser();
 		
-		// alkalmazzuk a ticket az objektumon, és eltároljuk, törlendõ-e
-		boolean isToBeRemoved = object.applyTick();
-		
-		// ha törlendõ az objektum, töröljük
-		if (isToBeRemoved) {
-			Game.getMap().removeObject(object);
+		if (object != null) {
+			// alkalmazzuk a ticket az objektumon, és eltároljuk, törlendõ-e
+			boolean isToBeRemoved = object.applyTick();
+			
+			// ha törlendõ az objektum, töröljük
+			if (isToBeRemoved) {
+				Game.getMap().removeObject(object);
+			}
 		}
 		
 		deIndent();
@@ -366,7 +415,7 @@ public class Console {
 		
 		GameObject object = getObjectFromUser();
 		
-		if (object instanceof Tower) {
+		if (object != null && object instanceof Tower) {
 			((Tower)object).upgrade();
 		}
 		
@@ -406,8 +455,11 @@ public class Console {
 		
 		Effect effect = new RedCrystalEffect();
 		GameObject object = getObjectFromUser();
-		object.addEffect(effect);
-		object.affect(effect);
+		
+		if (object != null) {
+			object.addEffect(effect);
+			object.affect(effect);
+		}
 		
 		deIndent();
 	}
@@ -419,8 +471,11 @@ public class Console {
 		
 		Effect effect = new GreenCrystalEffect();
 		GameObject object = getObjectFromUser();
-		object.addEffect(effect);
-		object.affect(effect);
+		
+		if (object != null) {
+			object.addEffect(effect);
+			object.affect(effect);
+		}
 		
 		deIndent();
 	}
@@ -432,8 +487,27 @@ public class Console {
 		
 		Effect effect = new BlueCrystalEffect();
 		GameObject object = getObjectFromUser();
-		object.addEffect(effect);
-		object.affect(effect);
+		
+		if (object != null) {
+			object.addEffect(effect);
+			object.affect(effect);
+		}
+		
+		deIndent();
+	}
+	
+	// new game menüpont
+	public static void newGame() throws IOException {
+		println("Console.newGame()");
+		indent();
+		
+		printlnMsg("Mented a játékot?");
+		
+		if (chooseYesNo()) {
+			saveGame();
+		}
+		
+		Game.newGame();
 		
 		deIndent();
 	}
@@ -500,7 +574,14 @@ public class Console {
 	
 	// tesztesetek
 	private static final String[][] tests = {
-		{"1", "1", "2"}
+		{"7", "2", "1", "1", "1", "1", "3", "2", "4", "0", "1", "1", "1", "4", "2", "1", "1", "-1", "4", "1", "1", "2", "2", "1", "10"},
+		{"7", "2", "1", "1", "1", "1", "1", "2", "1", "1", "3", "5", "0", "6", "3", "2", "4", "2", "2", "3", "1", "10"},
+		{"7", "2", "1", "2", "1", "1", "3", "1", "1", "3", "3", "1", "3", "4", "4", "0", "2", "3", "-1", "4", "1", "2", "2", "4", "2", "2", "2", "4", "3", "2", "1", "10"},
+		{"7", "2", "1", "2", "2", "1", "3", "1", "1", "3", "1", "4", "0", "1", "2", "-1", "4", "1", "2", "2", "4", "2", "2", "2", "10"},
+		{"7", "2", "1", "3", "1", "1", "3", "1", "1", "3", "2", "4", "0", "1", "2", "2", "2", "4", "1", "1", "2", "2", "2", "4", "2", "1", "1", "2", "2", "10"},
+		{"1", "3", "1", "1", "3", "2", "1", "3", "3", "1", "3", "4", "10"},
+		{"1", "1", "1", "1", "1", "2", "1", "1", "3", "10"},
+		{"1", "2", "1", "1", "2", "2", "10"}
 	};
 	
 	// választási lehetõségek a tesztesetekhez

@@ -3,11 +3,11 @@ package tower_defense;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class GameObject implements ITickable, Serializable {
 	private static final long serialVersionUID = 8508068704731173934L;
-	private static int count;
 	protected final int id;
 	
 	//protected double x;
@@ -15,7 +15,7 @@ public abstract class GameObject implements ITickable, Serializable {
 	protected final List<Effect> effects;
 	
 	protected GameObject() {
-		id = count++;
+		id = Game.getNextObjectId();
 		
 		effects = new ArrayList<Effect>();
 	}
@@ -28,14 +28,18 @@ public abstract class GameObject implements ITickable, Serializable {
 		Console.println(this + ".effect()");
 		Console.indent();
 		
+		Iterator<Effect> effectIt = effects.iterator();
+		
 		// minden effektre a listában
-		for (Effect effect : effects) {
+		while (effectIt.hasNext()) {
+			Effect effect = effectIt.next();
+			
 			// alkalmazzuk a ticket, és megnézzük hogy lejárt-e
 			boolean effectIsToBeRemoved = effect.applyTick();
 			
 			// ha lejárt, töröljük
 			if (effectIsToBeRemoved) {
-				effects.remove(effect);
+				effectIt.remove();
 			}
 		}
 		
