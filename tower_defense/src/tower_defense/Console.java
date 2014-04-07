@@ -230,7 +230,7 @@ public class Console {
 					listObjects();
 					break;
 				case 5: // apply tick
-					applyTick();
+					applyTicks();
 					break;
 				case 6: // add tower
 					addTower();
@@ -284,6 +284,11 @@ public class Console {
 		default: // vissza
 			break;
 		}
+		
+		int x = Console.readInt();
+		int y = Console.readInt();
+		
+		
 	}
 	
 	// add trap menüpont
@@ -348,6 +353,7 @@ public class Console {
 	}
 	*/
 	
+	/*
 	// apply tick menüpont
 	public static void applyTick() throws IOException {
 		printlnMsg("Add meg az objektum ID-jét!");
@@ -363,11 +369,37 @@ public class Console {
 			}
 		}
 	}
+	*/
+	
+	// objektumok léptetése
+	public static void applyTicks() throws IOException {
+		GameMap map = Game.getMap();
+		
+		printlnMsg("Hány lépés legyen?");
+		int ticks = readInt();
+		
+		// annyiszor, ahány tick van
+		for (int i = 0; i < ticks; i++) {
+			
+			// minden objektumra...
+			for (GameObject object : map.getObjects()) {
+				// alkalmazzuk a tick-et
+				boolean objectIsToBeRemoved = object.applyTick();
+				
+				// ha kell, töröljük az objektumot
+				if (objectIsToBeRemoved) {
+					map.removeObject(object);
+				}
+			}
+		}
+	}
 	
 	// upgrade tower menüpont
 	public static void upgradeTower() throws IOException {
+		// bekérünk egy objektumot
 		GameObject object = getObjectFromUser();
 		
+		// ha torony, upgradeljük
 		if (object != null && object instanceof Tower) {
 			((Tower)object).upgrade();
 		}
@@ -403,8 +435,6 @@ public class Console {
 			object.addEffect(effect);
 			object.affect(effect);
 		}
-		
-		deIndent();
 	}
 	
 	// apply green crystal menüpont
