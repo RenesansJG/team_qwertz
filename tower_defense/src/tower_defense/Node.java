@@ -9,14 +9,14 @@ public class Node implements Serializable {
 	private static final long serialVersionUID = 6423495891562787370L;
 	protected final int id;
 	
-	//private final double x;
-	//private final double y;
+	private final double x;
+	private final double y;
 	private final List<Node> nextNodes; // következõ node-ok listája
 	
-	public Node() {
-		Console.println("new Node()");
+	public Node(double x, double y) {
 		id = Game.getNextNodeId();
-		
+		this.x=x;
+		this.y=y;
 		nextNodes = new ArrayList<Node>();
 	}
 	

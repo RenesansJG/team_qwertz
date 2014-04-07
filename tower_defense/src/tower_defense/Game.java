@@ -53,20 +53,14 @@ public class Game implements Serializable {
 	
 	// új játék indítása
 	public static void newGame() {
-		Console.println("Game.newGame()");
-		Console.indent();
 		
 		currentGame = new Game();
 		
-		Game.getMap().addNode(new Node());
-		
-		Console.deIndent();
+		//Game.getMap().addNode(new Node());
 	}
 	
 	// játék betöltése fájlból
 	public static boolean loadGame(String file) {
-		Console.println("Game.loadGame(" + file + ")");
-		
 		// szerializálást használ
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
@@ -87,8 +81,6 @@ public class Game implements Serializable {
 	
 	// játék mentése fájlba
 	public static boolean saveGame(String file) {
-		Console.println("Game.saveGame(" + file + ")");
-		
 		// szerializálást használ
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
