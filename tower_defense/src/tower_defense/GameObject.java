@@ -20,7 +20,7 @@ public abstract class GameObject implements ITickable, Serializable {
 		effects = new ArrayList<Effect>();
 	}
 	
-	public abstract boolean action() throws IOException; // tevékenység
+	public abstract boolean action(); // tevékenység
 	public abstract void affect(Effect effect);          // accept függvény visitor patternhez
 	
 	// összes effekt léptetése (applyTick minden effecten)

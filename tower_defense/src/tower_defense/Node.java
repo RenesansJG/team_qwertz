@@ -26,6 +26,10 @@ public class Node implements Serializable {
 		return Collections.unmodifiableList(nextNodes);
 	}
 	
+	public void addNextNode(Node n){
+		nextNodes.add(n);
+	}
+	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {

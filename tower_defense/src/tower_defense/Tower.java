@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.io.IOException;
 import java.util.List;
 
 public abstract class Tower extends GameObject {
@@ -17,7 +16,7 @@ public abstract class Tower extends GameObject {
 	
 	// torony tevékenysége
 	@Override
-	public final boolean action() throws IOException {
+	public final boolean action(){
 		// attackspeed nincs megoldva 
 		
 		if(true){
@@ -35,7 +34,8 @@ public abstract class Tower extends GameObject {
 				GameObject closest = objects.get(closestindex);
 				if(getDistance(closest)<=range)
 				{
-					Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y));
+					//fel kell még szorozni a damaget a multiplierrel
+					Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y,projectileSpeed,projectileAoE,projectileDamage));
 				}
 			}
 		}

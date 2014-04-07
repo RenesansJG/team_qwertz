@@ -6,7 +6,7 @@ public abstract class Effect implements ITickable, Serializable {
 	private static final long serialVersionUID = -1973848083850121683L;
 	protected final int id;
 	
-	//private int remainingTicks;
+	protected int remainingTicks;
 	
 	protected Effect() {
 		id = Game.getNextEffectId();
@@ -15,7 +15,11 @@ public abstract class Effect implements ITickable, Serializable {
 	// tick alkalmazása effekten
 	@Override
 	public final boolean applyTick() {
-		return true; // az effekteket egyelõre mindig töröljük
+		
+		
+		remainingTicks--;
+		return remainingTicks<=0;
+
 	}
 	
 	public void apply(Tower tower) {

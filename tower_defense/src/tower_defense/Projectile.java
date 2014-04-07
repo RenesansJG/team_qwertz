@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Projectile extends MovableGameObject {
@@ -9,17 +8,19 @@ public class Projectile extends MovableGameObject {
 	private Damage damage;
 	private double AoE;
 	
-	public Projectile(double x, double y, double destx,double desty ) {
+	public Projectile(double x, double y, double destx,double desty, double speed, double Aoe,Damage damage ) {
 		this.x=x;
 		this.y=y;
 		targetX=destx;
 		targetY=desty;
-		damage = new Damage();
+		movementSpeed=speed;
+		this.AoE=Aoe;
+		this.damage = damage;
 	}
 	
 	// lövedék tevékenysége
 	@Override
-	public final boolean action() throws IOException {
+	public final boolean action() {
 		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
 		if(distance<movementSpeed)
 		{
@@ -34,7 +35,7 @@ public class Projectile extends MovableGameObject {
 	}
 	
 	// lövedék robbanása
-	public void explode() throws IOException {
+	public void explode(){
 		
 		List<GameObject> objects = Game.getMap().getObjects();
 		
