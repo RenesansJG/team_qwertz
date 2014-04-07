@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.io.IOException;
 import java.util.List;
 
 public abstract class Tower extends GameObject {
@@ -17,7 +16,7 @@ public abstract class Tower extends GameObject {
 	
 	// torony tevékenysége
 	@Override
-	public final boolean action() throws IOException {
+	public final boolean action(){
 		// attackspeed nincs megoldva 
 		
 		if(true){

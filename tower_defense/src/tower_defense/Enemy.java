@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.io.IOException;
 
 public abstract class Enemy extends MovableGameObject {
 	private static final long serialVersionUID = 6413219852626908584L;
@@ -20,7 +19,7 @@ public abstract class Enemy extends MovableGameObject {
 	
 	// ellenség tevékenysége
 	@Override
-	public final boolean action() throws IOException {
+	public final boolean action() {
 		// van-e még fennmaradó távolság a tickben?
 		boolean remainingDistanceBiggerThanZero = true;
 		
