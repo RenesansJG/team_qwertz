@@ -1,7 +1,6 @@
 package tower_defense;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Projectile extends MovableGameObject {
