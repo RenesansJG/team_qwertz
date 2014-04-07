@@ -7,10 +7,8 @@ import java.util.List;
 public class Projectile extends MovableGameObject {
 	private static final long serialVersionUID = -3507357373445026085L;
 	
-	
-	
 	private Damage damage;
-	//private double AoE;
+	private double AoE;
 	
 	public Projectile(double x, double y, double destx,double desty ) {
 		this.x=x;
@@ -38,40 +36,22 @@ public class Projectile extends MovableGameObject {
 	
 	// lövedék robbanása
 	public void explode() throws IOException {
-		// megsebzendõ objektumok
-		List<GameObject> objectsToDamage = new ArrayList<GameObject>();
-		// objektumok kérése a user-tõl
-		while (true) {
-			GameObject object = Console.getObjectFromUser();
-			
-			if (object == null) {
-				break;
-			}
-			
-			// lekért objektum hozzáadása a listához
-			objectsToDamage.add(object);
-		}
 		
-		// minden sebzendõ objektumon végigmegyünk
-		for (GameObject object : objectsToDamage) {
-			// csak akkor sebzünk ha ellenséges
-			if (object.isEnemy()) {
-				Enemy enemy = (Enemy) object;
-				enemy.takeDamage(damage);
+		List<GameObject> objects = Game.getMap().getObjects();
+		
+		for(GameObject o : objects)
+		{
+			if(o.isEnemy() && getDistance(o)<AoE)
+			{
+				Enemy e = (Enemy)o;
+				e.takeDamage(damage);
 			}
 		}
-		
-		Console.deIndent();
 	}
 	
 	@Override
 	public void affect(Effect effect) {
-		Console.println(this + ".affect(" + effect + ")");
-		Console.indent();
 		
-		// nem ad ki effektet
-		
-		Console.deIndent();
 	}
 	
 	// toString függvény kiíratáshoz
