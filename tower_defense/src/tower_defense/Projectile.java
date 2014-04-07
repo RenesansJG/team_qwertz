@@ -8,12 +8,14 @@ public class Projectile extends MovableGameObject {
 	private Damage damage;
 	private double AoE;
 	
-	public Projectile(double x, double y, double destx,double desty ) {
+	public Projectile(double x, double y, double destx,double desty, double speed, double Aoe,Damage damage ) {
 		this.x=x;
 		this.y=y;
 		targetX=destx;
 		targetY=desty;
-		damage = new Damage();
+		movementSpeed=speed;
+		this.AoE=Aoe;
+		this.damage = damage;
 	}
 	
 	// lövedék tevékenysége

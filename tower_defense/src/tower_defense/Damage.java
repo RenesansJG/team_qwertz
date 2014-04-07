@@ -16,6 +16,10 @@ public class Damage implements Serializable {
 	
 	Map<DamageType, Double> damageMap = new HashMap<DamageType,Double>();
 	
+	public Damage(){
+		
+	}
+	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {

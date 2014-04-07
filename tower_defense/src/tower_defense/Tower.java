@@ -34,7 +34,8 @@ public abstract class Tower extends GameObject {
 				GameObject closest = objects.get(closestindex);
 				if(getDistance(closest)<=range)
 				{
-					Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y));
+					//fel kell még szorozni a damaget a multiplierrel
+					Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y,projectileSpeed,projectileAoE,projectileDamage));
 				}
 			}
 		}
