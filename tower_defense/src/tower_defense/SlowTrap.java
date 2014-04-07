@@ -5,6 +5,9 @@ import java.util.List;
 public class SlowTrap extends Trap {
 	private static final long serialVersionUID = 8010869721215614573L;
 	
+	private double slow;
+	private double slowMultiplier;
+	
 	// lassító csapda konstruktor
 	public SlowTrap() {
 
