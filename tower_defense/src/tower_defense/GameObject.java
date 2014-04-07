@@ -10,8 +10,8 @@ public abstract class GameObject implements ITickable, Serializable {
 	private static final long serialVersionUID = 8508068704731173934L;
 	protected final int id;
 	
-	//protected double x;
-	//protected double y;
+	protected double x;
+	protected double y;
 	protected final List<Effect> effects;
 	
 	protected GameObject() {
