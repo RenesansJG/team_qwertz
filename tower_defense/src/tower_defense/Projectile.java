@@ -17,21 +17,8 @@ public class Projectile extends MovableGameObject {
 	// lövedék tevékenysége
 	@Override
 	public final boolean action() throws IOException {
-		Console.println(this + ".action()");
-		Console.indent();
-		
-		boolean ret = false;
-		
-		Console.printlnMsg("Robbanjon a lövedék?");
-		
-		// Ha robban a lövedék
-		if (Console.chooseYesNo()) {
-			explode();
-			ret = true;
-		}
-		
-		Console.deIndent();
-		return ret;
+		explode();
+		return true;
 	}
 	
 	// lövedék robbanása

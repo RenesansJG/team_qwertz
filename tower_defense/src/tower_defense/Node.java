@@ -22,7 +22,6 @@ public class Node implements Serializable {
 	
 	// lekéri a következõ node-okat
 	public List<Node> getNextNodes() {
-		Console.println(this + ".getNextNodes()");
 		// módosíthatatlan verzióban adjuk vissza a listát
 		return Collections.unmodifiableList(nextNodes);
 	}

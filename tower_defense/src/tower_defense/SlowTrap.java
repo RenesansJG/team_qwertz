@@ -9,19 +9,14 @@ public class SlowTrap extends Trap {
 	
 	// lassító csapda konstruktor
 	public SlowTrap() {
-		Console.println(this + " = new SlowTrap()");
+
 	}
 	
 	// lassító csapda tevékenysége
 	@Override
 	public final boolean action() throws IOException {
-		Console.println(this + ".action()");
-		Console.indent();
-		
 		// lassítandó objektumok listája
 		List<GameObject> objectsToSlow = new ArrayList<GameObject>();
-		
-		Console.printlnMsg("Melyik objektumok vannak az akadály hatókörében?");
 		
 		// objektumok bekérése a user-tõl
 		while (true) {
@@ -43,8 +38,6 @@ public class SlowTrap extends Trap {
 			object.addEffect(effect);
 			object.affect(effect);
 		}
-		
-		Console.deIndent();
 		return false;
 	}
 	
