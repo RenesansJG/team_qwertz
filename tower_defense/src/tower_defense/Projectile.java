@@ -10,7 +10,7 @@ public class Projectile extends MovableGameObject {
 	private Damage damage;
 	//private double AoE;
 	
-	public Projectile() {
+	public Projectile(double x, double y, double destx,double desty ) {
 		damage = new Damage();
 	}
 	

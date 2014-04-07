@@ -1,21 +1,39 @@
 package tower_defense;
 
 import java.io.IOException;
+import java.util.List;
 
 public abstract class Tower extends GameObject {
 	private static final long serialVersionUID = 641853699471809737L;
+	protected double range;
+	protected double rangeMultiplier;
+	protected double attackSpeed;
+	protected double attackSpeedMultiplier;
+	protected Damage projectileDamage;
+	protected double projectileDamageMultiplier;
+	protected double projectileSpeed;
+	protected double projectileAoE;
+	
 	
 	// torony tevékenysége
 	@Override
 	public final boolean action() throws IOException {
-		// ha lõ a torony
-		if (true) {
-			// bekérjük a legközelebbi objektumot
-			GameObject object = null;
-			
-			// ha ellenséges
-			if (object!=null && object.isEnemy()) {
-				Game.getMap().addObject(new Projectile());
+		// lekérjük a legközelebbi objektumot
+		List<GameObject> objects = Game.getMap().getObjects();
+		
+		int closestindex=-1;
+		for(int i=0;i<objects.size();i++){
+			if(objects.get(i).isEnemy() && getDistance(objects.get(i))<getDistance(objects.get(closestindex)))
+			{
+				closestindex=i;
+			}
+		}
+		
+		if(closestindex!=-1){
+			GameObject closest = objects.get(closestindex);
+			if(getDistance(closest)<=range)
+			{
+				Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y));
 			}
 		}
 		return false;
