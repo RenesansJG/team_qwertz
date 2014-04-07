@@ -15,25 +15,23 @@ public abstract class Effect implements ITickable, Serializable {
 	// tick alkalmazása effekten
 	@Override
 	public final boolean applyTick() {
-		Console.println(this + ".applyTick()");
-		
 		return true; // az effekteket egyelõre mindig töröljük
 	}
 	
 	public void apply(Tower tower) {
-		Console.println(this + ".apply(" + tower + ")");
+
 	}
 	
 	public void apply(DamageTrap damageTrap) {
-		Console.println(this + ".apply(" + damageTrap + ")");
+		
 	}
 	
 	public void apply(SlowTrap slowTrap) {
-		Console.println(this + ".apply(" + slowTrap + ")");
+		
 	}
 	
 	public void apply(Enemy enemy) {
-		Console.println(this + ".apply(" + enemy + ")");
+		
 	}
 	
 	// kötelezõ toString függvény kiíratáshoz

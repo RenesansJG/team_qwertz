@@ -32,22 +32,15 @@ public class Game implements Serializable {
 	
 	// játék konstruktor
 	private Game() {
-		Console.println("new Game()");
-		Console.indent();
-		
 		gameMap = new GameMap();
 		
 		objectCount = 0;
 		effectCount = 0;
 		nodeCount = 0;
-		
-		Console.deIndent();
 	}
 	
 	// játék mapjének lekérése
 	public static GameMap getMap() {
-		Console.println("Game.getMap()");
-		
 		return currentGame.gameMap;
 	}
 	
