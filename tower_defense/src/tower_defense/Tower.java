@@ -14,7 +14,7 @@ public abstract class Tower extends GameObject {
 			GameObject object = null;
 			
 			// ha ellenséges
-			if (object != null && object.isEnemy()) {
+			if (true/*object != null && object.isEnemy()*/) {
 				// és ha benne van a hatókörben
 					// kilövünk egy lövedéket
 					Game.getMap().addObject(new Projectile());
