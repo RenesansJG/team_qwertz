@@ -197,18 +197,9 @@ public class Console {
 			while (true) {
 				// fõmenü
 				int choice = choose(false,
-						"Objektum hozzáadása",
-						"Objektumok listázása",
-						"Objektum eltávolítása",
-						"Objektum léptetése",
-						"Torony fejlesztése",
-						"Kristály alkalmazása tornyon vagy akadályon",
-						"Új játék",
-						"Játék mentése",
-						"Másik játék betöltése",
-						"Tesztesetek",
-						"Kilépés");
+						"");
 				
+				/*
 				switch (choice) {
 				case 0: // add object
 					addObject();
@@ -246,6 +237,7 @@ public class Console {
 					}
 					break;
 				}
+				*/
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
