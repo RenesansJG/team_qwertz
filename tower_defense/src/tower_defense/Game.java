@@ -11,6 +11,7 @@ public class Game implements Serializable {
 	private static final long serialVersionUID = -2262641899325571201L;
 	private static Game currentGame; // aktuális játék
 	private final GameMap gameMap;   // referencia a mapre
+	private final Saruman saruman;
 	
 	// *** darabszámok szkelentonhoz ***
 	private int objectCount;
@@ -33,6 +34,7 @@ public class Game implements Serializable {
 	// játék konstruktor
 	private Game() {
 		gameMap = new GameMap();
+		saruman = new Saruman();
 		
 		objectCount = 0;
 		effectCount = 0;
