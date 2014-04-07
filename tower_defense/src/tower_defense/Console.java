@@ -541,4 +541,9 @@ public class Console {
 		
 		return false;
 	}
+	
+	// random seed menüpont
+	public static void randomSeed() {
+		// TODO
+	}
 }
