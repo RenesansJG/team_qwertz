@@ -20,24 +20,21 @@ public abstract class Enemy extends MovableGameObject {
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
-		// van-e még fennmaradó távolság a tickben?
-		boolean remainingDistanceBiggerThanZero = true;
-		
-		while (remainingDistanceBiggerThanZero) {
-			// elérte-e már az enemy a targetNode-ját?
-			boolean reachedTarget = true;
-			
-			if (reachedTarget) {
-				// ha igen, lekérjük a következõ node-ok listáját
-				targetNode.getNextNodes();
+		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
+		boolean canmove=true;
+		while(canmove){
+			if(distance<movementSpeed)
+			{
+				//új node
+				movementSpeed-=distance;
 			}
-			// van-e még fennmaradó távolság a tickben?
-			remainingDistanceBiggerThanZero = true;
+			else
+			{
+				//mozog a cél felé!
+				canmove=false;
+			}
 		}
-		// meghalt-e az enemy?
-		boolean isDead = true;
-		
-		return isDead; // visszaadjuk, meghalt-e
+		return false;
 	}
 	
 	@Override
