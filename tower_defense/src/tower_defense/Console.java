@@ -197,47 +197,62 @@ public class Console {
 			while (true) {
 				// fõmenü
 				int choice = choose(false,
-						"");
+						"Új játék",
+						"Játék mentése",
+						"Játék betöltése",
+						"Kilépés",
+						"Objektumok listázása",
+						"Játék léptetése",
+						"Torony lerakása",
+						"Akadály lerakása",
+						"Ellenség generálása",
+						"Torony fejlesztése",
+						"Effekt alkalmazása",
+						"Véletlenszerûség ki/be",
+						"Tesztesetek");
 				
-				/*
 				switch (choice) {
-				case 0: // add object
-					addObject();
-					break;
-				case 1: // list objects
-					listObjects();
-					break;
-				case 2: // remove object
-					removeObject();
-					break;
-				case 3: // apply tick
-					applyTick();
-					break;
-				case 4: // upgrade tower
-					upgradeTower();
-					break;
-				case 5: // apply crystal
-					applyCrystal();
-					break;
-				case 6: // new game
+				case 0: // new game
 					newGame();
 					break;
-				case 7: // save game
+				case 1: // save game
 					saveGame();
 					break;
-				case 8: // load game
+				case 2: // load game
 					loadGame();
 					break;
-				case 9: // test
-					test();
-					break;
-				case 10: // exit
+				case 3: // exit game
 					if (exit()) {
 						return;
 					}
 					break;
+				case 4: // list objects
+					listObjects();
+					break;
+				case 5: // apply tick
+					applyTick();
+					break;
+				case 6: // add tower
+					addTower();
+					break;
+				case 7: // add trap
+					addTrap();
+					break;
+				case 8: // add enemy
+					addEnemy();
+					break;
+				case 9: // upgrade tower
+					upgradeTower();
+					break;
+				case 10: // apply effect
+					applyEffect();
+					break;
+				case 11: // random seed
+					break;
+				case 12: // tests
+					test();
+					break;
 				}
-				*/
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -246,46 +261,12 @@ public class Console {
 	
 	// inicializáció
 	public static void init() {
-		println("Console.init()");
-		indent();
-		
 		// új játék indítása
 		Game.newGame();
-		
-		deIndent();
-	}
-	
-	// add object menüpont
-	public static void addObject() throws IOException {
-		println("Console.addObject()");
-		indent();
-		
-		printlnMsg("Milyen objektum legyen?");
-		
-		int choice = choose("Torony", "Akadály", "Ellenség");
-		
-		switch (choice) {
-		case 0: // tower
-			addTower();
-			break;
-		case 1: // trap
-			addTrap();
-			break;
-		case 2: // enemy
-			addEnemy();
-			break;
-		default: // vissza
-			break;
-		}
-		
-		deIndent();
 	}
 	
 	// add tower menüpont
 	public static void addTower() throws IOException {
-		println("Console.addTower()");
-		indent();
-		
 		printlnMsg("Milyen torony legyen?");
 		
 		int choice = choose("Piros", "Zöld", "Kék");
@@ -303,15 +284,10 @@ public class Console {
 		default: // vissza
 			break;
 		}
-		
-		deIndent();
 	}
 	
 	// add trap menüpont
 	public static void addTrap() throws IOException {
-		println("Console.addTrap()");
-		indent();
-		
 		printlnMsg("Milyen akadály legyen?");
 		
 		int choice = choose("Sebzõ", "Lassító");
@@ -326,15 +302,10 @@ public class Console {
 		default: // vissza
 			break;
 		}
-		
-		deIndent();
 	}
 	
 	// add enemy menüpont
 	public static void addEnemy() throws IOException {
-		println("Console.addEnemy()");
-		indent();
-		
 		printlnMsg("Milyen ellenség legyen?");
 		
 		int choice = choose("Ember", "Tünde", "Törp", "Hobbit");
@@ -355,27 +326,18 @@ public class Console {
 		default: // vissza
 			break;
 		}
-		
-		deIndent();
 	}
 	
 	// list objects menüpont
 	public static void listObjects() {
-		println("Console.listObjects()");
-		indent();
-		
 		for (GameObject object : Game.getMap().getObjects()) {
-			printlnMsg(object);
+			println(object);
 		}
-		
-		deIndent();
 	}
 	
+	/*
 	// remove object menüpont
 	public static void removeObject() throws IOException {
-		println("Console.removeObject()");
-		indent();
-		
 		printlnMsg("Írd be a törlendõ objektum ID-jét!");
 		
 		GameObject objectToRemove = getObjectFromUser();
@@ -383,15 +345,11 @@ public class Console {
 		if (objectToRemove != null) {
 			Game.getMap().removeObject(objectToRemove);
 		}
-		
-		deIndent();
 	}
+	*/
 	
 	// apply tick menüpont
 	public static void applyTick() throws IOException {
-		println("Console.applyTick()");
-		indent();
-		
 		printlnMsg("Add meg az objektum ID-jét!");
 		GameObject object = getObjectFromUser();
 		
@@ -404,29 +362,19 @@ public class Console {
 				Game.getMap().removeObject(object);
 			}
 		}
-		
-		deIndent();
 	}
 	
 	// upgrade tower menüpont
 	public static void upgradeTower() throws IOException {
-		println("Console.upgradeTower()");
-		indent();
-		
 		GameObject object = getObjectFromUser();
 		
 		if (object != null && object instanceof Tower) {
 			((Tower)object).upgrade();
 		}
-		
-		deIndent();
 	}
 	
-	// apply crystal menüpont
-	public static void applyCrystal() throws IOException {
-		println("Console.applyCrystal()");
-		indent();
-		
+	// apply effect menüpont
+	public static void applyEffect() throws IOException {
 		printlnMsg("Milyen kristály legyen?");
 		
 		int choice = choose("Piros", "Zöld", "Kék");
@@ -444,15 +392,10 @@ public class Console {
 		default: // vissza
 			break;
 		}
-		
-		deIndent();
 	}
 	
 	// apply red crystal menüpont
 	public static void applyRedCrystal() throws IOException {
-		println("Console.applyRedCrystal()");
-		indent();
-		
 		Effect effect = new RedCrystalEffect();
 		GameObject object = getObjectFromUser();
 		
@@ -466,9 +409,6 @@ public class Console {
 	
 	// apply green crystal menüpont
 	public static void applyGreenCrystal() throws IOException {
-		println("Console.applyGreenCrystal()");
-		indent();
-		
 		Effect effect = new GreenCrystalEffect();
 		GameObject object = getObjectFromUser();
 		
@@ -482,9 +422,6 @@ public class Console {
 		
 	// apply blue crystal menüpont
 	public static void applyBlueCrystal() throws IOException {
-		println("Console.applyBlueCrystal()");
-		indent();
-		
 		Effect effect = new BlueCrystalEffect();
 		GameObject object = getObjectFromUser();
 		
@@ -492,15 +429,10 @@ public class Console {
 			object.addEffect(effect);
 			object.affect(effect);
 		}
-		
-		deIndent();
 	}
 	
 	// new game menüpont
 	public static void newGame() throws IOException {
-		println("Console.newGame()");
-		indent();
-		
 		printlnMsg("Mented a játékot?");
 		
 		if (chooseYesNo()) {
@@ -508,15 +440,10 @@ public class Console {
 		}
 		
 		Game.newGame();
-		
-		deIndent();
 	}
 	
 	// save game menüpont
 	public static void saveGame() throws IOException {
-		println("Console.saveGame()");
-		indent();
-		
 		while (true) {
 			printMsg("Mentés fájlneve: ");
 			String file = readLine();
@@ -535,15 +462,10 @@ public class Console {
 				printlnMsg("Hiba a mentéskor!");
 			}
 		}
-		
-		deIndent();
 	}
 	
 	// load game menüpont
 	public static void loadGame() throws IOException {
-		println("Console.loadGame()");
-		indent();
-		
 		printlnMsg("Mented a játékot?");
 		
 		if (chooseYesNo()) {
@@ -568,12 +490,11 @@ public class Console {
 				printlnMsg("Hiba a betöltéskor!");
 			}
 		}
-		
-		deIndent();
 	}
 	
 	// tesztesetek
 	private static final String[][] tests = {
+		/*
 		{"7", "2", "1", "1", "1", "1", "3", "2", "4", "0", "1", "1", "1", "4", "2", "1", "1", "-1", "4", "1", "1", "2", "2", "1", "10"},
 		{"7", "2", "1", "1", "1", "1", "1", "2", "1", "1", "3", "5", "0", "6", "3", "2", "4", "2", "2", "3", "1", "10"},
 		{"7", "2", "1", "2", "1", "1", "3", "1", "1", "3", "3", "1", "3", "4", "4", "0", "2", "3", "-1", "4", "1", "2", "2", "4", "2", "2", "2", "4", "3", "2", "1", "10"},
@@ -582,6 +503,7 @@ public class Console {
 		{"1", "3", "1", "1", "3", "2", "1", "3", "3", "1", "3", "4", "10"},
 		{"1", "1", "1", "1", "1", "2", "1", "1", "3", "10"},
 		{"1", "2", "1", "1", "2", "2", "10"}
+		*/
 	};
 	
 	// választási lehetõségek a tesztesetekhez
@@ -595,9 +517,6 @@ public class Console {
 	
 	// teszt menüpont
 	public static void test() throws IOException {
-		println("Console.test()");
-		indent();
-		
 		if (commands.isEmpty()) {
 			int choice = choose(false, choices);
 			
@@ -607,15 +526,10 @@ public class Console {
 		} else {
 			choose(false, choices);
 		}
-		
-		deIndent();
 	}
 	
 	// exit menüpont
 	public static boolean exit() throws IOException {
-		println("Console.exit()");
-		indent();
-		
 		printlnMsg("Biztosan kilépsz?");
 		
 		if (chooseYesNo()) {
@@ -625,7 +539,6 @@ public class Console {
 			return true;
 		}
 		
-		deIndent();
 		return false;
 	}
 }
