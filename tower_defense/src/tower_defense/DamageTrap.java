@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DamageTrap extends Trap {
