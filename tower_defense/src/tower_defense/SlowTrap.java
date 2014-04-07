@@ -9,8 +9,9 @@ public class SlowTrap extends Trap {
 	private double slowMultiplier;
 	
 	// lassító csapda konstruktor
-	public SlowTrap() {
-
+	public SlowTrap(double x, double y) {
+		this.x=x;
+		this.y=y;
 	}
 	
 	// lassító csapda tevékenysége

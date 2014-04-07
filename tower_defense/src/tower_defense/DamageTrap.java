@@ -8,8 +8,10 @@ public class DamageTrap extends Trap {
 	private double damageMultiplier;
 	
 	// sebzõ csapda konstruktor
-	public DamageTrap(Damage damage) {
-		this.damage = damage;
+	public DamageTrap(double x, double y) {
+		this.x=x;
+		this.y=y;
+		damage = new Damage();
 	}
 	
 	// sebzõ csapda tevékenysége
