@@ -17,4 +17,12 @@ public class HP implements Serializable {
 	public String toString() {
 		return ("hp");
 	}
+
+	public double getHP() {
+		return HP;
+	}
+
+	public void setHP(double hP) {
+		HP = hP;
+	}
 }
