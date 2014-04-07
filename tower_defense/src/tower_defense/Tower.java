@@ -10,14 +10,12 @@ public abstract class Tower extends GameObject {
 	public final boolean action() throws IOException {
 		// ha lõ a torony
 		if (true) {
-			// bekérjük a legközelebbi objektumot a usertõl
+			// bekérjük a legközelebbi objektumot
 			GameObject object = null;
 			
 			// ha ellenséges
-			if (true/*object != null && object.isEnemy()*/) {
-				// és ha benne van a hatókörben
-					// kilövünk egy lövedéket
-					Game.getMap().addObject(new Projectile());
+			if (object!=null && object.isEnemy()) {
+				Game.getMap().addObject(new Projectile());
 			}
 		}
 		return false;
