@@ -17,9 +17,9 @@ public abstract class Tower extends GameObject {
 	// torony tevékenysége
 	@Override
 	public final boolean action(){
-		// attackspeed nincs megoldva 
 		
-		if(true){
+		
+		if(true){// attackspeed nincs megoldva 
 			List<GameObject> objects = Game.getMap().getObjects();
 	
 			int closestindex=-1;
