@@ -23,10 +23,10 @@ public abstract class Enemy extends MovableGameObject {
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
-		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
 		double steps = movementSpeed;
 		boolean canmove=true;
 		while(canmove){
+			double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
 			if(distance<=steps)
 			{
 				x=targetNode.getX();
