@@ -17,9 +17,9 @@ public abstract class Enemy extends MovableGameObject {
 	
 	
 	// sebzõdés
-	public final void takeDamage(Damage damage, double multiplier) {
+	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
-		hp.takeDamage(damage, multiplier);
+		hp.takeDamage(damage, modifier);
 	}
 	
 	// ellenség tevékenysége
