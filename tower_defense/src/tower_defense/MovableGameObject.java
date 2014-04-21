@@ -12,8 +12,8 @@ public abstract class MovableGameObject extends GameObject {
 		this.movementSpeed=movementSpeed;
 	}
 	
-	public void setMovementMultiplier(double multiplier)
+	public void modifyMovementMultiplier(double multiplier)
 	{
-		movementSpeedMultiplier = multiplier;
+		movementSpeedMultiplier += multiplier;
 	}
 }
