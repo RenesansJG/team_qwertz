@@ -36,6 +36,22 @@ public abstract class Effect implements ITickable, Serializable {
 		
 	}
 	
+	public void restore(Tower tower) {
+		
+	}
+	
+	public void restore(DamageTrap damageTrap) {
+		
+	}
+	
+	public void restore(SlowTrap slowTrap) {
+		
+	}
+	
+	public void restore(Enemy enemy) {
+		
+	}
+	
 	// kötelezõ toString függvény kiíratáshoz
 	@Override
 	public abstract String toString();

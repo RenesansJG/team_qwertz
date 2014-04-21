@@ -13,6 +13,11 @@ public class FogEffect extends Effect {
 		
 	}
 	
+	@Override
+	public void restore(Tower tower) {
+		
+	}
+	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {

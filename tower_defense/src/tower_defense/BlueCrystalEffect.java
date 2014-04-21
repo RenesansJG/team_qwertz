@@ -10,18 +10,21 @@ public class BlueCrystalEffect extends Effect {
 	// effekt alkalmazása tornyon
 	@Override
 	public void apply(Tower tower) {
-
-	}
-	
-	// effekt alkalmazása sebzõ csapdán
-	@Override
-	public void apply(DamageTrap damageTrap) {
-
+		// attackspeed növelés
 	}
 	
 	// effekt alkalmazása lassító csapdán
 	@Override
 	public void apply(SlowTrap slowTrap) {
+		// lassítás növelés
+	}
+	
+	@Override
+	public void restore(Tower tower) {
+		
+	}
+	
+	public void restore(SlowTrap slowTrap) {
 		
 	}
 	

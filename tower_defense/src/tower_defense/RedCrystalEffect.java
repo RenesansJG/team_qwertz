@@ -10,19 +10,22 @@ public class RedCrystalEffect extends Effect {
 	// effekt alkalmazása tornyon
 	@Override
 	public void apply(Tower tower) {
-
+		// sebzés növelés
 	}
 	
 	// effekt alkalmazása sebzõ csapdán
 	@Override
 	public void apply(DamageTrap damageTrap) {
-
+		// sebzés növelés
 	}
 	
-	// effekt alkalmazása lassító csapdán
 	@Override
-	public void apply(SlowTrap slowTrap) {
-
+	public void restore(Tower tower) {
+	}
+	
+	@Override
+	public void restore(DamageTrap damageTrap) {
+		
 	}
 	
 	// toString függvény kiíratáshoz

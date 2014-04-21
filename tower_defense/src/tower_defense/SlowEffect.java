@@ -15,6 +15,11 @@ public class SlowEffect extends Effect {
 		enemy.modifyMovementMultiplier(slow);
 	}
 	
+	@Override
+	public void restore(Enemy enemy) {
+		enemy.modifyMovementMultiplier(-slow);
+	}
+	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
