@@ -4,6 +4,7 @@ import java.util.List;
 
 public abstract class Tower extends GameObject {
 	private static final long serialVersionUID = 641853699471809737L;
+	
 	protected double range;
 	protected double rangeMultiplier;
 	protected double attackSpeed;
@@ -13,12 +14,14 @@ public abstract class Tower extends GameObject {
 	protected double projectileSpeed;
 	protected double projectileAoE;
 	
+
+	protected Tower(double x, double y) {
+		super(x, y);
+	}	
 	
 	// torony tevékenysége
 	@Override
 	public final boolean action(){
-		
-		
 		if(true){// attackspeed nincs megoldva 
 			List<GameObject> objects = Game.getMap().getObjects();
 	

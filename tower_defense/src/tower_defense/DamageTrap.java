@@ -5,13 +5,12 @@ import java.util.List;
 public class DamageTrap extends Trap {
 
 	private static final long serialVersionUID = 9047501422958390396L;
-	private final Damage damage;
+	private static final Damage damage = new Damage(3,3,3);
 	private double damageMultiplier;
 	
 	// sebzõ csapda konstruktor
-	protected DamageTrap(double x, double y, double range, Damage damage) {
-		super(x, y, range);
-		this.damage = damage.Clone();
+	protected DamageTrap(double x, double y) {
+		super(x, y);
 	}
 	
 	// sebzõ csapda tevékenysége
