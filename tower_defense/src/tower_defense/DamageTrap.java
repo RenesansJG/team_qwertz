@@ -3,15 +3,15 @@ package tower_defense;
 import java.util.List;
 
 public class DamageTrap extends Trap {
+
 	private static final long serialVersionUID = 9047501422958390396L;
 	private final Damage damage;
 	private double damageMultiplier;
 	
 	// sebzõ csapda konstruktor
-	public DamageTrap(double x, double y) {
-		this.x=x;
-		this.y=y;
-		damage = new Damage();
+	protected DamageTrap(double x, double y, double range, Damage damage) {
+		super(x, y, range);
+		this.damage = damage.Clone();
 	}
 	
 	// sebzõ csapda tevékenysége
