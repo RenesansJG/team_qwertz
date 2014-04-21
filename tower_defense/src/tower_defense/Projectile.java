@@ -10,9 +10,9 @@ public class Projectile extends MovableGameObject {
 	
 	public Projectile(double x, double y, double destx,double desty, double speed, double Aoe,Damage damage ) {
 		super(x,y,speed);
-		targetX=destx;
-		targetY=desty;
-		this.AoE=Aoe;
+		targetX = destx;
+		targetY = desty;
+		this.AoE = Aoe;
 		this.damage = damage.Clone();
 	}
 	
