@@ -20,7 +20,7 @@ public class Projectile extends MovableGameObject {
 	@Override
 	public final boolean action() {
 		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
-		if(distance<movementSpeed)
+		if(distance<=movementSpeed)
 		{
 			x=targetX;
 			y=targetY;
