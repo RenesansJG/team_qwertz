@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.Random;
 
 public class Console {
 	private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -77,6 +78,15 @@ public class Console {
 	public static int readInt() throws IOException {
 		try {
 			return Integer.parseInt(readLine());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+	
+	// egy long egész szám beolvasása
+	public static long readLong() throws IOException {
+		try {
+			return Long.parseLong(readLine());
 		} catch (NumberFormatException e) {
 			return 0;
 		}
@@ -573,7 +583,8 @@ public class Console {
 	}
 	
 	// random seed menüpont
-	public static void randomSeed() {
-		// TODO
+	public static void randomSeed() throws IOException {
+		printlnMsg("Random seed: ");
+		Game.rnd = new Random(readLong());
 	}
 }
