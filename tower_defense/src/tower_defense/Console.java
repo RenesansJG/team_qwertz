@@ -103,30 +103,10 @@ public class Console {
 		return line;
 	}
 	
-	public static int choose(String... choices) throws IOException {
-		return choose(true, choices);
-	}
-	
 	// listából választás
 	// paraméterek: a lista elemei
 	// visszatérés: hanyadik elemet választotta a felhasználó (0-tól indexelünk)
-	public static int choose(boolean showHeader, String... choices) throws IOException {
-		if (showHeader) {
-			printi("Console.choose(");
-			
-			for (int i = 0; i < choices.length - 1; i++) {
-				print(choices[i] + ", ");
-			}
-			
-			if (choices.length > 0) {
-				print(choices[choices.length - 1]);
-			}
-			
-			print(")");
-			println();
-			indent();
-		}
-		
+	public static int choose(String... choices) throws IOException {	
 		if (choices == null || choices.length == 0)
 			return 0;
 		
@@ -143,9 +123,6 @@ public class Console {
 			choice = readInt();
 		}
 		
-		if (showHeader) {
-			deIndent();
-		}
 		return (choice != - 1) ? choice - 1 : choice;
 	}
 	
@@ -205,7 +182,7 @@ public class Console {
 			
 			while (true) {
 				// fõmenü
-				int choice = choose(false,
+				int choice = choose(
 						"Új játék",
 						"Játék mentése",
 						"Játék betöltése",
@@ -257,7 +234,7 @@ public class Console {
 					applyEffect();
 					break;
 				case 11: // random seed
-					// TODO
+					randomSeed();
 					break;
 				case 12: // tests
 					test();
@@ -374,8 +351,6 @@ public class Console {
 		case 3: // hobit
 			Game.getMap().addObject(new Hobbit(x, y));
 			break;
-		default: // vissza
-			break;
 		}
 	}
 	
@@ -486,41 +461,6 @@ public class Console {
 		}
 	}
 	
-	// apply red crystal menüpont
-	public static void applyRedCrystal() throws IOException {
-		Effect effect = new RedCrystalEffect();
-		GameObject object = getObjectFromUser();
-		
-		if (object != null) {
-			object.addEffect(effect);
-			object.affect(effect);
-		}
-	}
-	
-	// apply green crystal menüpont
-	public static void applyGreenCrystal() throws IOException {
-		Effect effect = new GreenCrystalEffect();
-		GameObject object = getObjectFromUser();
-		
-		if (object != null) {
-			object.addEffect(effect);
-			object.affect(effect);
-		}
-		
-		deIndent();
-	}
-		
-	// apply blue crystal menüpont
-	public static void applyBlueCrystal() throws IOException {
-		Effect effect = new BlueCrystalEffect();
-		GameObject object = getObjectFromUser();
-		
-		if (object != null) {
-			object.addEffect(effect);
-			object.affect(effect);
-		}
-	}
-	
 	// new game menüpont
 	public static void newGame() throws IOException {
 		printlnMsg("Mented a játékot?");
@@ -608,13 +548,13 @@ public class Console {
 	// teszt menüpont
 	public static void test() throws IOException {
 		if (commands.isEmpty()) {
-			int choice = choose(false, choices);
+			int choice = choose(choices);
 			
 			if (choice != -1) {
 				commands.addAll(Arrays.asList(tests[choice]));
 			}
 		} else {
-			choose(false, choices);
+			choose(choices);
 		}
 	}
 	
