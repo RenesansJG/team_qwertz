@@ -8,10 +8,9 @@ public class Hobbit extends Enemy {
 	private static double baseRes = 0.25;
 	private static double levelRes = 0.05;
 	private static double baseMove = 3;
-	private static double levelMove = 0;
 
 	protected Hobbit(Node targetNode, int level) {
-		super(targetNode,baseMove + level * levelMove, level);
+		super(targetNode,baseMove, level);
 		hp = new HP(baseHP + level * levelHP, 0, 0, baseRes + levelRes * level);
 	}
 	
