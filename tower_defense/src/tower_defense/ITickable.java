@@ -4,5 +4,5 @@ import java.io.IOException;
 
 public interface ITickable {
 	// tick alkalmazása
-	boolean applyTick() throws IOException;
+	boolean applyTick();
 }

@@ -49,7 +49,7 @@ public abstract class GameObject implements ITickable, Serializable {
 	
 	// tick alkalmazása
 	@Override
-	public final boolean applyTick() throws IOException {
+	public final boolean applyTick(){
 		// effektek léptetése és az objektum tevékenységének meghívása
 		effect();                         // léptetés
 		boolean isToBeRemoved = action(); // tevékenység, visszatér, hogy törlendõ-e az objektum
