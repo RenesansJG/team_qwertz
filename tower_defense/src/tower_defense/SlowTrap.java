@@ -25,7 +25,7 @@ public class SlowTrap extends Trap {
 			if(o.isEnemy() && getDistance(o)<range)
 			{
 				Enemy e = (Enemy)o;
-				Effect effect = new SlowEffect();
+				Effect effect = new SlowEffect(slow*slowMultiplier);
 				e.addEffect(effect);
 				e.affect(effect);
 			}

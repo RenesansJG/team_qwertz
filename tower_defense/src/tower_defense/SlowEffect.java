@@ -3,14 +3,16 @@ package tower_defense;
 public class SlowEffect extends Effect {
 	private static final long serialVersionUID = -1864723360268261902L;
 
-	public SlowEffect() {
-
+	private double slow;
+	
+	public SlowEffect(double slow) {
+		this.slow = slow;
 	}
 	
 	// effekt alkalmazása ellenségen
 	@Override
 	public void apply(Enemy enemy) {
-
+		
 	}
 	
 	// toString függvény kiíratáshoz
