@@ -17,7 +17,6 @@ public abstract class Effect implements ITickable, Serializable {
 	public final boolean applyTick() {
 		remainingTicks--;
 		return remainingTicks<=0;
-
 	}
 	
 	public void apply(Tower tower) {
