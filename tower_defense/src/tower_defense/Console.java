@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.List;
 import java.util.Random;
 
 public class Console {
@@ -337,29 +338,39 @@ public class Console {
 		// ha -1, visszatérünk
 		if (choice < 0)
 			return;
-						
-		// bekérjük a koordinátákat
-		double x = Console.readDouble();
-		double y = Console.readDouble();
-				
-		// ha érvénytelenek a koordináták, kilépünk
-		if (x < 0 || x > GameMap.maxX || y < 0 || y > GameMap.maxY) {
+		
+		printMsg("szint: ");
+		int level = readInt();  // bekérjük a szintet
+		
+		printMsg("belépési pont sorszáma: ");
+		int nodeId = readInt(); // bekérjük a kezdõ node-ot
+		
+		List<Node> rootNodes = Game.getMap().getNodes(); // gyökér nodeok
+		int numOfRootNodes = rootNodes.size();           // gyökér nodeok száma
+		
+		// ha érvénytelen a kezdõ node id, kilépünk
+		if (nodeId < 0 || nodeId >= numOfRootNodes) {
 			println("Ellenség lerakása sikertelen: érvénytelen pozíció.");
 			return;
 		}
 		
+		List<Node> nextNodes = rootNodes.get(nodeId).getNextNodes(); // következõ nodeok
+		int numOfNextNodes = nextNodes.size();                       // következõ nodeok száma
+		int targetNodeId = Game.rnd.nextInt(numOfNextNodes);         // cél node ID-je
+		Node targetNode = nextNodes.get(targetNodeId);               // cél node
+		
 		switch (choice) {
 		case 0: // human
-			Game.getMap().addObject(new Human(x, y));
+			Game.getMap().addObject(new Human(targetNode, level));
 			break;
 		case 1: // elf
-			Game.getMap().addObject(new Elf(x, y));
+			Game.getMap().addObject(new Elf(targetNode, level));
 			break;
 		case 2: // dwarf
-			Game.getMap().addObject(new Dwarf(x, y));
+			Game.getMap().addObject(new Dwarf(targetNode, level));
 			break;
 		case 3: // hobit
-			Game.getMap().addObject(new Hobbit(x, y));
+			Game.getMap().addObject(new Hobbit(targetNode, level));
 			break;
 		}
 	}
