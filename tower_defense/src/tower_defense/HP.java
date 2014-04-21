@@ -18,10 +18,10 @@ public class HP implements Serializable {
 	}
 	
 	// sebzõdés
-	public void takeDamage(Damage damage) {
-		HP-=damage.getRedDamage()*(1-Red);
-		HP-=damage.getGreenDamage()*(1-Green);
-		HP-=damage.getBlueDamage()*(1-Blue);
+	public void takeDamage(Damage damage, double modifier) {
+		HP-=damage.getRedDamage()*(1-Red)*modifier;
+		HP-=damage.getGreenDamage()*(1-Green)*modifier;
+		HP-=damage.getBlueDamage()*(1-Blue)*modifier;
 	}
 	
 	// toString függvény kiíratáshoz

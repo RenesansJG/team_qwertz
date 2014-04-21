@@ -24,7 +24,7 @@ public class DamageTrap extends Trap {
 			if(o.isEnemy() && getDistance(o)<range)
 			{
 				Enemy e = (Enemy)o;
-				e.takeDamage(damage);
+				e.takeDamage(damage,damageMultiplier);
 			}
 		}
 		return false;
