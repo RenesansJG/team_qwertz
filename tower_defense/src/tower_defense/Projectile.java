@@ -50,7 +50,7 @@ public class Projectile extends MovableGameObject {
 			if(o.isEnemy() && getDistance(o)<AoE)
 			{
 				Enemy e = (Enemy)o;
-				e.takeDamage(damage);
+				e.takeDamage(damage,1);
 			}
 		}
 	}
