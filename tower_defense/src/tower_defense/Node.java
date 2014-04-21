@@ -20,6 +20,16 @@ public class Node implements Serializable {
 		nextNodes = new ArrayList<Node>();
 	}
 	
+	public double getX()
+	{
+		return x;
+	}
+	
+	public double getY()
+	{
+		return y;
+	}
+	
 	// lekéri a következõ node-okat
 	public List<Node> getNextNodes() {
 		// módosíthatatlan verzióban adjuk vissza a listát
