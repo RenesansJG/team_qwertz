@@ -27,7 +27,7 @@ public abstract class Enemy extends MovableGameObject {
 	public final boolean action() {
 		if(hp.getHP()<=0)
 			return true;
-		double steps = movementSpeed;
+		double steps = movementSpeed*movementSpeedMultiplier;
 		boolean canmove=true;
 		while(canmove){
 			double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
