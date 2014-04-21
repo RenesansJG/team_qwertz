@@ -1,5 +1,7 @@
 package tower_defense;
 
+import java.util.List;
+
 
 public abstract class Enemy extends MovableGameObject {
 	private static final long serialVersionUID = 6413219852626908584L;
@@ -32,11 +34,18 @@ public abstract class Enemy extends MovableGameObject {
 				x=targetNode.getX();
 				y=targetNode.getY();
 				steps-=distance;
-				targetNode.getNextNodes();
+				List<Node> nodes = targetNode.getNextNodes();
+				targetNode= nodes.get(Game.rnd.nextInt(nodes.size()));
+				if(steps==0)
+					canmove=false;
 			}
 			else
 			{
-				//mozog a cél felé!
+				double dx = this.x - targetNode.getX();
+				double dy = this.x - targetNode.getY();
+				double vector = Math.sqrt(dx*dx + dy*dy);
+				dx/=vector;
+				dy/=vector;
 				canmove=false;
 			}
 		}
