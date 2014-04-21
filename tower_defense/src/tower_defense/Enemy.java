@@ -24,12 +24,15 @@ public abstract class Enemy extends MovableGameObject {
 	@Override
 	public final boolean action() {
 		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
+		double steps = movementSpeed;
 		boolean canmove=true;
 		while(canmove){
-			if(distance<movementSpeed)
+			if(distance<=steps)
 			{
-				//új node
-				movementSpeed-=distance;
+				x=targetNode.getX();
+				y=targetNode.getY();
+				steps-=distance;
+				targetNode.getNextNodes();
 			}
 			else
 			{

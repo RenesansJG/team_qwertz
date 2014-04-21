@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Random;
 
 public class Game implements Serializable {
 	private static final long serialVersionUID = -2262641899325571201L;
 	private static Game currentGame; // aktuális játék
 	private final GameMap gameMap;   // referencia a mapre
 	private final Saruman saruman;
+	public static Random rnd = new Random();
 	
 	// *** darabszámok szkelentonhoz ***
 	private int objectCount;
