@@ -10,6 +10,9 @@ public class GameMap implements Serializable {
 	private final List<Node> nodes;         // gyökér node-ok listája
 	private final List<GameObject> objects; // objektumok listája
 	
+	public static final int maxX = 1000;
+	public static final int maxY = 1000;
+	
 	// map konstruktor
 	public GameMap() {
 		nodes = new ArrayList<Node>();
