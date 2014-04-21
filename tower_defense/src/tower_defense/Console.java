@@ -443,6 +443,11 @@ public class Console {
 		
 		// ha torony, upgradeljük
 		if (object != null && object instanceof Tower) {
+			
+			Console.printlnMsg("Add meg az upgrade típusát!");
+			Console.choose("damge", "range", "attack speed", "projectile speed");
+			
+			// TODO
 			((Tower)object).upgrade();
 		}
 	}
