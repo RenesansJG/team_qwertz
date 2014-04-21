@@ -82,6 +82,15 @@ public class Console {
 		}
 	}
 	
+	// egy valós szám beolvasása
+	public static double readDouble() throws IOException {
+		try {
+			return Double.parseDouble(readLine());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+	
 	// egy sor beolvasása
 	public static String readLine() throws IOException {
 		// ha van a commands sorban elem, azt olvassuk be
@@ -229,7 +238,7 @@ public class Console {
 				case 4: // list objects
 					listObjects();
 					break;
-				case 5: // apply tick
+				case 5: // apply ticks
 					applyTicks();
 					break;
 				case 6: // add tower
@@ -248,6 +257,7 @@ public class Console {
 					applyEffect();
 					break;
 				case 11: // random seed
+					// TODO
 					break;
 				case 12: // tests
 					test();
@@ -267,28 +277,38 @@ public class Console {
 	
 	// add tower menüpont
 	public static void addTower() throws IOException {
+		GameMap map = Game.getMap();
+		
 		printlnMsg("Milyen torony legyen?");
 		
+		// bekérjük a torony típusát
 		int choice = choose("Piros", "Zöld", "Kék");
+		
+		// ha -1, visszatérünk
+		if (choice < 0)
+			return;
+		
+		// bekérjük a koordinátákat
+		double x = Console.readDouble();
+		double y = Console.readDouble();
+		
+		// ha érvénytelenek a koordináták, kilépünk
+		if (x < 0 || x > GameMap.maxX || y < 0 || y > GameMap.maxY) {
+			println("Torony lerakása sikertelen: érvénytelen pozíció.");
+			return;
+		}
 		
 		switch (choice) {
 		case 0: // redTower
-			Game.getMap().addObject(new RedTower());
+			map.addObject(new RedTower(x, y));
 			break;
 		case 1: // greenTower
-			Game.getMap().addObject(new GreenTower());
+			map.addObject(new GreenTower(x, y));
 			break;
 		case 2: // blueTower
-			Game.getMap().addObject(new BlueTower());
-			break;
-		default: // vissza
+			map.addObject(new BlueTower(x, y));
 			break;
 		}
-		
-		int x = Console.readInt();
-		int y = Console.readInt();
-		
-		
 	}
 	
 	// add trap menüpont
@@ -297,14 +317,26 @@ public class Console {
 		
 		int choice = choose("Sebzõ", "Lassító");
 		
+		// ha -1, visszatérünk
+		if (choice < 0)
+			return;
+				
+		// bekérjük a koordinátákat
+		double x = Console.readDouble();
+		double y = Console.readDouble();
+		
+		// ha érvénytelenek a koordináták, kilépünk
+		if (x < 0 || x > GameMap.maxX || y < 0 || y > GameMap.maxY) {
+			println("Akadály lerakása sikertelen: érvénytelen pozíció.");
+			return;
+		}
+		
 		switch (choice) {
 		case 0: // damageTrap
-			Game.getMap().addObject(new DamageTrap());
+			Game.getMap().addObject(new DamageTrap(x, y));
 			break;
 		case 1: // slowTrap
-			Game.getMap().addObject(new SlowTrap());
-			break;
-		default: // vissza
+			Game.getMap().addObject(new SlowTrap(x, y));
 			break;
 		}
 	}
@@ -315,18 +347,32 @@ public class Console {
 		
 		int choice = choose("Ember", "Tünde", "Törp", "Hobbit");
 		
+		// ha -1, visszatérünk
+		if (choice < 0)
+			return;
+						
+		// bekérjük a koordinátákat
+		double x = Console.readDouble();
+		double y = Console.readDouble();
+				
+		// ha érvénytelenek a koordináták, kilépünk
+		if (x < 0 || x > GameMap.maxX || y < 0 || y > GameMap.maxY) {
+			println("Ellenség lerakása sikertelen: érvénytelen pozíció.");
+			return;
+		}
+		
 		switch (choice) {
 		case 0: // human
-			Game.getMap().addObject(new Human());
+			Game.getMap().addObject(new Human(x, y));
 			break;
 		case 1: // elf
-			Game.getMap().addObject(new Elf());
+			Game.getMap().addObject(new Elf(x, y));
 			break;
 		case 2: // dwarf
-			Game.getMap().addObject(new Dwarf());
+			Game.getMap().addObject(new Dwarf(x, y));
 			break;
 		case 3: // hobit
-			Game.getMap().addObject(new Hobbit());
+			Game.getMap().addObject(new Hobbit(x, y));
 			break;
 		default: // vissza
 			break;
@@ -407,22 +453,36 @@ public class Console {
 	
 	// apply effect menüpont
 	public static void applyEffect() throws IOException {
-		printlnMsg("Milyen kristály legyen?");
+		printlnMsg("Milyen effekt legyen?");
 		
-		int choice = choose("Piros", "Zöld", "Kék");
+		int choice = choose("Piros kristály", "Zöld kristály", "Kék kristály", "Köd");
+		
+		// ha -1, visszatérünk
+		if (choice < 0)
+			return;
+		
+		Effect effect = null;
 		
 		switch (choice) {
 		case 0: // redCrystal
-			applyRedCrystal();
+			effect = new RedCrystalEffect();
 			break;
 		case 1: // greenCrystal
-			applyGreenCrystal();
+			effect = new GreenCrystalEffect();
 			break;
 		case 2: // blueCrystal
-			applyBlueCrystal();
+			effect = new BlueCrystalEffect();
 			break;
-		default: // vissza
+		case 3:
+			effect = new FogEffect();
 			break;
+		}
+		
+		GameObject object = getObjectFromUser();
+		
+		if (object != null) {
+			object.addEffect(effect);
+			object.affect(effect);
 		}
 	}
 	
