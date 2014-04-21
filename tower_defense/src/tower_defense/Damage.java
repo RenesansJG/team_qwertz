@@ -15,6 +15,11 @@ public class Damage implements Serializable {
 		Blue=blue;
 	}
 	
+	public Damage Clone()
+	{
+		return new Damage(Red,Green,Blue);
+	}
+	
 	public double getRedDamage()
 	{
 		return Red;

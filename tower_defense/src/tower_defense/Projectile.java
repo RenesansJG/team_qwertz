@@ -13,7 +13,7 @@ public class Projectile extends MovableGameObject {
 		targetX=destx;
 		targetY=desty;
 		this.AoE=Aoe;
-		this.damage = damage;
+		this.damage = damage.Clone();
 	}
 	
 	// lövedék tevékenysége
