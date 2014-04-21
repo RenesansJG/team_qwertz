@@ -3,14 +3,13 @@ package tower_defense;
 
 public abstract class Enemy extends MovableGameObject {
 	private static final long serialVersionUID = 6413219852626908584L;
-	protected final HP hp;
+	protected HP hp;
 	protected Node targetNode;
 	protected int level;
 
 	protected Enemy(Node targetNode, double movementSpeed, int level) {
 		super(targetNode.getX(), targetNode.getY(), movementSpeed);
 		this.level=level;
-		hp = new HP();
 		targetNode = Game.getMap().getNodes().get(0);
 	}
 	
