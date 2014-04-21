@@ -22,7 +22,7 @@ public class BlueCrystalEffect extends Effect {
 	// effekt alkalmazása lassító csapdán
 	@Override
 	public void apply(SlowTrap slowTrap) {
-
+		
 	}
 	
 	// toString függvény kiíratáshoz
