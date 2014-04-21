@@ -5,4 +5,9 @@ public abstract class MovableGameObject extends GameObject {
 	protected double targetX;
 	protected double targetY;
 	protected double movementSpeed;
+	
+	protected MovableGameObject(double x, double y, double movementSpeed) {
+		super(x, y);
+		this.movementSpeed=movementSpeed;
+	}
 }
