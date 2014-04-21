@@ -14,9 +14,10 @@ public abstract class GameObject implements ITickable, Serializable {
 	protected double y;
 	protected final List<Effect> effects;
 	
-	protected GameObject() {
+	protected GameObject(double x, double y) {
 		id = Game.getNextObjectId();
-		
+		this.x=x;
+		this.y=y;
 		effects = new ArrayList<Effect>();
 	}
 	
@@ -56,9 +57,19 @@ public abstract class GameObject implements ITickable, Serializable {
 		return isToBeRemoved; // visszatérünk, hogy törlendõ-e
 	}
 	
+	/*public double getX()
+	{
+		return x;
+	}
+	
+	public double getY()
+	{
+		return y;
+	}*/
+	
 	// távolság számítása
 	public final double getDistance(GameObject object) {
-		return 0; // egyelõre nem számolunk távolságot, 0-val tér vissza
+		return Math.sqrt(Math.pow((x-object.x), 2)+Math.pow((y-object.y), 2)); // egyelõre nem számolunk távolságot, 0-val tér vissza
 	}
 	
 	// ellenséges-e a gameObject
