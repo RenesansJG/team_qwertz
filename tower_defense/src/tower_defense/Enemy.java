@@ -9,9 +9,9 @@ public abstract class Enemy extends MovableGameObject {
 	protected Node targetNode;
 	protected int level;
 
-	protected Enemy(Node targetNode, double movementSpeed, int level) {
-		super(targetNode.getX(), targetNode.getY(), movementSpeed);
-		this.targetNode=targetNode;
+	protected Enemy(Node startNode, double movementSpeed, int level) {
+		super(startNode.getX(), startNode.getY(), movementSpeed);
+		this.targetNode=startNode;
 		this.level=level;
 	}
 	

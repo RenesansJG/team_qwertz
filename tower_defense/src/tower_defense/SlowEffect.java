@@ -12,7 +12,7 @@ public class SlowEffect extends Effect {
 	// effekt alkalmazása ellenségen
 	@Override
 	public void apply(Enemy enemy) {
-		
+		enemy.setMovementMultiplier(slow);
 	}
 	
 	// toString függvény kiíratáshoz
