@@ -354,23 +354,20 @@ public class Console {
 			return;
 		}
 		
-		List<Node> nextNodes = rootNodes.get(nodeId).getNextNodes(); // következõ nodeok
-		int numOfNextNodes = nextNodes.size();                       // következõ nodeok száma
-		int targetNodeId = Game.rnd.nextInt(numOfNextNodes);         // cél node ID-je
-		Node targetNode = nextNodes.get(targetNodeId);               // cél node
+		Node startNode = rootNodes.get(nodeId); // start Node
 		
 		switch (choice) {
 		case 0: // human
-			Game.getMap().addObject(new Human(targetNode, level));
+			Game.getMap().addObject(new Human(startNode, level));
 			break;
 		case 1: // elf
-			Game.getMap().addObject(new Elf(targetNode, level));
+			Game.getMap().addObject(new Elf(startNode, level));
 			break;
 		case 2: // dwarf
-			Game.getMap().addObject(new Dwarf(targetNode, level));
+			Game.getMap().addObject(new Dwarf(startNode, level));
 			break;
 		case 3: // hobit
-			Game.getMap().addObject(new Hobbit(targetNode, level));
+			Game.getMap().addObject(new Hobbit(startNode, level));
 			break;
 		}
 	}
