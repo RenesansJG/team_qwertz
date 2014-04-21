@@ -48,6 +48,8 @@ public abstract class Enemy extends MovableGameObject {
 				double vector = Math.sqrt(dx*dx + dy*dy);
 				dx/=vector;
 				dy/=vector;
+				x+=dx*steps;
+				y+=dy*steps;
 				canmove=false;
 			}
 		}

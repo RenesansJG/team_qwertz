@@ -29,7 +29,13 @@ public class Projectile extends MovableGameObject {
 		}
 		else
 		{
-			//mozog a cél felé!
+			double dx = this.x - targetX;
+			double dy = this.x - targetY;
+			double vector = Math.sqrt(dx*dx + dy*dy);
+			dx/=vector;
+			dy/=vector;
+			x+=dx*movementSpeed;
+			y+=dy*movementSpeed;
 			return false;
 		}
 	}
