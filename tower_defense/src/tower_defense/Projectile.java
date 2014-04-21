@@ -9,11 +9,9 @@ public class Projectile extends MovableGameObject {
 	private double AoE;
 	
 	public Projectile(double x, double y, double destx,double desty, double speed, double Aoe,Damage damage ) {
-		this.x=x;
-		this.y=y;
+		super(x,y,speed);
 		targetX=destx;
 		targetY=desty;
-		movementSpeed=speed;
 		this.AoE=Aoe;
 		this.damage = damage;
 	}
@@ -24,6 +22,8 @@ public class Projectile extends MovableGameObject {
 		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
 		if(distance<movementSpeed)
 		{
+			x=targetX;
+			y=targetY;
 			explode();
 			return true;
 		}
