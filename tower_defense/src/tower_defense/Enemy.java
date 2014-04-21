@@ -25,6 +25,8 @@ public abstract class Enemy extends MovableGameObject {
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
+		if(hp.getHP()<=0)
+			return true;
 		double steps = movementSpeed;
 		boolean canmove=true;
 		while(canmove){
