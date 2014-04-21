@@ -56,16 +56,6 @@ public abstract class GameObject implements ITickable, Serializable {
 		return isToBeRemoved; // visszatérünk, hogy törlendõ-e
 	}
 	
-	/*public double getX()
-	{
-		return x;
-	}
-	
-	public double getY()
-	{
-		return y;
-	}*/
-	
 	// távolság számítása
 	public final double getDistance(GameObject object) {
 		return Math.sqrt(Math.pow((x-object.x), 2)+Math.pow((y-object.y), 2)); // egyelõre nem számolunk távolságot, 0-val tér vissza
