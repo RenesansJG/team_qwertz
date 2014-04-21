@@ -1,6 +1,5 @@
 package tower_defense;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
