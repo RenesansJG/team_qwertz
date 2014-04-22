@@ -124,7 +124,7 @@ public class Console {
 		// akkor jó a válasz, ha az -1 (ez a "vissza" parancs),
 		// vagy 1 és a válaszok hossza között van,
 		// és létezik is az adott válasz (a válaszlista adott eleme nem null)
-		while (choice != -1 && choice < 1 || choice > choices.length || choices[choice - 1] == null) {
+		while (choice != -1 && (choice < 1 || choice > choices.length || choices[choice - 1] == null)) {
 			printMsg("Rossz válasz. Válasz: ");
 			choice = readInt();
 		}
@@ -196,7 +196,7 @@ public class Console {
 						"Ellenség generálása",
 						"Torony fejlesztése",
 						"Effekt alkalmazása",
-						"Véletlenszerûség " + (Game.isRandom() ? "ki" : "be"),
+						"Véletlenszerûség " + (Game.isRandom() ? "ki" : "kezelése"),
 						"Tesztesetek");
 				
 				switch (choice) {
@@ -582,19 +582,20 @@ public class Console {
 				Game.setRandom(true);
 				return;
 			case 1:
-				printMsg("érték: ");
+				printMsg("Érték: ");
 				// bekérünk egy egészet
 				int iChoice = readInt();
 				
 				// ha nem -1 és kisebb, mint 0, újat kérünk
-				while (iChoice != -1 && iChoice < 0) {
+				while (iChoice < 0 && iChoice != -1) {
+					printMsg("Rossz válasz. Érték: ");
 					iChoice = readInt();
 				}
 				
 				// ha nem -1-et választott a felhasználó, azaz nem visszalépett...
 				if (iChoice != -1) {
 					// beállítjuk a nem random intet
-					Game.setNonRandomNextInt(readInt());
+					Game.setNonRandomNextInt(iChoice);
 				}
 				
 				return;
@@ -605,7 +606,7 @@ public class Console {
 				// ha nem -1-et választott a felhasználó, azaz nem visszalépett...
 				if (bChoice != -1) {
 					// beállítjuk a nem random booleant
-					Game.setNonRandomNextBoolean(bChoice == 1);
+					Game.setNonRandomNextBoolean(bChoice == 0);
 				}
 				
 				return;
