@@ -1,15 +1,23 @@
 package tower_defense;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
 public class Console {
-	private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private static BufferedReader br = null;
+	
 	private static final Deque<String> commands = new ArrayDeque<String>();
 	private static int indent = 0;
 	
@@ -174,6 +182,25 @@ public class Console {
 	
 	// main
 	public static void main(String[] args) {
+		// ha van parancssori argumentum
+		if (args.length > 0) {
+			// bemeneti fájl
+			File inputFile = new File(args[0]);
+			
+			try {
+				// ha sikerül, a bemenetet beállítjuk a fájlra
+				br = new BufferedReader(new FileReader(inputFile));
+			} catch (FileNotFoundException e) {
+				// ha nem, hibaüzenet, és a standard inputot használjuk
+				println("A fájl nem található/nem olvasható: " + args[0] + ".");
+				br = new BufferedReader(new InputStreamReader(System.in));
+			}
+		// ha nincs parancssori argumentum
+		} else {
+			// a standard inputot használjuk
+			br = new BufferedReader(new InputStreamReader(System.in));
+		}
+		
 		try {
 			// welcome üzenet
 			printlnMsg("A két torony");
