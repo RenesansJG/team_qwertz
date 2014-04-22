@@ -19,6 +19,22 @@ public abstract class Tower extends GameObject {
 		super(x, y);
 	}	
 	
+	public void modifyRangeMultiplier(double multiplier)
+	{
+		rangeMultiplier += multiplier;
+	}
+	
+	public void modifyAttackspeedMultiplier(double multiplier)
+	{
+		attackSpeedMultiplier += multiplier;
+	}
+	
+	public void modifyprojectileDamageMultiplier(double multiplier)
+	{
+		projectileDamageMultiplier += multiplier;
+	}
+	
+	
 	// torony tevékenysége
 	@Override
 	public final boolean action(){

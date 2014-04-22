@@ -11,21 +11,24 @@ public class RedCrystalEffect extends Effect {
 	@Override
 	public void apply(Tower tower) {
 		// sebzés növelés
+		tower.modifyprojectileDamageMultiplier(1);
 	}
 	
 	// effekt alkalmazása sebzõ csapdán
 	@Override
 	public void apply(DamageTrap damageTrap) {
 		// sebzés növelés
+		damageTrap.modifyDamageMultiplier(1);
 	}
 	
 	@Override
 	public void restore(Tower tower) {
+		tower.modifyprojectileDamageMultiplier(-1);
 	}
 	
 	@Override
 	public void restore(DamageTrap damageTrap) {
-		
+		damageTrap.modifyDamageMultiplier(-1);		
 	}
 	
 	// toString függvény kiíratáshoz

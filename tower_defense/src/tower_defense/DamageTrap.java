@@ -8,6 +8,13 @@ public class DamageTrap extends Trap {
 	private static final Damage damage = new Damage(3,3,3);
 	private double damageMultiplier;
 	
+	
+	public void modifyDamageMultiplier(double multiplier)
+	{
+		damageMultiplier += multiplier;
+	}
+	
+	
 	// sebzõ csapda konstruktor
 	protected DamageTrap(double x, double y) {
 		super(x, y);
