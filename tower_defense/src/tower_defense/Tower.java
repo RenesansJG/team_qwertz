@@ -113,23 +113,28 @@ public abstract class Tower extends GameObject {
 									  (projectileDamage.getBlueDamage()) +10);
 		
 		projectileDamage = temp;
+		Console.println("Tower#" + id + " damage upgrade-elve. Új damage: " + projectileDamage);
 	}
 	
 	
 	public void rangeUpgrade() {
 		range += 10;
+		Console.println("Tower#" + id + " range upgrade-elve. Új range: " + range);
 	}
 
 	public void attackSpeedUpgrade() {
 		attackSpeed += 0.2;
+		Console.println("Tower#" + id + " attack speed upgrade-elve. Új attack speed: " + attackSpeed);
 	}
 	
 	public void projectileSpeedUpgrade() {
 		projectileSpeed += 10;
+		Console.println("Tower#" + id + " projectile speed upgrade-elve. Új projectile speed: " + projectileSpeed);
 	}
 	
 	public void AoEUpgrade() {
 		projectileAoE += 10;
+		Console.println("Tower#" + id + " AoE upgrade-elve. Új AoE: " + projectileAoE);
 	}
 
 	
