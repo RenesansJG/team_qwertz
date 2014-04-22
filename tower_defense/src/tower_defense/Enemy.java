@@ -20,17 +20,22 @@ public abstract class Enemy extends MovableGameObject {
 	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
 		hp.takeDamage(damage, modifier);
+		Console.println("Enemy sebzõdött " + damage + " * " + modifier);
 	}
 	
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
-		if(hp.getHP()<=0)
+		if(hp.getHP()<=0){
+			Console.println("Enemy " + id + " meghalt");
 			return true;
+		}
 		double steps = movementSpeed*movementSpeedMultiplier;
 		boolean canmove=true;
 		while(canmove){
 			double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
+
+			Console.println("target node " + targetNode.getX() + " y=" + targetNode.getY());
 			if(distance<=steps)
 			{
 				x=targetNode.getX();
@@ -53,6 +58,7 @@ public abstract class Enemy extends MovableGameObject {
 				canmove=false;
 			}
 		}
+		Console.println("target node " + targetNode.getX() + " y=" + targetNode.getY());
 		return false;
 	}
 	

@@ -23,7 +23,7 @@ public abstract class Tower extends GameObject {
 		attackSpeedMultiplier = 1;
 		projectileDamageMultiplier = 1;
 		
-		range = 300;
+		range = 100;
 		attackSpeed = 1;
 		projectileSpeed = 5;
 		projectileAoE = 10;
