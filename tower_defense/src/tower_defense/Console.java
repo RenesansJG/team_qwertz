@@ -404,7 +404,7 @@ public class Console {
 			Console.printlnMsg("Add meg az upgrade típusát!");
 			Console.choose("damge", "range", "attack speed", "projectile speed");
 			
-			// TODO
+			// TODO upgrade típusok???
 			((Tower)object).upgrade();
 		}
 	}
