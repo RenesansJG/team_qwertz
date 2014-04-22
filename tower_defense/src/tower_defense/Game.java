@@ -11,9 +11,17 @@ import java.util.Random;
 public class Game implements Serializable {
 	private static final long serialVersionUID = -2262641899325571201L;
 	private static Game currentGame; // aktuális játék
+	
+	// random seed
+	private static Random rndGen = new Random();
+	// direkt privát, kérlek ne módosítsátok, magyarázatért engem kérdezzetek (Máté)
+	
 	private final GameMap gameMap;   // referencia a mapre
 	private final Saruman saruman;
-	public static Random rnd = new Random();
+	
+	private boolean random; // véletlenszerûség be van-e kapcsolva
+	private int nonRandomNextInt; // ha nem, ez adja meg a következõ int-et
+	private boolean nonRandomNextBoolean; // ha nem, ez adja meg a következõ boolean-t
 	
 	// *** darabszámok szkelentonhoz ***
 	private int objectCount;
@@ -38,6 +46,10 @@ public class Game implements Serializable {
 		gameMap = new GameMap();
 		saruman = new Saruman();
 		
+		random = true;
+		nonRandomNextInt = 0;
+		nonRandomNextBoolean = false;
+		
 		objectCount = 0;
 		effectCount = 0;
 		nodeCount = 0;
@@ -50,7 +62,6 @@ public class Game implements Serializable {
 	
 	// új játék indítása
 	public static void newGame() {
-		
 		currentGame = new Game();
 		
 		//Game.getMap().addNode(new Node());
@@ -87,5 +98,51 @@ public class Game implements Serializable {
 		} catch (IOException e) {
 			return false;
 		}
+	}
+	
+	// random vagy elõre specifikált egész szám
+	public static int nextInt(int n) {
+		if (!currentGame.random) {
+			int nonRandomNextInt = currentGame.nonRandomNextInt;
+			nonRandomNextInt = Math.max(0, nonRandomNextInt);
+			nonRandomNextInt = Math.min(nonRandomNextInt, n);
+			
+			return nonRandomNextInt;
+		} else {
+			return rndGen.nextInt(n);
+		}
+	}
+	
+	// random vagy elõre specifikált boolean érték
+	// paraméter: true esélye (0 = nincs esély, 1 = biztos)
+	public static boolean nextBoolean(double chanceOfTrue) {
+		if (!currentGame.random) {
+			return currentGame.nonRandomNextBoolean;
+		}
+		
+		chanceOfTrue = Math.max(0.0, chanceOfTrue);
+		chanceOfTrue = Math.min(chanceOfTrue, 1.0);
+		
+		return rndGen.nextDouble() <= chanceOfTrue;
+	}
+	
+	// be van-e kapcsolva a véletlenszerûség
+	public static boolean isRandom() {
+		return currentGame.random;
+	}
+	
+	// véletlenszerûség beállítása
+	public static void setRandom(boolean random) {
+		currentGame.random = random;
+	}
+	
+	// következõ (nem véletlen) int beállítása
+	public static void setNonRandomNextInt(int n) {
+		currentGame.nonRandomNextInt = n;
+	}
+	
+	// következõ (nem véletlen) boolean beállítása
+	public static void setNonRandomNextBoolean(boolean b) {
+		currentGame.nonRandomNextBoolean = b;
 	}
 }

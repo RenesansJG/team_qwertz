@@ -602,7 +602,6 @@ public class Console {
 	
 	// random seed menüpont
 	public static void randomSeed() throws IOException {
-		printlnMsg("Random seed: ");
-		Game.rnd = new Random(readLong());
+		// TODO
 	}
 }

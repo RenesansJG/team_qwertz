@@ -37,7 +37,7 @@ public abstract class Enemy extends MovableGameObject {
 				y=targetNode.getY();
 				steps-=distance;
 				List<Node> nodes = targetNode.getNextNodes();
-				targetNode= nodes.get(Game.rnd.nextInt(nodes.size()));
+				targetNode= nodes.get(Game.nextInt(nodes.size()));
 				if(steps==0)
 					canmove=false;
 			}
