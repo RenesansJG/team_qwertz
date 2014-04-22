@@ -48,6 +48,6 @@ public class SlowTrap extends Trap {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "slowTrap#" + id + " " + getPosString();
+		return "slowTrap#" + id;
 	}
 }
