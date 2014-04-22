@@ -11,13 +11,13 @@ public class FogEffect extends Effect {
 	@Override
 	public void apply(Tower tower) {
 		tower.modifyRange(-10);
-		Console.println("Fog Effect: " + tower + " range-je csökkentve!");
+		Console.println(this + ": " + tower + " range-je csökkentve!");
 	}
 	
 	@Override
 	public void restore(Tower tower) {
 		tower.modifyRange(10);
-		Console.println("Fog Effect lejárt: " + tower + " range-je visszaállítva!");
+		Console.println(this + "lejárt: " + tower + " range-je visszaállítva!");
 	}
 	
 	// toString függvény kiíratáshoz
