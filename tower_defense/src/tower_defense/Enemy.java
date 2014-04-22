@@ -51,13 +51,13 @@ public abstract class Enemy extends MovableGameObject {
 			}
 			else
 			{
-				double dx = this.x - targetNode.getX();
-				double dy = this.x - targetNode.getY();
+				double dx = targetNode.getX()-x;
+				double dy = targetNode.getY()-y;
 				double vector = Math.sqrt(dx*dx + dy*dy);
 				dx/=vector;
 				dy/=vector;
-				x-=dx*steps;
-				y-=dy*steps;
+				x+=dx*steps;
+				y+=dy*steps;
 				canmove=false;
 			}
 		}
