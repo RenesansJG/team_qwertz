@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Damage implements Serializable {
 	private static final long serialVersionUID = -1059220976860524923L;
 	
-	double Red;
-	double Green;
-	double Blue;
+	protected double Red;
+	protected double Green;
+	protected double Blue;
 	
 	public Damage(double red, double green, double blue){
 		Red=red;

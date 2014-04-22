@@ -439,7 +439,7 @@ public class Console {
 			Console.choose("damge", "range", "attack speed", "projectile speed");
 			
 			// TODO upgrade típusok???
-			((Tower)object).upgrade();
+			((Tower)object).Upgrade();
 		}
 	}
 	

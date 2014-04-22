@@ -57,10 +57,12 @@ public abstract class Tower extends GameObject {
 			
 			if(closestindex!=-1){
 				GameObject closest = objects.get(closestindex);
-				if(getDistance(closest)<=range)
+				if(getDistance(closest)<=range * rangeMultiplier)
 				{
-					//fel kell még szorozni a damaget a multiplierrel
-					Game.getMap().addObject(new Projectile(x,y,closest.x,closest.y,projectileSpeed,projectileAoE,projectileDamage));
+					Game.getMap().addObject(new Projectile(x,y,
+							closest.x,closest.y,
+							projectileSpeed,projectileAoE,
+							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
 				}
 			}
 		}
@@ -73,8 +75,41 @@ public abstract class Tower extends GameObject {
 		Console.println(this + " megkapta " + effect + " effektet.");
 	}
 	
-	// torony fejlesztés
-	public void upgrade() {
-		
+	
+	private Damage calculateProjectileDamage(Damage dmg, double mult){
+		Damage temp = new Damage(dmg.getRedDamage()*mult,
+								 dmg.getGreenDamage() * mult,
+								 dmg.getBlueDamage() * mult);
+			
+		return temp;
 	}
+	
+	
+	// torony fejlesztés
+	public void damageUpgrade() {
+		projectileDamage = new Damage(projectileDamage.getRedDamage(),
+									  projectileDamage.getGreenDamage(),
+									  projectileDamage.getBlueDamage());
+	}
+	
+	
+	public void rangeUpgrade() {
+		range += 10;
+	}
+
+	public void attackSpeedUpgrade() {
+		attackSpeed += 10;
+	}
+	
+	public void projectileSpeedUpgrade() {
+		projectileSpeed += 10;
+	}
+	
+	public void AoEUpgrade() {
+		projectileAoE += 10;
+	}
+
+	
+	
+	
 }
