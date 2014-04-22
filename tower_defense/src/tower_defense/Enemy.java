@@ -12,7 +12,10 @@ public abstract class Enemy extends MovableGameObject {
 	protected Enemy(Node startNode, double movementSpeed, int level) {
 		super(startNode.getX(), startNode.getY(), movementSpeed);
 		this.targetNode=startNode;
+		targetX=startNode.getX();
+		targetY=startNode.getY();
 		this.level=level;
+		this.movementSpeedMultiplier=1;
 	}
 	
 	
@@ -34,8 +37,6 @@ public abstract class Enemy extends MovableGameObject {
 		boolean canmove=true;
 		while(canmove){
 			double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
-
-			Console.println("target node " + targetNode.getX() + " y=" + targetNode.getY());
 			if(distance<=steps)
 			{
 				x=targetNode.getX();
@@ -43,6 +44,8 @@ public abstract class Enemy extends MovableGameObject {
 				steps-=distance;
 				List<Node> nodes = targetNode.getNextNodes();
 				targetNode= nodes.get(Game.nextInt(nodes.size()));
+				targetX=targetNode.getX();
+				targetY=targetNode.getY();
 				if(steps==0)
 					canmove=false;
 			}
@@ -53,12 +56,12 @@ public abstract class Enemy extends MovableGameObject {
 				double vector = Math.sqrt(dx*dx + dy*dy);
 				dx/=vector;
 				dy/=vector;
-				x+=dx*steps;
-				y+=dy*steps;
+				x-=dx*steps;
+				y-=dy*steps;
 				canmove=false;
 			}
 		}
-		Console.println("target node " + targetNode.getX() + " y=" + targetNode.getY());
+		Console.println("Enemy mozgott az x=" + x + " y=" + y);
 		return false;
 	}
 	
