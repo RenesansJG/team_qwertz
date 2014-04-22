@@ -113,6 +113,7 @@ public abstract class Tower extends GameObject {
 									  (projectileDamage.getBlueDamage()) +10);
 		
 		projectileDamage = temp;
+		Console.println("Tower#" + id + " damage upgrade-elve. Új damage: " + projectileDamage);
 	}
 	
 	
