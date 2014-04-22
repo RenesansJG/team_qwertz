@@ -64,6 +64,7 @@ public class Game implements Serializable {
 	public static void newGame() {
 		currentGame = new Game();
 		
+		// TODO MAP BETÖLTÉSE !!!
 		//Game.getMap().addNode(new Node());
 	}
 	
