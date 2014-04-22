@@ -14,6 +14,8 @@ public abstract class Tower extends GameObject {
 	protected double projectileSpeed;
 	protected double projectileAoE;
 	
+	private double tickCount = 0;
+	
 
 	protected Tower(double x, double y) {
 		super(x, y);
@@ -45,6 +47,8 @@ public abstract class Tower extends GameObject {
 	@Override
 	public final boolean action(){
 		if(true){// attackspeed nincs megoldva 
+			tickCount += 1;
+			
 			List<GameObject> objects = Game.getMap().getObjects();
 	
 			int closestindex=-1;
@@ -55,14 +59,16 @@ public abstract class Tower extends GameObject {
 				}
 			}
 			
-			if(closestindex!=-1){
-				GameObject closest = objects.get(closestindex);
-				if(getDistance(closest)<=range * rangeMultiplier)
+			//Lövés
+			if(closestindex!=-1){												//TimerTick --> timer hány ms-ra van állítva
+				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
+				if(getDistance(closest)<=range * rangeMultiplier && tickCount >= 1000/1000/attackSpeed)
 				{
 					Game.getMap().addObject(new Projectile(x,y,
 							closest.x,closest.y,
 							projectileSpeed,projectileAoE,
 							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
+					tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
 				}
 			}
 		}
@@ -98,7 +104,7 @@ public abstract class Tower extends GameObject {
 	}
 
 	public void attackSpeedUpgrade() {
-		attackSpeed += 10;
+		attackSpeed += 0.2;
 	}
 	
 	public void projectileSpeedUpgrade() {
