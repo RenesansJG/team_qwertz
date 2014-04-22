@@ -20,4 +20,10 @@ public class Elf extends Enemy {
 	public String toString() {
 		return "elf#" + id;
 	}
+
+	@Override
+	public double getMagicPower() {
+		// TODO hogyan számítsuk a kapott varázserõt?
+		return level * 10.0;
+	}
 }

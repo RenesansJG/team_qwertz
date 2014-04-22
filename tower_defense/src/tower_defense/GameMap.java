@@ -41,6 +41,11 @@ public class GameMap implements Serializable {
 	
 	// objektum eltávolítása a maprõl
 	public boolean removeObject(GameObject object) {
+		// ha ellenség, a varázserõt kiszámítjuk és hozzáadjuk
+		if (object.isEnemy()) {
+			Game.addMagicPower(((Enemy) object).getMagicPower());
+		}
+		
 		return objects.remove(object);
 	}
 	

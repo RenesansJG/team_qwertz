@@ -56,6 +56,9 @@ public abstract class Enemy extends MovableGameObject {
 		return false;
 	}
 	
+	// ellenség megölésekor a kapott varázserõt adja meg
+	public abstract double getMagicPower();
+	
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);

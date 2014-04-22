@@ -18,4 +18,10 @@ public class Human extends Enemy {
 	public String toString() {
 		return "human#" + id;
 	}
+
+	@Override
+	public double getMagicPower() {
+		// TODO hogyan számítsuk a kapott varázserõt?
+		return level * 10.0;
+	}
 }

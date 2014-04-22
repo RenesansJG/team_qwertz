@@ -7,7 +7,6 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
-import java.util.Random;
 
 public class Console {
 	private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

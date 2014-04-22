@@ -100,6 +100,16 @@ public class Game implements Serializable {
 		}
 	}
 	
+	// varázserõ lekérdezése
+	public static double getMagicPower() {
+		return currentGame.saruman.getMagicPower();
+	}
+	
+	// varázserõ hozzáadása
+	public static void addMagicPower(double power) {
+		currentGame.saruman.setMagicPower(currentGame.saruman.getMagicPower() + power);
+	}
+	
 	// random vagy elõre specifikált egész szám
 	public static int nextInt(int n) {
 		if (!currentGame.random) {
@@ -136,10 +146,12 @@ public class Game implements Serializable {
 		currentGame.random = random;
 	}
 	
+	// nem random következõ int lekérdezése
 	public static int getNonRandomNextInt() {
 		return currentGame.nonRandomNextInt;
 	}
 	
+	// nem random következõ boolean lekérdezése
 	public static boolean getNonRandomNextBoolean() {
 		return currentGame.nonRandomNextBoolean;
 	}
