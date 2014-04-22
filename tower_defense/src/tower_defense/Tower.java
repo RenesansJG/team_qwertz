@@ -64,6 +64,7 @@ public abstract class Tower extends GameObject {
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);
+		Console.println(this + " megkapta " + effect + " effektet.");
 	}
 	
 	// torony fejlesztés

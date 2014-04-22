@@ -12,7 +12,6 @@ public class GreenCrystalEffect extends Effect {
 	public void apply(Tower tower) {
 		// ranget növeli
 		tower.modifyRangeMultiplier(1);
-		Console.println("Tower#" + tower.id + " megkapta greenCrystalEffect#" + id);
 	}
 	
 	// effekt alkalmazása sebzõ csapdán

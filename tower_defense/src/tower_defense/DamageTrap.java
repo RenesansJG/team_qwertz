@@ -40,6 +40,7 @@ public class DamageTrap extends Trap {
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);
+		Console.println(this + " megkapta " + effect + " effektet.");
 	}
 	
 	// toString függvény kiíratáshoz
