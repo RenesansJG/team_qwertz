@@ -19,6 +19,12 @@ public abstract class Tower extends GameObject {
 		super(x, y);
 	}	
 	
+	public void modifyRange(double constant)
+	{
+		range += constant;
+	}
+	
+	
 	public void modifyRangeMultiplier(double multiplier)
 	{
 		rangeMultiplier += multiplier;
