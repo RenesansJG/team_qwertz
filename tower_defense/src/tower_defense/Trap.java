@@ -8,6 +8,8 @@ public abstract class Trap extends GameObject {
 
 	protected Trap(double x, double y) {
 		super(x, y);
+		rangeMultiplier = 1;
+		range = 10;
 	}
 	
 	public void modifyRangeMultiplier(double multiplier)

@@ -53,6 +53,10 @@ public class Game implements Serializable {
 		objectCount = 0;
 		effectCount = 0;
 		nodeCount = 0;
+		
+		
+		
+		
 	}
 	
 	// játék mapjének lekérése

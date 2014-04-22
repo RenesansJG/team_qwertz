@@ -7,7 +7,7 @@ public class SlowTrap extends Trap {
 	private static final long serialVersionUID = 8010869721215614573L;
 	
 	private static final double slow = 0.3;
-	public double slowMultiplier;
+	public double slowMultiplier = 1;
 	
 	// lassító csapda konstruktor
 	protected SlowTrap(double x, double y) {
@@ -27,7 +27,7 @@ public class SlowTrap extends Trap {
 		
 		for(GameObject o : objects)
 		{
-			if(o.isEnemy() && getDistance(o)<range)
+			if(o.isEnemy() && getDistance(o) < range * rangeMultiplier)
 			{
 				Enemy e = (Enemy)o;
 				Effect effect = new SlowEffect(slow*slowMultiplier);

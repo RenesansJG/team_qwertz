@@ -6,7 +6,7 @@ public class DamageTrap extends Trap {
 
 	private static final long serialVersionUID = 9047501422958390396L;
 	private static final Damage damage = new Damage(3,3,3);
-	private double damageMultiplier;
+	private double damageMultiplier = 1;
 	
 	
 	public void modifyDamageMultiplier(double multiplier)
@@ -28,7 +28,7 @@ public class DamageTrap extends Trap {
 		
 		for(GameObject o : objects)
 		{
-			if(o.isEnemy() && getDistance(o)<range)
+			if(o.isEnemy() && getDistance(o) < range * rangeMultiplier)
 			{
 				Enemy e = (Enemy)o;
 				e.takeDamage(damage,damageMultiplier);

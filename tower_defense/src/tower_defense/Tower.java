@@ -19,6 +19,15 @@ public abstract class Tower extends GameObject {
 
 	protected Tower(double x, double y) {
 		super(x, y);
+		rangeMultiplier = 1;
+		attackSpeedMultiplier = 1;
+		projectileDamageMultiplier = 1;
+		
+		range = 50;
+		attackSpeed = 0.5;
+		projectileSpeed = 5;
+		projectileAoE = 10;
+		
 	}	
 	
 	public void modifyRange(double constant)
