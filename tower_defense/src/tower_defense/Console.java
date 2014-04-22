@@ -436,10 +436,25 @@ public class Console {
 		if (object != null && object instanceof Tower) {
 			
 			Console.printlnMsg("Add meg az upgrade típusát!");
-			Console.choose("damge", "range", "attack speed", "projectile speed");
+			int choice = choose("damage", "range", "attack speed", "projectile speed");
 			
-			// TODO upgrade típusok???
-			((Tower)object).Upgrade();
+			
+			switch (choice) {
+			case 0: // damage
+				((Tower)object).damageUpgrade();
+				break;
+			case 1: // range
+				((Tower)object).rangeUpgrade();
+				break;
+			case 2: // attackspeed
+				((Tower)object).attackSpeedUpgrade();
+				break;
+			case 3: // projectile speed
+				((Tower)object).projectileSpeedUpgrade();
+				break;
+			}
+			
+			((Tower)object).damageUpgrade();
 		}
 	}
 	

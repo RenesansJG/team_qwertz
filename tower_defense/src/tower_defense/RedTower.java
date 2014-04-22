@@ -6,6 +6,7 @@ public class RedTower extends Tower {
 
 	protected RedTower(double x, double y) {
 		super(x, y);
+		projectileDamage = new Damage(10,5,5);
 	}
 	
 	// toString függvény kiíratáshoz

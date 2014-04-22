@@ -94,9 +94,11 @@ public abstract class Tower extends GameObject {
 	
 	// torony fejlesztés
 	public void damageUpgrade() {
-		projectileDamage = new Damage(projectileDamage.getRedDamage(),
-									  projectileDamage.getGreenDamage(),
-									  projectileDamage.getBlueDamage());
+		Damage temp = new Damage((projectileDamage.getRedDamage() +10),
+									  (projectileDamage.getGreenDamage() +10),
+									  (projectileDamage.getBlueDamage()) +10);
+		
+		projectileDamage = temp;
 	}
 	
 	
