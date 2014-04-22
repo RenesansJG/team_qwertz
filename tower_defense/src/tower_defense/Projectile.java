@@ -29,8 +29,8 @@ public class Projectile extends MovableGameObject {
 		}
 		else
 		{
-			double dx = this.x - targetX;
-			double dy = this.x - targetY;
+			double dx = targetX-x;
+			double dy = targetY-y;
 			double vector = Math.sqrt(dx*dx + dy*dy);
 			dx/=vector;
 			dy/=vector;
