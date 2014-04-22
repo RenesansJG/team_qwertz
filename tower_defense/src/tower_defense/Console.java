@@ -84,15 +84,6 @@ public class Console {
 		}
 	}
 	
-	// egy long egész szám beolvasása
-	public static long readLong() throws IOException {
-		try {
-			return Long.parseLong(readLine());
-		} catch (NumberFormatException e) {
-			return 0;
-		}
-	}
-	
 	// egy valós szám beolvasása
 	public static double readDouble() throws IOException {
 		try {
@@ -117,33 +108,35 @@ public class Console {
 	// listából választás
 	// paraméterek: a lista elemei
 	// visszatérés: hanyadik elemet választotta a felhasználó (0-tól indexelünk)
-	public static int choose(String... choices) throws IOException {	
+	public static int choose(String... choices) throws IOException {
 		if (choices == null || choices.length == 0)
 			return 0;
 		
 		for (int i = 0; i < choices.length; i++) {
-			printlnMsg((i + 1) + " = " + choices[i]);
+			if (choices[i] != null) { // csak a létezõ (nem null) választásokat írjuk ki
+				printlnMsg((i + 1) + " = " + choices[i]);
+			}
 		}
 		
 		printMsg("Válasz: ");
 		
 		int choice = readInt();
 		
-		while (choice != -1 && choice < 1 || choice > choices.length) {
+		// akkor jó a válasz, ha az -1 (ez a "vissza" parancs),
+		// vagy 1 és a válaszok hossza között van,
+		// és létezik is az adott válasz (a válaszlista adott eleme nem null)
+		while (choice != -1 && choice < 1 || choice > choices.length || choices[choice - 1] == null) {
 			printMsg("Rossz válasz. Válasz: ");
 			choice = readInt();
 		}
 		
-		return (choice != - 1) ? choice - 1 : choice;
+		return (choice != - 1) ? choice - 1 : -1;
 	}
 	
 	// eldöntendõ kérdés
 	// visszatérés: igaz, ha az igent választotta a felhasználó,
 	//              hamis ha a nemet
 	public static boolean chooseYesNo() throws IOException {
-		println("Console.chooseYesNo()");
-		indent();
-		
 		printlnMsg("1 = Igen");
 		printlnMsg("2 = Nem");
 		printMsg("Válasz: ");
@@ -155,7 +148,6 @@ public class Console {
 			choice = readInt();
 		}
 		
-		deIndent();
 		return choice == 1;
 	}
 	
@@ -378,37 +370,6 @@ public class Console {
 			println(object);
 		}
 	}
-	
-	/*
-	// remove object menüpont
-	public static void removeObject() throws IOException {
-		printlnMsg("Írd be a törlendõ objektum ID-jét!");
-		
-		GameObject objectToRemove = getObjectFromUser();
-		
-		if (objectToRemove != null) {
-			Game.getMap().removeObject(objectToRemove);
-		}
-	}
-	*/
-	
-	/*
-	// apply tick menüpont
-	public static void applyTick() throws IOException {
-		printlnMsg("Add meg az objektum ID-jét!");
-		GameObject object = getObjectFromUser();
-		
-		if (object != null) {
-			// alkalmazzuk a ticket az objektumon, és eltároljuk, törlendõ-e
-			boolean isToBeRemoved = object.applyTick();
-			
-			// ha törlendõ az objektum, töröljük
-			if (isToBeRemoved) {
-				Game.getMap().removeObject(object);
-			}
-		}
-	}
-	*/
 	
 	// objektumok léptetése
 	public static void applyTicks() throws IOException {
