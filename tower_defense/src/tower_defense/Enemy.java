@@ -56,12 +56,11 @@ public abstract class Enemy extends MovableGameObject {
 				double vector = Math.sqrt(dx*dx + dy*dy);
 				dx/=vector;
 				dy/=vector;
-				x+=dx*steps;
-				y+=dy*steps;
+				x-=dx*steps;
+				y-=dy*steps;
 				canmove=false;
 			}
 		}
-		Console.println("TX" + targetX + "TY" + targetY);
 		Console.println("Enemy mozgott az x=" + x + " y=" + y);
 		return false;
 	}
