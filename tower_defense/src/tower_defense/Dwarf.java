@@ -17,7 +17,7 @@ public class Dwarf extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "dwarf#" + id + " " + getPosString();
+		return "dwarf#" + id;
 	}
 
 	@Override

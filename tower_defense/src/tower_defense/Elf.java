@@ -18,7 +18,7 @@ public class Elf extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "elf#" + id + " " + getPosString();
+		return "elf#" + id;
 	}
 
 	@Override

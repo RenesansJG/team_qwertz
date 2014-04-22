@@ -400,7 +400,7 @@ public class Console {
 	// list objects menüpont
 	public static void listObjects() {
 		for (GameObject object : Game.getMap().getObjects()) {
-			println(object);
+			println(object + " " + object.getPosString());
 		}
 	}
 	
