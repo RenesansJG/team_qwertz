@@ -62,7 +62,8 @@ public abstract class Tower extends GameObject {
 			//Lövés
 			if(closestindex!=-1){												//TimerTick --> timer hány ms-ra van állítva
 				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
-				if(getDistance(closest)<=range * rangeMultiplier && tickCount >= 1000/1000/attackSpeed)
+				if(getDistance(closest)<=range * rangeMultiplier && 
+						tickCount >= 1000/1000/(attackSpeed*attackSpeedMultiplier))
 				{
 					Game.getMap().addObject(new Projectile(x,y,
 							closest.x,closest.y,
