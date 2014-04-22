@@ -17,7 +17,7 @@ public class Hobbit extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "hobbit#" + id;
+		return "hobbit#" + id + " " + getPosString();
 	}
 
 	@Override

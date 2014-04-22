@@ -68,4 +68,8 @@ public abstract class GameObject implements ITickable, Serializable {
 	
 	@Override
 	public abstract String toString();
+	
+	public final String getPosString() {
+		return "(" + x + ", " + y + ")";
+	}
 }

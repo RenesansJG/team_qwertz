@@ -10,6 +10,6 @@ public class BlueTower extends Tower {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "blueTower#" + id;
+		return "blueTower#" + id + " " + getPosString();
 	}
 }

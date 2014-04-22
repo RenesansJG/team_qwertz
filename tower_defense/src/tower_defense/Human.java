@@ -16,7 +16,7 @@ public class Human extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "human#" + id;
+		return "human#" + id + " " + getPosString();
 	}
 
 	@Override

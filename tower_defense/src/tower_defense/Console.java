@@ -268,7 +268,9 @@ public class Console {
 			return;
 		
 		// bekérjük a koordinátákat
+		printMsg("x: ");
 		double x = Console.readDouble();
+		printMsg("y: ");
 		double y = Console.readDouble();
 		
 		// ha érvénytelenek a koordináták, kilépünk

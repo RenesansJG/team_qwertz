@@ -11,6 +11,6 @@ public class RedTower extends Tower {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "redTower#" + id;
+		return "redTower#" + id + " " + getPosString();
 	}
 }

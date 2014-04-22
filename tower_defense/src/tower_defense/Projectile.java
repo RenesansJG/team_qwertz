@@ -63,7 +63,7 @@ public class Projectile extends MovableGameObject {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "projectile#" + id;
+		return "projectile#" + id + " " + getPosString();
 	}
 	
 }
