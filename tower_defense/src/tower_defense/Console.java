@@ -415,7 +415,17 @@ public class Console {
 		for (int i = 0; i < ticks; i++) {
 			
 			// minden objektumra...
-			for (GameObject object : map.getObjects()) {
+			/*for (GameObject object : map.getObjects()) {
+				// alkalmazzuk a tick-et
+				boolean objectIsToBeRemoved = object.applyTick();
+				
+				// ha kell, töröljük az objektumot
+				if (objectIsToBeRemoved) {
+					map.removeObject(object);
+				}
+			}*/
+			for (int j =0 ; j<map.getObjects().size();j++ ) {
+				GameObject object = map.getObjects().get(j);
 				// alkalmazzuk a tick-et
 				boolean objectIsToBeRemoved = object.applyTick();
 				

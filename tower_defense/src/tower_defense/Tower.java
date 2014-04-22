@@ -23,7 +23,7 @@ public abstract class Tower extends GameObject {
 		attackSpeedMultiplier = 1;
 		projectileDamageMultiplier = 1;
 		
-		range = 50;
+		range = 300;
 		attackSpeed = 1;
 		projectileSpeed = 5;
 		projectileAoE = 10;
@@ -60,18 +60,20 @@ public abstract class Tower extends GameObject {
 			
 			List<GameObject> objects = Game.getMap().getObjects();
 	
-			boolean targetfound = false;
+			//boolean targetfound = false;
 			int closestindex=0;
 			for(int i=0;i<objects.size();i++){
 				if(objects.get(i).isEnemy() && getDistance(objects.get(i))<getDistance(objects.get(closestindex)))
 				{
 					closestindex=i;
-					targetfound = true;
+					//targetfound = true;
 				}
 			}
+
 			
 			//Lövés
-			if(targetfound){												//TimerTick --> timer hány ms-ra van állítva
+			//if(targetfound)
+			{												//TimerTick --> timer hány ms-ra van állítva
 				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
 				if(getDistance(closest)<=range * rangeMultiplier && 
 						tickCount >= 1000/1000/(attackSpeed*attackSpeedMultiplier))
@@ -81,6 +83,7 @@ public abstract class Tower extends GameObject {
 							projectileSpeed,projectileAoE,
 							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
 					tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
+					Console.println("Lövés a #" + id + " toronyból #" + objects.get(closestindex).id + " enemyre");
 				}
 			}
 		}
