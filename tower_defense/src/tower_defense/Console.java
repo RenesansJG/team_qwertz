@@ -197,7 +197,7 @@ public class Console {
 						"Ellenség generálása",
 						"Torony fejlesztése",
 						"Effekt alkalmazása",
-						"Véletlenszerûség ki/be",
+						"Véletlenszerûség " + (Game.isRandom() ? "ki" : "be"),
 						"Tesztesetek");
 				
 				switch (choice) {
@@ -414,7 +414,7 @@ public class Console {
 	public static void applyEffect() throws IOException {
 		printlnMsg("Milyen effekt legyen?");
 		
-		int choice = choose("Piros kristály", "Zöld kristály", "Kék kristály", "(unused)", "Köd");
+		int choice = choose("Piros kristály", "Zöld kristály", "Kék kristály", null, "Köd");
 		
 		// ha -1, visszatérünk
 		if (choice < 0)
@@ -432,8 +432,6 @@ public class Console {
 		case 2: // blueCrystal
 			effect = new BlueCrystalEffect();
 			break;
-		case 3:
-			return;
 		case 4:
 			effect = new FogEffect();
 			break;
@@ -563,6 +561,56 @@ public class Console {
 	
 	// random seed menüpont
 	public static void randomSeed() throws IOException {
-		// TODO
+		// ha be van kapcsolva a véletlenszerûség...
+		if (Game.isRandom()) {
+			// kikapcsoljuk
+			Game.setRandom(false);
+			// kilépünk
+			return;
+		// ha ki van kapcsolva a véletlenszerûség...
+		} else {
+			// választhatunk, hogy bekapcsoljuk,
+			// megadunk egy nem véletlen intet, ami ezentúl a véletlen intet helyett generálódik
+			// vagy megadunk egy nem véletlen booleant, ami ezentúl a véletlen booleanok helyett generálódik
+			int choice = choose(
+					"Véletlenszerûség be",
+					"Nem véletlen egész megadása (jelenleg: " + Game.getNonRandomNextInt() + ")",
+					"Nem véletlen logikai érték megadása (jelenleg: "+ Game.getNonRandomNextBoolean() + ")");
+			
+			switch (choice) {
+			case 0:
+				// bekapcsoljuk a véletlenszerûséget
+				Game.setRandom(true);
+				return;
+			case 1:
+				printMsg("érték: ");
+				// bekérünk egy egészet
+				int iChoice = readInt();
+				
+				// ha nem -1 és kisebb, mint 0, újat kérünk
+				while (iChoice != -1 && iChoice < 0) {
+					iChoice = readInt();
+				}
+				
+				// ha nem -1-et választott a felhasználó, azaz nem visszalépett...
+				if (iChoice != -1) {
+					// beállítjuk a nem random intet
+					Game.setNonRandomNextInt(readInt());
+				}
+				
+				return;
+			case 2:
+				// választunk, hogy true vagy false legyen a nem random érték
+				int bChoice = choose("true", "false");
+				
+				// ha nem -1-et választott a felhasználó, azaz nem visszalépett...
+				if (bChoice != -1) {
+					// beállítjuk a nem random booleant
+					Game.setNonRandomNextBoolean(bChoice == 1);
+				}
+				
+				return;
+			}
+		}
 	}
 }

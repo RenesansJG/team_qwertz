@@ -136,6 +136,14 @@ public class Game implements Serializable {
 		currentGame.random = random;
 	}
 	
+	public static int getNonRandomNextInt() {
+		return currentGame.nonRandomNextInt;
+	}
+	
+	public static boolean getNonRandomNextBoolean() {
+		return currentGame.nonRandomNextBoolean;
+	}
+	
 	// következõ (nem véletlen) int beállítása
 	public static void setNonRandomNextInt(int n) {
 		currentGame.nonRandomNextInt = n;
