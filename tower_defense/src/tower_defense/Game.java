@@ -23,7 +23,7 @@ public class Game implements Serializable {
 	private int nonRandomNextInt; // ha nem, ez adja meg a következõ int-et
 	private boolean nonRandomNextBoolean; // ha nem, ez adja meg a következõ boolean-t
 	
-	// *** darabszámok szkelentonhoz ***
+	// *** darabszámok protohoz ***
 	private int objectCount;
 	private int effectCount;
 	private int nodeCount;
