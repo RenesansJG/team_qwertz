@@ -24,7 +24,7 @@ public abstract class Tower extends GameObject {
 		projectileDamageMultiplier = 1;
 		
 		range = 50;
-		attackSpeed = 0.5;
+		attackSpeed = 1;
 		projectileSpeed = 5;
 		projectileAoE = 10;
 		
@@ -60,16 +60,18 @@ public abstract class Tower extends GameObject {
 			
 			List<GameObject> objects = Game.getMap().getObjects();
 	
-			int closestindex=-1;
+			boolean targetfound = false;
+			int closestindex=0;
 			for(int i=0;i<objects.size();i++){
 				if(objects.get(i).isEnemy() && getDistance(objects.get(i))<getDistance(objects.get(closestindex)))
 				{
 					closestindex=i;
+					targetfound = true;
 				}
 			}
 			
 			//Lövés
-			if(closestindex!=-1){												//TimerTick --> timer hány ms-ra van állítva
+			if(targetfound){												//TimerTick --> timer hány ms-ra van állítva
 				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
 				if(getDistance(closest)<=range * rangeMultiplier && 
 						tickCount >= 1000/1000/(attackSpeed*attackSpeedMultiplier))

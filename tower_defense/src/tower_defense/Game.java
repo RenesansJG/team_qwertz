@@ -26,7 +26,7 @@ public class Game implements Serializable {
 	// *** darabszámok protohoz ***
 	private int objectCount;
 	private int effectCount;
-	private int nodeCount;
+	private int nodeCount = 0;
 	
 	public static int getNextObjectId() {
 		return currentGame.objectCount++;
@@ -53,10 +53,6 @@ public class Game implements Serializable {
 		objectCount = 0;
 		effectCount = 0;
 		nodeCount = 0;
-		
-		
-		
-		
 	}
 	
 	// játék mapjének lekérése
@@ -70,6 +66,40 @@ public class Game implements Serializable {
 		
 		// TODO MAP BETÖLTÉSE !!!
 		//Game.getMap().addNode(new Node());
+		//TÉRKÉP LÉTREHOZÁSA
+		//Kezdõ Nodek
+		Node s1 = new Node(0,100);
+		Node s2 = new Node(0,200);
+		
+		//Köztes Nodek
+		Node n1 = new Node(100,120);
+		Node n2 = new Node(200,150);
+		
+		//Elágazás
+		Node n3 = new Node(250,150);
+		
+		Node n4 = new Node(300,130);
+		Node n5 = new Node(300,170);
+		
+		//Connection node
+		Node c6 = new Node(400,150);
+		
+		//Finish Node
+		Node f1 = new Node(500,150);
+		
+		//Térkép létrehozása
+		s1.addNextNode(n1);
+		s2.addNextNode(n2);
+		n1.addNextNode(n2);
+		n2.addNextNode(n3);
+		n3.addNextNode(n4);
+		n3.addNextNode(n5);
+		n4.addNextNode(c6);
+		n5.addNextNode(c6);
+		c6.addNextNode(f1);
+		
+		Game.getMap().addNode(s1);		//Startpontok hozzáadása
+		Game.getMap().addNode(s2);
 	}
 	
 	// játék betöltése fájlból
