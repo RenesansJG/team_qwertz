@@ -183,6 +183,8 @@ public class Console {
 			init();
 			
 			while (true) {
+				deIndent();
+				
 				// fõmenü
 				int choice = choose(
 						"Új játék",
@@ -198,6 +200,8 @@ public class Console {
 						"Effekt alkalmazása",
 						"Véletlenszerûség " + (Game.isRandom() ? "ki" : "kezelése"),
 						"Tesztesetek");
+				
+				indent();
 				
 				switch (choice) {
 				case 0: // new game
@@ -303,7 +307,9 @@ public class Console {
 			return;
 				
 		// bekérjük a koordinátákat
+		printMsg("x: ");
 		double x = Console.readDouble();
+		printMsg("y: ");
 		double y = Console.readDouble();
 		
 		// ha érvénytelenek a koordináták, kilépünk
@@ -376,7 +382,7 @@ public class Console {
 	public static void applyTicks() throws IOException {
 		GameMap map = Game.getMap();
 		
-		printlnMsg("Hány lépés legyen?");
+		printMsg("Lépések száma: ");
 		int ticks = readInt();
 		
 		// annyiszor, ahány tick van
