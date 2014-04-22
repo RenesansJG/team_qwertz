@@ -12,6 +12,7 @@ public class RedCrystalEffect extends Effect {
 	public void apply(Tower tower) {
 		// sebzés növelés
 		tower.modifyprojectileDamageMultiplier(1);
+		Console.println("Tower#" + tower.id + " megkapta redCrystalEffect#" + id);
 	}
 	
 	// effekt alkalmazása sebzõ csapdán

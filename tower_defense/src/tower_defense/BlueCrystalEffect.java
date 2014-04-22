@@ -11,7 +11,8 @@ public class BlueCrystalEffect extends Effect {
 	@Override
 	public void apply(Tower tower) {
 		// attackspeed növelés
-		tower.modifyAttackspeedMultiplier(1);;
+		tower.modifyAttackspeedMultiplier(1);
+		Console.println("Tower#" + tower.id + " megkapta blueCrystalEffect#" + id);
 	}
 	
 	// effekt alkalmazása lassító csapdán
@@ -23,7 +24,7 @@ public class BlueCrystalEffect extends Effect {
 	
 	@Override
 	public void restore(Tower tower) {
-		tower.modifyAttackspeedMultiplier(-1);;
+		tower.modifyAttackspeedMultiplier(-1);
 	}
 	
 	public void restore(SlowTrap slowTrap) {
