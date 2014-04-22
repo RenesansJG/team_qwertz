@@ -14,6 +14,7 @@ import java.util.List;
 public class Console {
 	private static BufferedReader br = null;
 	
+	private static boolean showMsg = true;
 	private static final Deque<String> commands = new ArrayDeque<String>();
 	private static int indent = 0;
 	
@@ -47,7 +48,7 @@ public class Console {
 	
 	// felhasználónak szóló üzenet kiírása (teljes sor, elején tabokkal)
 	public static void printlnMsg(Object o) {
-		if (commands.isEmpty()) {
+		if (showMsg && commands.isEmpty()) {
 			for (int i = 0; i < indent; i++) {
 				System.out.print("  ");
 			}
@@ -58,7 +59,7 @@ public class Console {
 	
 	// felhasználónak szóló üzenet kiírása (elején tabokkal)
 	public static void printMsg(Object o) {
-		if (commands.isEmpty()) {
+		if (showMsg && commands.isEmpty()) {
 			for (int i = 0; i < indent; i++) {
 				System.out.print("  ");
 			}
@@ -186,6 +187,8 @@ public class Console {
 			try {
 				// ha sikerül, a bemenetet beállítjuk a fájlra
 				br = new BufferedReader(new FileReader(inputFile));
+				// kikapcsoljuk az üzenetek kiírását
+				showMsg = false;
 			} catch (FileNotFoundException e) {
 				// ha nem, hibaüzenet, és a standard inputot használjuk
 				println("A fájl nem található/nem olvasható: " + args[0] + ".");
