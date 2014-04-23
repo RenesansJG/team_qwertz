@@ -64,6 +64,8 @@ public class Game implements Serializable {
 	public static void newGame() {
 		currentGame = new Game();
 		
+		lost=false;
+		
 		// TODO MAP BETÖLTÉSE !!!
 		//Game.getMap().addNode(new Node());
 		//TÉRKÉP LÉTREHOZÁSA
@@ -201,8 +203,11 @@ public class Game implements Serializable {
 		currentGame.nonRandomNextBoolean = b;
 	}
 	
+	public static boolean lost;
+	
 	public static void loseGame()
 	{
+		lost=true;
 		Console.println("Játék elveszítve");
 	}
 }
