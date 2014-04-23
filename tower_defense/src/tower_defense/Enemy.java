@@ -19,7 +19,7 @@ public abstract class Enemy extends MovableGameObject {
 	}
 	
 	protected Enemy(Enemy source) {
-		super(source.x + 5, source.y + 5, source.movementSpeed);
+		super(source.x + 3, source.y + 3, source.movementSpeed);
 		this.targetX = source.targetX;
 		this.targetY = source.targetY;
 		this.level = source.level;
