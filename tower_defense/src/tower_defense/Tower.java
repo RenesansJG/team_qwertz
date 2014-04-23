@@ -60,19 +60,24 @@ public abstract class Tower extends GameObject {
 			
 			List<GameObject> objects = Game.getMap().getObjects();
 	
-			//boolean targetfound = false;
-			int closestindex=0;
+			boolean targetfound = false;
+			int closestindex=-1;
 			for(int i=0;i<objects.size();i++){
-				if(objects.get(i).isEnemy() && getDistance(objects.get(i))<getDistance(objects.get(closestindex)))
+				if(closestindex==-1 && objects.get(i).isEnemy())
 				{
 					closestindex=i;
-					//targetfound = true;
+					targetfound = true;
+				}
+				else if(objects.get(i).isEnemy() && getDistance(objects.get(i))<=getDistance(objects.get(closestindex)))
+				{
+					closestindex=i;
+					targetfound = true;
 				}
 			}
 
 			
 			//Lövés
-			//if(targetfound)
+			if(targetfound)
 			{												//TimerTick --> timer hány ms-ra van állítva
 				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
 				if(getDistance(closest)<=range * rangeMultiplier && 
