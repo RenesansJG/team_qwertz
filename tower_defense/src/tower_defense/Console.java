@@ -103,8 +103,18 @@ public class Console {
 		String line = commands.poll();
 		
 		// ha nincs, a felhasználótól kérünk egy sort
-		if (line == null)
+		if (line == null) {
 			line = br.readLine();
+			
+			// ha még mindig nullt kapunk
+			// (text file-ból olvastunk és vége lett)
+			// átváltunk a standard inputra
+			if (line == null) {
+				showMsg = true;
+				br = new BufferedReader(new InputStreamReader(System.in));
+				line = br.readLine();
+			}
+		}
 		
 		return line;
 	}
