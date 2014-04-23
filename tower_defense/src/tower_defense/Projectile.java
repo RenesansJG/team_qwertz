@@ -48,8 +48,9 @@ public class Projectile extends MovableGameObject {
 				" blueDamage: " + damage.getBlueDamage());
 		List<GameObject> objects = Game.getMap().getObjects();
 		
-		for(GameObject o : objects)
+		for(int i=0 ;i< objects.size();i++)
 		{
+			GameObject o = objects.get(i);
 			if(o.isEnemy() && getDistance(o)<AoE)
 			{
 				Enemy e = (Enemy)o;

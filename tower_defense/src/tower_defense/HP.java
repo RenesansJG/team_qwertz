@@ -17,6 +17,14 @@ public class HP implements Serializable {
 		Blue=blue;
 	}
 	
+	public HP(HP hp)
+	{
+		HP=hp.HP;
+		Red=hp.Red;
+		Green=hp.Green;
+		Blue=hp.Blue;
+	}
+	
 	// sebzõdés
 	public void takeDamage(Damage damage, double modifier) {
 		HP-=damage.getRedDamage()*(1-Red)*modifier;
