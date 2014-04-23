@@ -5,10 +5,11 @@ import java.util.List;
 
 public abstract class Enemy extends MovableGameObject {
 	private static final long serialVersionUID = 6413219852626908584L;
-	protected HP hp;
-	protected Node targetNode;
-	protected int level;
+	protected HP hp; // enemy hpja
+	protected Node targetNode; // cél node
+	protected int level; // enemy szintje (érte kapott varázserõ)
 
+	// enemy ctor
 	protected Enemy(Node startNode, double movementSpeed, int level) {
 		super(startNode.getX(), startNode.getY(), movementSpeed);
 		this.targetNode=startNode;
@@ -18,6 +19,7 @@ public abstract class Enemy extends MovableGameObject {
 		this.movementSpeedMultiplier=1;
 	}
 	
+	// enemy copy ctor
 	protected Enemy(Enemy source) {
 		super(source.x + 3, source.y + 3, source.movementSpeed);
 		this.targetX = source.targetX;
@@ -40,49 +42,68 @@ public abstract class Enemy extends MovableGameObject {
 			Game.getMap().addObject(Copy(this));
 			Console.println(this + " szétesett");
 		}
+		// kiírás
 		Console.println(this+" sebzõdött " + (a-hp.getHP())+"-vel jelenlegi HP: " +hp.getHP());
 	}
 	
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
+		// meghalás ellenõrzése
 		if(hp.getHP()<=0){
 			Console.println(this + " meghalt");
 			return true;
 		}
+		// kiszámítjuk mennyit kell mozognia
 		double steps = movementSpeed*movementSpeedMultiplier;
 		boolean canmove=true;
+		// amíg nem érte el a célt
 		while(canmove){
+			// céltól való távolság kiszámítása
 			double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
+			// ha a távolság a céltól kisebb a megtehetõ lépéseknél
 			if(distance<=steps)
 			{
+				// targetre helyezés
 				x=targetNode.getX();
 				y=targetNode.getY();
+				
+				// stepek csökkentése
 				steps-=distance;
+				// következõ node lekérése
 				List<Node> nodes = targetNode.getNextNodes();
+				// ha nincs, ez a cél
 				if(nodes.size()==0)
 				{
+					// elveszítjük a játékot
 					Game.loseGame();
 					return true;
 				}
+				// amúgy következõ node kérése
 				targetNode= nodes.get(Game.nextInt(nodes.size()));
+				// új cél
 				targetX=targetNode.getX();
 				targetY=targetNode.getY();
+				// ha már lejártak a stepek nem mozoghat
 				if(steps==0)
 					canmove=false;
 			}
+			// amúgy mozgás a célra
 			else
 			{
+				// dx, dy kiszám.
 				double dx = targetNode.getX()-x;
 				double dy = targetNode.getY()-y;
 				double vector = Math.sqrt(dx*dx + dy*dy);
 				dx/=vector;
 				dy/=vector;
+				// mozgás 
 				x+=dx*steps;
 				y+=dy*steps;
 				canmove=false;
 			}
 		}
+		// kiírás
 		Console.println(this+ " mozgott az x=" + x + " y=" + y);
 		return false;
 	}
@@ -90,6 +111,7 @@ public abstract class Enemy extends MovableGameObject {
 	// ellenség megölésekor a kapott varázserõt adja meg
 	public abstract double getMagicPower();
 	
+	// effektek alkalmazása enemy-n
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);
