@@ -22,15 +22,16 @@ public abstract class Enemy extends MovableGameObject {
 	// sebzõdés
 	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
+		double a = hp.getHP();
 		hp.takeDamage(damage, modifier);
-		Console.println("Enemy sebzõdött " + damage + " * " + modifier);
+		Console.println(this+" sebzõdött " + (a-hp.getHP())+"-vel jelenlegi HP: " +hp.getHP());
 	}
 	
 	// ellenség tevékenysége
 	@Override
 	public final boolean action() {
 		if(hp.getHP()<=0){
-			Console.println("Enemy " + id + " meghalt");
+			Console.println(this + " meghalt");
 			return true;
 		}
 		double steps = movementSpeed*movementSpeedMultiplier;
@@ -43,6 +44,11 @@ public abstract class Enemy extends MovableGameObject {
 				y=targetNode.getY();
 				steps-=distance;
 				List<Node> nodes = targetNode.getNextNodes();
+				if(nodes.size()==0)
+				{
+					Game.loseGame();
+					return true;
+				}
 				targetNode= nodes.get(Game.nextInt(nodes.size()));
 				targetX=targetNode.getX();
 				targetY=targetNode.getY();
@@ -61,7 +67,7 @@ public abstract class Enemy extends MovableGameObject {
 				canmove=false;
 			}
 		}
-		Console.println("Enemy mozgott az x=" + x + " y=" + y);
+		Console.println(this+ " mozgott az x=" + x + " y=" + y);
 		return false;
 	}
 	

@@ -200,4 +200,9 @@ public class Game implements Serializable {
 	public static void setNonRandomNextBoolean(boolean b) {
 		currentGame.nonRandomNextBoolean = b;
 	}
+	
+	public static void loseGame()
+	{
+		Console.println("Játék elveszítve");
+	}
 }
