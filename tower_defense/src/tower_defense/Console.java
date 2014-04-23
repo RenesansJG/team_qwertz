@@ -110,6 +110,7 @@ public class Console {
 			// (text file-ból olvastunk és vége lett)
 			// átváltunk a standard inputra
 			if (line == null) {
+				showMsg = true;
 				br = new BufferedReader(new InputStreamReader(System.in));
 				line = br.readLine();
 			}
