@@ -88,7 +88,7 @@ public abstract class Tower extends GameObject {
 							projectileSpeed,projectileAoE,
 							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
 					tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
-					Console.println("Lövés a #" + id + " toronyból #" + objects.get(closestindex).id + " enemyre");
+					Console.println("Lövés a " +this + " -bõl " + objects.get(closestindex)+"-re");
 				}
 			}
 		}
