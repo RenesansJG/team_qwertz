@@ -23,20 +23,25 @@ public class DamageTrap extends Trap {
 	// sebzõ csapda tevékenysége
 	@Override
 	public final boolean action() {
-		
+		// gameobject lista lekérés
 		List<GameObject> objects = Game.getMap().getObjects();
 		
+		// minden go-re
 		for(GameObject o : objects)
 		{
+			// ha az enemy elég közel van
 			if(o.isEnemy() && getDistance(o) < range * rangeMultiplier)
 			{
 				Enemy e = (Enemy)o;
+				// megsebzés
 				e.takeDamage(damage,damageMultiplier);
 			}
 		}
+		// sebzõ csapda nem pusztul el
 		return false;
 	}
 	
+	// effekt alkalmazása
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);

@@ -2,7 +2,8 @@ package tower_defense;
 
 public class BlueCrystalEffect extends Effect {
 	private static final long serialVersionUID = 2922468267291618074L;
-
+	
+	// konstr.
 	public BlueCrystalEffect() {
 
 	}
@@ -23,13 +24,17 @@ public class BlueCrystalEffect extends Effect {
 		Console.println(this + ": " + slowTrap + " slow effect-je növelve");
 	}
 	
+	// effekt visszaáll (tower)
 	@Override
 	public void restore(Tower tower) {
+		// attack speed visszaáll.
 		tower.modifyAttackspeedMultiplier(-1);
 		Console.println(this + ": " + tower + " attack speed-je visszaállítva");
 	}
 	
+	// effekt visszaáll. (slowTrap)
 	public void restore(SlowTrap slowTrap) {
+		// lassítás visszaállítás
 		slowTrap.modifySlowMultiplier(-1);
 		Console.println(this + ": " + slowTrap + " slow effect-je visszaállítva");
 	}
