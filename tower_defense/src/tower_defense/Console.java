@@ -415,15 +415,6 @@ public class Console {
 		for (int i = 0; i < ticks; i++) {
 			
 			// minden objektumra...
-			/*for (GameObject object : map.getObjects()) {
-				// alkalmazzuk a tick-et
-				boolean objectIsToBeRemoved = object.applyTick();
-				
-				// ha kell, töröljük az objektumot
-				if (objectIsToBeRemoved) {
-					map.removeObject(object);
-				}
-			}*/
 			for (int j =0 ; j<map.getObjects().size();j++ ) {
 				GameObject object = map.getObjects().get(j);
 				// alkalmazzuk a tick-et
@@ -433,6 +424,10 @@ public class Console {
 				if (objectIsToBeRemoved) {
 					map.removeObject(object);
 				}
+			}
+			if(Game.lost)
+			{
+				break;
 			}
 		}
 	}
@@ -566,19 +561,19 @@ public class Console {
 	
 	// tesztesetek
 	private static final String[][] tests = {
-		/*  1. Torony meglõ egy Enemy-t        */ {"1", "7", "3", "100", "100.5", "9", "3", "1", "0", "5", "6", "4", "13"},
-		/*  2. DamageTrap-re futás             */ {"1", "8", "1", "10.5", "100", "9", "3", "1", "0", "5", "6", "2", "13"},
-		/*  3. SlowTrap-re futás               */ {"1", "8", "2", "10.5", "100", "9", "3", "1", "0", "5", "6", "2", "13"},
-		/*  4. BlueTower RedCrystal-t kap      */ {"1", "7", "3", "100", "100.5", "11", "1", "5", "13"},
-		/*  5. DamageTrap RedCrystal-t kap     */ {"1", "8", "1", "100", "10.5", "", "11", "1", "5", "13"},
-		/*  6. Egy enemy beér a végzet hegyébe */ {"1", "9", "2", "1", "0", "5", "6", "9999", "13"},
-		/*  7. Torony megöl egy enemyt         */ {"1", "7", "3", "100", "100.5", "9", "3", "1", "0", "5", "6", "12", "5", "13"},
-		/*  8. Fog effect tesztje              */ {"1", "7", "3", "100", "100.5", "11", "5", "5", "13"},
-		/*  9. Range upgrade teszt             */ {"1", "7", "3", "100", "100.5", "10", "0", "2", "5", "13"},
-		/* 10. Damage upgrade teszt            */ {"1", "7", "3", "100", "100.5", "10", "1", "5", "13"},
-		/* 11. AttackSpeed upgrade teszt       */ {"1", "7", "3", "100", "100.5", "10", "3", "5", "13"},
-		/* 12. Projectile speed upgrade teszt  */ {"1", "7", "3", "100", "100.5", "10", "4", "5", "13"},
-		/* 13. Resistek tesztje                */ {"1", "7", "1", "100", "50", "7", "2", "100", "60", "7", "3", "100", "70", "9", "3", "10", "0", "5", "6", "3", "13"}
+		/*  1. Torony meglõ egy Enemy-t        */ {"7", "3", "100", "100.5", "9", "3", "1", "0", "5", "6", "4", "13"},
+		/*  2. DamageTrap-re futás             */ {"8", "1", "10.5", "100", "9", "3", "1", "0", "5", "6", "2", "13"},
+		/*  3. SlowTrap-re futás               */ {"8", "2", "10.5", "100", "9", "3", "1", "0", "5", "6", "2", "13"},
+		/*  4. BlueTower RedCrystal-t kap      */ {"7", "3", "100", "100.5", "11", "1", "0", "5", "13"},
+		/*  5. DamageTrap RedCrystal-t kap     */ {"8", "1", "100", "10.5", "", "11", "1", "0", "5", "13"},
+		/*  6. Egy enemy beér a végzet hegyébe */ {"9", "2", "1", "0", "5", "6", "9999", "13"},
+		/*  7. Torony megöl egy enemyt         */ {"7", "3", "100", "100.5", "9", "3", "1", "0", "5", "6", "12", "5", "13"},
+		/*  8. Fog effect tesztje              */ {"7", "3", "100", "100.5", "11", "5", "5", "13"},
+		/*  9. Range upgrade teszt             */ {"7", "3", "100", "100.5", "10", "0", "2", "5", "13"},
+		/* 10. Damage upgrade teszt            */ {"7", "3", "100", "100.5", "10", "1", "5", "13"},
+		/* 11. AttackSpeed upgrade teszt       */ {"7", "3", "100", "100.5", "10", "3", "5", "13"},
+		/* 12. Projectile speed upgrade teszt  */ {"7", "3", "100", "100.5", "10", "4", "5", "13"},
+		/* 13. Resistek tesztje                */ {"7", "1", "100", "50", "7", "2", "100", "60", "7", "3", "100", "70", "9", "3", "10", "0", "5", "6", "3", "13"}
 	};
 	
 	// választási lehetõségek a tesztesetekhez
@@ -592,6 +587,7 @@ public class Console {
 	
 	// teszt menüpont
 	public static void test() throws IOException {
+		Game.newGame();
 		if (commands.isEmpty()) {
 			int choice = choose(choices);
 			
