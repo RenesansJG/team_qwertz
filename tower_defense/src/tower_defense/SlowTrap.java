@@ -27,6 +27,7 @@ public class SlowTrap extends Trap {
 		
 		for(GameObject o : objects)
 		{
+			//Enemy és range-ban van, akkor lassítani kell
 			if(o.isEnemy() && getDistance(o) < range * rangeMultiplier)
 			{
 				Enemy e = (Enemy)o;

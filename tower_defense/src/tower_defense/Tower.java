@@ -9,12 +9,12 @@ public abstract class Tower extends GameObject {
 	protected double rangeMultiplier;
 	protected double attackSpeed;
 	protected double attackSpeedMultiplier;
-	protected Damage projectileDamage;
+	protected Damage projectileDamage;			//Torony sebzése
 	protected double projectileDamageMultiplier;
 	protected double projectileSpeed;
 	protected double projectileAoE;
 	
-	private double tickCount = 0;
+	private double tickCount = 0;		//Számoljuk, az actionon hány tick ment át. (attackspeedhez kell)
 	
 
 	protected Tower(double x, double y) {
@@ -24,7 +24,7 @@ public abstract class Tower extends GameObject {
 		projectileDamageMultiplier = 1;
 		
 		range = 100;
-		attackSpeed = 1;
+		attackSpeed = 1;		//Másodpercenként ennyit lõ
 		projectileSpeed = 50;
 		projectileAoE = 10;
 		
@@ -55,19 +55,22 @@ public abstract class Tower extends GameObject {
 	// torony tevékenysége
 	@Override
 	public final boolean action(){
-		if(true){// attackspeed nincs megoldva 
+		if(true){ 
+			
+			//Target választás
 			tickCount += 1;
 			
 			List<GameObject> objects = Game.getMap().getObjects();
 	
 			boolean targetfound = false;
 			int closestindex=-1;
-			for(int i=0;i<objects.size();i++){
+			for(int i=0;i<objects.size();i++){	//Ha még nincs valid target
 				if(closestindex==-1 && objects.get(i).isEnemy())
 				{
 					closestindex=i;
 					targetfound = true;
 				}
+												//Egyébként   (enemy, és közelebb van mint az eddigi)
 				else if(objects.get(i).isEnemy() && getDistance(objects.get(i))<=getDistance(objects.get(closestindex)))
 				{
 					closestindex=i;
