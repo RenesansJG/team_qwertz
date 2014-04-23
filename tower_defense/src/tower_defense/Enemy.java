@@ -34,7 +34,7 @@ public abstract class Enemy extends MovableGameObject {
 		// a HP objetumán meghívja a sebzõdést
 		double a = hp.getHP();
 		hp.takeDamage(damage, modifier);
-		if(false)// szétesés
+		if (Game.nextBoolean(0.05)) // szétesés
 		{
 			Game.getMap().addObject(Copy(this));
 		}
