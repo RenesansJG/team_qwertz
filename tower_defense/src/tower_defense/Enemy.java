@@ -18,6 +18,13 @@ public abstract class Enemy extends MovableGameObject {
 		this.movementSpeedMultiplier=1;
 	}
 	
+	protected Enemy(Enemy source) {
+		super(source.x + 5, source.y + 5, source.movementSpeed);
+		this.targetX = source.targetX;
+		this.targetY = source.targetY;
+		this.level = source.level;
+		this.movementSpeedMultiplier=source.movementSpeedMultiplier;
+	}
 	
 	// sebzõdés
 	public final void takeDamage(Damage damage, double modifier) {
