@@ -13,6 +13,7 @@ public abstract class GameObject implements ITickable, Serializable {
 	protected double y;
 	protected final List<Effect> effects;
 	
+	//Alap konstruktor mindenkire
 	protected GameObject(double x, double y) {
 		id = Game.getNextObjectId();
 		this.x=x;

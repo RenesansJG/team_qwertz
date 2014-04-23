@@ -40,7 +40,7 @@ public class SlowTrap extends Trap {
 		return false;
 	}
 	
-	@Override
+	@Override	//Egy effect berakása
 	public final void affect(Effect effect) {
 		effect.apply(this);
 		Console.println(this + " megkapta " + effect + " effektet.");

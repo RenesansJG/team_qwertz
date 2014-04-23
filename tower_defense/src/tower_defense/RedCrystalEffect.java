@@ -23,7 +23,7 @@ public class RedCrystalEffect extends Effect {
 		Console.println(this + ": " + damageTrap + " damage-e növelve");
 	}
 	
-	@Override
+	@Override //Effect levételek
 	public void restore(Tower tower) {
 		tower.modifyprojectileDamageMultiplier(-1);
 		Console.println(this + "lejárt: " + tower + " damage-e visszaállítva");

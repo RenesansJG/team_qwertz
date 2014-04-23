@@ -11,12 +11,12 @@ public class FogEffect extends Effect {
 	@Override
 	public void apply(Tower tower) {
 		tower.modifyRange(-10);
-		Console.println(this + ": " + tower + " range-je csökkentve!");
+		Console.println(this + ": " + tower + " range-je csökkentve!");		//Csökken a range konstansal
 	}
 	
-	@Override
+	@Override	//Effect levétele
 	public void restore(Tower tower) {
-		tower.modifyRange(10);
+		tower.modifyRange(10);				//Visszanõ a range
 		Console.println(this + "lejárt: " + tower + " range-je visszaállítva!");
 	}
 	

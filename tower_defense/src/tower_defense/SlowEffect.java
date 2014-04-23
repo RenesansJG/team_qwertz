@@ -16,7 +16,7 @@ public class SlowEffect extends Effect {
 		Console.println(this + ": " + enemy + "movement speed-je csökkentve!");
 	}
 	
-	@Override
+	@Override //Effect levétele
 	public void restore(Enemy enemy) {
 		enemy.modifyMovementMultiplier(-slow);
 		Console.println(this + "lejárt: " + enemy + "movement speed-je visszaállítva!");

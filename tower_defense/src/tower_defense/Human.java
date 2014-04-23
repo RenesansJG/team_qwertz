@@ -29,6 +29,7 @@ public class Human extends Enemy {
 		return level * 10.0;
 	}
 	
+	//Copy, a széteséshez kell
 	protected Enemy Copy(Enemy source){
 		return new Human(source);
 	}

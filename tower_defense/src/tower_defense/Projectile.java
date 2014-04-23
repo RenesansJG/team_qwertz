@@ -8,6 +8,7 @@ public class Projectile extends MovableGameObject {
 	private Damage damage;
 	private double AoE;
 	
+	//Alap konstruktor
 	public Projectile(double x, double y, double destx,double desty, double speed, double Aoe,Damage damage ) {
 		super(x,y,speed);
 		targetX = destx;
@@ -19,6 +20,7 @@ public class Projectile extends MovableGameObject {
 	// lövedék tevékenysége
 	@Override
 	public final boolean action() {
+		//Lövedék mozgása (hasonló, mint az enemy-é)
 		double distance = Math.sqrt((x-targetX)*(x-targetX)+(y-targetY)*(y-targetY));
 		if(distance<=movementSpeed)
 		{
@@ -48,6 +50,7 @@ public class Projectile extends MovableGameObject {
 				" blueDamage: " + damage.getBlueDamage());
 		List<GameObject> objects = Game.getMap().getObjects();
 		
+		//Az összes rangeben lévõ enemyt sebzi
 		for(int i=0 ;i< objects.size();i++)
 		{
 			GameObject o = objects.get(i);

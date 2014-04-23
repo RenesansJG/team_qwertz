@@ -31,19 +31,19 @@ public class GreenCrystalEffect extends Effect {
 		Console.println(this + ": " + slowTrap + " damage-e növelve");
 	}
 	
-	@Override
+	@Override //Effect levétele
 	public void restore(Tower tower) {
 		tower.modifyRangeMultiplier(-1);
 		Console.println(this + ": " + tower + " damage-e visszaálítva");
 	}
 	
-	@Override
+	@Override //Effect levétele
 	public void restore(DamageTrap damageTrap) {
 		damageTrap.modifyRangeMultiplier(-1);
 		Console.println(this + ": " + damageTrap + " damage-e visszaálítva");
 	}
 	
-	@Override
+	@Override //Effect levétele
 	public void restore(SlowTrap slowTrap) {
 		slowTrap.modifyRangeMultiplier(-1);
 		Console.println(this + ": " + slowTrap + " damage-e visszaálítva");

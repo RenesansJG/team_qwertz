@@ -36,6 +36,7 @@ public class Node implements Serializable {
 		return Collections.unmodifiableList(nextNodes);
 	}
 	
+	//Hozzáad egyet a következõ nodesekhez
 	public void addNextNode(Node n){
 		nextNodes.add(n);
 	}

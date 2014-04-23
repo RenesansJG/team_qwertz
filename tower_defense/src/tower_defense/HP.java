@@ -6,9 +6,10 @@ public class HP implements Serializable {
 	private static final long serialVersionUID = 8678684793491126409L;
 	private double HP;
 	private double Red;
-	private double Green;
+	private double Green;		//Sebzés le van bontva elementekre
 	private double Blue;
 	
+	//Külön meg kell adni minden komponenst
 	public HP(double hp, double red, double green, double blue)
 	{
 		HP=hp;
@@ -17,6 +18,7 @@ public class HP implements Serializable {
 		Blue=blue;
 	}
 	
+	//Széteséshez kell
 	public HP(HP hp)
 	{
 		HP=hp.HP;
