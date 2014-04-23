@@ -24,6 +24,7 @@ public abstract class Enemy extends MovableGameObject {
 		this.targetY = source.targetY;
 		this.level = source.level;
 		this.movementSpeedMultiplier=source.movementSpeedMultiplier;
+		this.hp = source.hp;
 	}
 	
 	// sebzõdés
