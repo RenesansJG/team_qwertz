@@ -42,7 +42,10 @@ public class Projectile extends MovableGameObject {
 	
 	// lövedék robbanása
 	public void explode(){
-		
+		Console.println(this + " felrobban." +
+				"redDamage: " + damage.getRedDamage() + 
+				" greenDamage: " + damage.getGreenDamage() +
+				" blueDamage: " + damage.getBlueDamage());
 		List<GameObject> objects = Game.getMap().getObjects();
 		
 		for(GameObject o : objects)
