@@ -14,6 +14,10 @@ public class Hobbit extends Enemy {
 		hp = new HP(baseHP + level * levelHP, 0, 0, baseRes + levelRes * level);
 	}
 	
+	public Hobbit(Enemy source) {
+		super(source);
+	}
+
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
@@ -24,5 +28,9 @@ public class Hobbit extends Enemy {
 	public double getMagicPower() {
 		// TODO hogyan számítsuk a kapott varázserõt?
 		return level * 10.0;
+	}
+	
+	protected Enemy Copy(Enemy source){
+		return new Hobbit(source);
 	}
 }

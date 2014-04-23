@@ -15,6 +15,10 @@ public class Elf extends Enemy {
 		hp = new HP(baseHP + level * levelHP, 0, baseRes + levelRes * level, 0);
 	}
 	
+	public Elf(Enemy source) {
+		super(source);
+	}
+
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
@@ -25,5 +29,9 @@ public class Elf extends Enemy {
 	public double getMagicPower() {
 		// TODO hogyan számítsuk a kapott varázserõt?
 		return level * 10.0;
+	}
+	
+	protected Enemy Copy(Enemy source){
+		return new Elf(source);
 	}
 }

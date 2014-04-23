@@ -14,6 +14,10 @@ public class Dwarf extends Enemy {
 		hp = new HP(baseHP + level * levelHP, baseRes + levelRes * level, 0, 0);
 	}
 	
+	public Dwarf(Enemy source) {
+		super(source);
+	}
+
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
@@ -24,5 +28,9 @@ public class Dwarf extends Enemy {
 	public double getMagicPower() {
 		// TODO hogyan számítsuk a kapott varázserõt?
 		return level * 10.0;
+	}
+	
+	protected Enemy Copy(Enemy source){
+		return new Dwarf(source);
 	}
 }

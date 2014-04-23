@@ -27,11 +27,17 @@ public abstract class Enemy extends MovableGameObject {
 		this.hp = source.hp;
 	}
 	
+	protected abstract Enemy Copy(Enemy source);
+	
 	// sebzõdés
 	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
 		double a = hp.getHP();
 		hp.takeDamage(damage, modifier);
+		if(false)// szétesés
+		{
+			Game.getMap().addObject(Copy(this));
+		}
 		Console.println(this+" sebzõdött " + (a-hp.getHP())+"-vel jelenlegi HP: " +hp.getHP());
 	}
 	
