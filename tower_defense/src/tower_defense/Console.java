@@ -409,9 +409,12 @@ public class Console {
 	
 	// list objects menüpont
 	public static void listObjects() {
+		println("objektumlista:");
+		indent();
 		for (GameObject object : Game.getMap().getObjects()) {
 			println(object + " " + object.getPosString());
 		}
+		deIndent();
 	}
 	
 	// objektumok léptetése
