@@ -38,6 +38,8 @@ public class Damage implements Serializable {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "damage";
+		return "redDamage: " + Red + 
+				" greenDamage: " + Green +
+				" blueDamage: " + Blue;
 	}
 }

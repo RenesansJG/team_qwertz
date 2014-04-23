@@ -13,6 +13,10 @@ public class Human extends Enemy {
 		hp = new HP(baseHP + level * levelHP, levelRes * level, levelRes * level, levelRes * level);
 	}
 	
+	public Human(Enemy source) {
+		super(source);
+	}
+
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
@@ -23,5 +27,9 @@ public class Human extends Enemy {
 	public double getMagicPower() {
 		// TODO hogyan számítsuk a kapott varázserõt?
 		return level * 10.0;
+	}
+	
+	protected Enemy Copy(Enemy source){
+		return new Human(source);
 	}
 }
