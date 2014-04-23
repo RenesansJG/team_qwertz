@@ -5,7 +5,7 @@ public class GreenTower extends Tower {
 
 	public GreenTower(double x, double y) {
 		super(x, y);
-		projectileDamage = new Damage(5,10,5);
+		projectileDamage = new Damage(0,10,0);
 	}
 	
 	// toString függvény kiíratáshoz
