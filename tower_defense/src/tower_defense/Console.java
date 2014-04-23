@@ -437,6 +437,7 @@ public class Console {
 				if (objectIsToBeRemoved) {
 					map.removeObject(object);
 				}
+				j--;
 			}
 			if(Game.lost)
 			{
