@@ -12,6 +12,19 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 public class GameWindow extends JFrame {
+	public enum Command {
+		buildRedTower,
+		buildGreenTower,
+		buildBlueTower,
+		buildDamageTrap,
+		buildSlowTrap,
+		useRedCrystal,
+		useBlueCrystal,
+		useGreenCrystal,
+		upgradeTower,
+		noCommand
+	}
+	
 	private static final long serialVersionUID = 7817024087343251889L;
 	private Canvas canvas;
 	private GUI gui;
@@ -68,10 +81,10 @@ public class GameWindow extends JFrame {
 			}});
 		gameMenu.add(exitMenuItem);
 		
-		canvas = new Canvas();
+		canvas = new Canvas(this);
 		this.add(canvas, BorderLayout.CENTER);
 		
-		gui = new GUI(this);
+		gui = new GUI(canvas);
 		this.add(gui, BorderLayout.PAGE_END);
 	}
 	
