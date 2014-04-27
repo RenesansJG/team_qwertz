@@ -71,7 +71,7 @@ public class GameWindow extends JFrame {
 		canvas = new Canvas();
 		this.add(canvas, BorderLayout.CENTER);
 		
-		gui = new GUI();
+		gui = new GUI(this);
 		this.add(gui, BorderLayout.PAGE_END);
 	}
 	
