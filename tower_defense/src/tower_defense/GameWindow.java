@@ -72,7 +72,7 @@ public class GameWindow extends JFrame {
 		this.add(canvas, BorderLayout.CENTER);
 		
 		gui = new GUI();
-		this.add(canvas, BorderLayout.PAGE_END);
+		this.add(gui, BorderLayout.PAGE_END);
 	}
 	
 	private void count() {
