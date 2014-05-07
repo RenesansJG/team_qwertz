@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,8 +27,7 @@ public class Canvas extends JPanel {
 	private double mouseY;
 	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 	private String[] imageFilenames = {
-			"error",
-			"redTower",
+			"edTower",
 			"greenTower",
 			"blueTower",
 			"redCrystal",
@@ -43,11 +44,26 @@ public class Canvas extends JPanel {
 	
 	public Canvas(int width, int height) {
 		try {
-			for(String filename : imageFilenames) {
-				sprites.put(filename, ImageIO.read(new File("src/pic/" + filename + ".bmp")));
-			}
-		} catch (IOException e) {
+			sprites.put("error", ImageIO.read(new File("src/pic/" + "error" + ".bmp")));
+		} catch(IOException e) {
+			sprites.put("error", new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB));
 			System.exit(0);
+		}
+		for(String filename : imageFilenames) {
+			try {
+				BufferedImage img = ImageIO.read(new File("src/pic/" + filename + ".bmp"));
+				if(img == null) System.exit(0);
+				sprites.put(filename, img);
+			} catch (IOException e) {
+				BufferedImage errorImage = sprites.get("error");
+				ColorModel cm = errorImage.getColorModel();
+				boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+				WritableRaster raster = errorImage.copyData(null);
+				BufferedImage bi = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+				Graphics g = bi.getGraphics();
+				g.drawImage(errorImage, 0, 0, this);
+				sprites.put(filename, bi);
+			}
 		}
 		
 		this.setPreferredSize(new Dimension(width, height));
@@ -93,8 +109,40 @@ public class Canvas extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.fillRect(0, this.getHeight() - gui.getHeight(), this.getWidth(), this.getHeight());
-		GUI.Command command = this.gui.getLastCommand();
-		g.drawString(command.toString(), (int)mouseX, (int)mouseY);
+		BufferedImage commandImage = getCommandImage();
+		if(commandImage != null) {
+			g.drawImage(commandImage,
+					(int)(mouseX - commandImage.getWidth()/2),
+					(int)(mouseY - commandImage.getHeight()),
+					this);
+		} else {
+			g.drawString(gui.getLastCommand().toString(), (int)mouseX, (int)mouseY);
+		}
+	}
+	
+	private BufferedImage getCommandImage() {
+		switch(gui.getLastCommand()) {
+			case buildRedTower:
+				return sprites.get("redTower");
+			case buildGreenTower:
+				return sprites.get("greenTower");
+			case buildBlueTower:
+				return sprites.get("blueTower");
+			case buildDamageTrap:
+				return sprites.get("damageTrap");
+			case buildSlowTrap:
+				return sprites.get("slowTrap");
+			case useRedCrystal:
+				return sprites.get("redCrystal");
+			case useBlueCrystal:
+				return sprites.get("greenCrystal");
+			case useGreenCrystal:
+				return sprites.get("blueCrystal");
+			case upgradeTower:
+				return null;
+			default:
+				return null;
+		}
 	}
 	
 	private BufferedImage getImage(Object go) {

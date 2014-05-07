@@ -13,18 +13,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class GameWindow extends JFrame {
-	public enum Command {
-		buildRedTower,
-		buildGreenTower,
-		buildBlueTower,
-		buildDamageTrap,
-		buildSlowTrap,
-		useRedCrystal,
-		useBlueCrystal,
-		useGreenCrystal,
-		upgradeTower,
-		noCommand
-	}
 	
 	private static final long serialVersionUID = 7817024087343251889L;
 	private Container container = new Container(1024, 768);
