@@ -37,7 +37,8 @@ public class Canvas extends JPanel {
 			"hobbit",
 			"damageTrap",
 			"slowTrap",
-			"fog"
+			"fog",
+			"error"
 	};
 	
 	public Canvas(int width, int height) {
@@ -96,58 +97,46 @@ public class Canvas extends JPanel {
 		g.drawString(command.toString(), (int)mouseX, (int)mouseY);
 	}
 	
-	private BufferedImage getImage(GameObject go) {
-		"redTower",
-		"greenTower",
-		"blueTower",
-		"redCrystal",
-		"greenCrystal",
-		"blueCrystal",
-		"elf",
-		"dwarf",
-		"human",
-		"hobbit",
-		"damageTrap",
-		"slowTrap",
-		"fog"
+	private BufferedImage getImage(Object go) {
 		if(go instanceof RedTower) {
 			return sprites.get("redTower");
 		}
 		else if(go instanceof GreenTower) {
-			return sprites.get("redTower");
+			return sprites.get("greenTower");
 		}
 		else if(go instanceof BlueTower) {
-			return sprites.get("redTower");
+			return sprites.get("blueTower");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof RedCrystalEffect) {
+			return sprites.get("redCrystal");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof GreenCrystalEffect) {
+			return sprites.get("greenCrystal");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof BlueCrystalEffect) {
+			return sprites.get("blueCrystal");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof Elf) {
+			return sprites.get("elf");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof Dwarf) {
+			return sprites.get("dwarf");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof Human) {
+			return sprites.get("human");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof Hobbit) {
+			return sprites.get("hobbit");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof DamageTrap) {
+			return sprites.get("damageTrap");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof SlowTrap) {
+			return sprites.get("slowTrap");
 		}
-		else if(go instanceof ) {
-			return sprites.get("redTower");
+		else if(go instanceof FogEffect) {
+			return sprites.get("fog");
 		}
+		return sprites.get("error");
 	}
 }
