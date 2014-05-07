@@ -92,7 +92,7 @@ public class Canvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.fillRect(0, this.getHeight()-40, this.getWidth(), this.getHeight());
+		g.fillRect(0, this.getHeight() - gui.getHeight(), this.getWidth(), this.getHeight());
 		GUI.Command command = this.gui.getLastCommand();
 		g.drawString(command.toString(), (int)mouseX, (int)mouseY);
 	}
