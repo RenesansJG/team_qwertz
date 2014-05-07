@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class GameWindow extends JFrame {
@@ -63,7 +62,10 @@ public class GameWindow extends JFrame {
 				jFileChooser.setSelectedFile(new File("fileToLoad.tds"));
 				jFileChooser.showOpenDialog(container);
 				File file = jFileChooser.getSelectedFile();
-				Game.loadGame(file.getAbsolutePath());
+				if(file != null) {
+					Game.loadGame(file.getAbsolutePath());
+					container.gameLoaded();
+				}
 			}});
 		gameMenu.add(loadGameMenuItem);
 		

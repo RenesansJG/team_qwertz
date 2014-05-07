@@ -35,7 +35,6 @@ public abstract class Enemy extends MovableGameObject {
 	// sebzõdés
 	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
-		double a = hp.getHP();
 		hp.takeDamage(damage, modifier);
 		if (Game.nextBoolean(0.05)) // szétesés
 		{
