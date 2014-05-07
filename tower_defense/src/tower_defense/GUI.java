@@ -78,4 +78,8 @@ public class GUI extends JPanel {
 	public Command getLastCommand() {
 		return lastCommand;
 	}
+	
+	public void resetLastCommand() {
+		this.lastCommand = Command.noCommand;
+	}
 }

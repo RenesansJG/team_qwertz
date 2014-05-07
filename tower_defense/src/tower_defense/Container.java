@@ -24,6 +24,7 @@ public class Container extends JPanel {
 	
 	public void gameLoaded() {
 		canvas.drawBackground();
+		gui.resetLastCommand();
 	}
 	
 }
