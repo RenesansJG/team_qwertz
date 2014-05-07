@@ -25,6 +25,7 @@ public class Canvas extends JPanel {
 	private double mouseY;
 	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 	private String[] imageFilenames = {
+			"error",
 			"redTower",
 			"greenTower",
 			"blueTower",
@@ -37,8 +38,7 @@ public class Canvas extends JPanel {
 			"hobbit",
 			"damageTrap",
 			"slowTrap",
-			"fog",
-			"error"
+			"fog"
 	};
 	
 	public Canvas(int width, int height) {
