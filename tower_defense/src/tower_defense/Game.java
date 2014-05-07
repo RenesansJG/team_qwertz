@@ -1,5 +1,7 @@
 package tower_defense;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 public class Game implements Serializable {
 	private static final long serialVersionUID = -2262641899325571201L;
@@ -27,6 +31,9 @@ public class Game implements Serializable {
 	private int objectCount;
 	private int effectCount;
 	private int nodeCount = 0;
+	
+	private long timeOfLastTick;
+	private long tickInterval = 20;
 	
 	public static int getNextObjectId() {
 		return currentGame.objectCount++;
@@ -53,6 +60,27 @@ public class Game implements Serializable {
 		objectCount = 0;
 		effectCount = 0;
 		nodeCount = 0;
+		
+		this.timeOfLastTick = System.currentTimeMillis();
+		new Timer((int) tickInterval, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game.this.count();
+			}
+		}).start();
+	}
+	
+	private void count() {
+		long currentTime = System.currentTimeMillis();
+		long delta;
+		delta = currentTime - timeOfLastTick;
+		if(delta >= tickInterval) {
+			do {
+				Game.applyTicks();
+				delta -= tickInterval;
+			} while(delta >= tickInterval);
+			timeOfLastTick = currentTime;
+		}
 	}
 	
 	// játék mapjének lekérése
@@ -240,55 +268,26 @@ public class Game implements Serializable {
 		lost=true;
 	}
 	
-	public static void applyTicks() throws IOException {
+	public static void applyTicks() {
 		GameMap map = Game.getMap();
+		// iterátor
+		java.util.Iterator<GameObject> it = map.getObjects().iterator();
 		
-		printMsg("Lépések száma: ");
-		int ticks = readInt();
+		// minden objektumra...
+		while (it.hasNext()) {
+			GameObject object = it.next();
+			
+			// alkalmazzuk a tick-et
+			boolean objectIsToBeRemoved = object.applyTick();
+			
+			// ha kell, töröljük az objektumot
+			if (objectIsToBeRemoved) {
+				it.remove();
+			}
+		}
 		
-		// annyiszor, ahány tick van
-		for (int i = 0; i < ticks; i++) {
-			/*
-			
-			ITERÁTOROS MEGOLDÁS
-			szerintem jobb (Máté)
-			
-			// iterátor
-			java.util.Iterator<GameObject> it = map.getObjects().iterator();
-			
-			// minden objektumra...
-			while (it.hasNext()) {
-				GameObject object = it.next();
-				
-				// alkalmazzuk a tick-et
-				boolean objectIsToBeRemoved = object.applyTick();
-				
-				// ha kell, töröljük az objektumot
-				if (objectIsToBeRemoved) {
-					it.remove();
-				}
-			}
-			
-			*/
-			
-			// minden objektumra...
-			for (int j =0 ; j<map.getObjects().size();j++ ) {
-				GameObject object = map.getObjects().get(j);
-				// alkalmazzuk a tick-et
-				boolean objectIsToBeRemoved = object.applyTick();
-				
-				// ha kell, töröljük az objektumot
-				if (objectIsToBeRemoved) {
-					map.removeObject(object);
-					j--;
-				}
-				
-			}
-			
-			if(Game.lost)
-			{
-				break;
-			}
+		if(Game.lost) {
+			loseGame();
 		}
 	}
 }

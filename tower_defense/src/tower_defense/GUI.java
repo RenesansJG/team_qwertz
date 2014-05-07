@@ -70,7 +70,6 @@ public class GUI extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				canvas.setMosueX(e.getX());
 				canvas.setMosueY(e.getY());
-				canvas.repaint();
 			}
 		});
 	}

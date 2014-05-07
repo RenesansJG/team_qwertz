@@ -8,8 +8,12 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Canvas extends JPanel {
@@ -19,14 +23,37 @@ public class Canvas extends JPanel {
 	BufferedImage backgroundImage;
 	private double mouseX;
 	private double mouseY;
+	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
+	private String[] imageFilenames = {
+			"redTower",
+			"greenTower",
+			"blueTower",
+			"redCrystal",
+			"greenCrystal",
+			"blueCrystal",
+			"elf",
+			"dwarf",
+			"human",
+			"hobbit",
+			"damageTrap",
+			"slowTrap",
+			"fog"
+	};
 	
 	public Canvas(int width, int height) {
+		try {
+			for(String filename : imageFilenames) {
+				sprites.put(filename, ImageIO.read(new File("src/pic/" + filename + ".bmp")));
+			}
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		
 		this.setPreferredSize(new Dimension(width, height));
 		backgroundImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Point point = MouseInfo.getPointerInfo().getLocation();
 		mouseX = point.getX();
 		mouseY = point.getY();
-		
 	}
 	
 	public void drawBackground() {
@@ -67,5 +94,60 @@ public class Canvas extends JPanel {
 		g.fillRect(0, this.getHeight()-40, this.getWidth(), this.getHeight());
 		GUI.Command command = this.gui.getLastCommand();
 		g.drawString(command.toString(), (int)mouseX, (int)mouseY);
+	}
+	
+	private BufferedImage getImage(GameObject go) {
+		"redTower",
+		"greenTower",
+		"blueTower",
+		"redCrystal",
+		"greenCrystal",
+		"blueCrystal",
+		"elf",
+		"dwarf",
+		"human",
+		"hobbit",
+		"damageTrap",
+		"slowTrap",
+		"fog"
+		if(go instanceof RedTower) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof GreenTower) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof BlueTower) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
+		else if(go instanceof ) {
+			return sprites.get("redTower");
+		}
 	}
 }

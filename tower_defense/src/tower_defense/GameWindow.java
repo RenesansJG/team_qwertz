@@ -28,19 +28,14 @@ public class GameWindow extends JFrame {
 	
 	private static final long serialVersionUID = 7817024087343251889L;
 	private Container container = new Container(1024, 768);
-	
-	private long timeOfLastTick;
-	private long timeOfLastRefresh;
-	private long tickInterval = 20;
-	private long refreshInterval = 20;
+
+	private long frameRate = 20;
 	
 	public GameWindow() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tower defense");
 		setResizable(false);
 		this.add(container);
-		this.timeOfLastRefresh = System.currentTimeMillis();
-		this.timeOfLastTick = timeOfLastRefresh;
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -90,21 +85,13 @@ public class GameWindow extends JFrame {
 				System.exit(0);
 			}});
 		gameMenu.add(exitMenuItem);
-		pack();new Timer((int) tickInterval, new ActionListener() {
+		pack();
+		new Timer((int) frameRate, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GameWindow.this.count();
+				GameWindow.this.repaint();
 			}
 		}).start();
-	}
-	
-	private void count() {
-		long currentTime = System.currentTimeMillis();
-		long delta = currentTime - timeOfLastTick;
-		while(delta >= tickInterval) {
-			Game.getMap().
-		}
-		
 	}
 	
 	public static void main(String[] args) {
