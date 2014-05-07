@@ -29,16 +29,18 @@ public class GameWindow extends JFrame {
 	private Container container = new Container(1024, 768);
 	
 	private long lastTimeCheck;
-	private long refreshInterval;
-	private long tickInterval;
+	private long refreshInterval = 20;
+	private long tickInterval = 20;
 	private long timeOfLastRefresh;
 	private long timeOfLastTick;
 	
 	public GameWindow() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tower defense");
-		this.add(container);
 		setResizable(false);
+		this.add(container);
+		this.timeOfLastRefresh = System.currentTimeMillis();
+		this.timeOfLastTick = timeOfLastRefresh;
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
