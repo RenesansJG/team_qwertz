@@ -208,6 +208,5 @@ public class Game implements Serializable {
 	public static void loseGame()
 	{
 		lost=true;
-		Console.println("Játék elveszítve");
 	}
 }

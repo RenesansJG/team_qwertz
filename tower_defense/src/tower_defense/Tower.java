@@ -91,7 +91,6 @@ public abstract class Tower extends GameObject {
 							projectileSpeed,projectileAoE,
 							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
 					tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
-					Console.println("Lövés a " +this + " -bõl " + objects.get(closestindex)+"-re");
 				}
 			}
 		}
@@ -101,7 +100,6 @@ public abstract class Tower extends GameObject {
 	@Override
 	public final void affect(Effect effect) {
 		effect.apply(this);
-		Console.println(this + " megkapta " + effect + " effektet.");
 	}
 	
 	
@@ -121,28 +119,23 @@ public abstract class Tower extends GameObject {
 									  (projectileDamage.getBlueDamage()) +10);
 		
 		projectileDamage = temp;
-		Console.println(this + " damage upgrade-elve. Új damage: " + projectileDamage);
 	}
 	
 	
 	public void rangeUpgrade() {
 		range += 10;
-		Console.println(this + " range upgrade-elve. Új range: " + range);
 	}
 
 	public void attackSpeedUpgrade() {
 		attackSpeed += 0.2;
-		Console.println(this + " attack speed upgrade-elve. Új attack speed: " + attackSpeed);
 	}
 	
 	public void projectileSpeedUpgrade() {
 		projectileSpeed += 10;
-		Console.println(this + " projectile speed upgrade-elve. Új projectile speed: " + projectileSpeed);
 	}
 	
 	public void AoEUpgrade() {
 		projectileAoE += 10;
-		Console.println(this + " AoE upgrade-elve. Új AoE: " + projectileAoE);
 	}
 
 	

@@ -44,10 +44,6 @@ public class Projectile extends MovableGameObject {
 	
 	// lövedék robbanása
 	public void explode(){
-		Console.println(this + " felrobban." +
-				"redDamage: " + damage.getRedDamage() + 
-				" greenDamage: " + damage.getGreenDamage() +
-				" blueDamage: " + damage.getBlueDamage());
 		List<GameObject> objects = Game.getMap().getObjects();
 		
 		//Az összes rangeben lévõ enemyt sebzi

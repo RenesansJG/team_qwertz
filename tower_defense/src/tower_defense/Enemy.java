@@ -40,10 +40,7 @@ public abstract class Enemy extends MovableGameObject {
 		if (Game.nextBoolean(0.05)) // szétesés
 		{
 			Game.getMap().addObject(Copy(this));
-			Console.println(this + " szétesett");
 		}
-		// kiírás
-		Console.println(this+" sebzõdött " + (a-hp.getHP())+"-vel jelenlegi HP: " +hp.getHP());
 	}
 	
 	// ellenség tevékenysége
@@ -51,7 +48,6 @@ public abstract class Enemy extends MovableGameObject {
 	public final boolean action() {
 		// meghalás ellenõrzése
 		if(hp.getHP()<=0){
-			Console.println(this + " meghalt");
 			return true;
 		}
 		// kiszámítjuk mennyit kell mozognia
@@ -103,8 +99,6 @@ public abstract class Enemy extends MovableGameObject {
 				canmove=false;
 			}
 		}
-		// kiírás
-		Console.println(this+ " mozgott az x=" + x + " y=" + y);
 		return false;
 	}
 	
