@@ -239,4 +239,56 @@ public class Game implements Serializable {
 	{
 		lost=true;
 	}
+	
+	public static void applyTicks() throws IOException {
+		GameMap map = Game.getMap();
+		
+		printMsg("Lépések száma: ");
+		int ticks = readInt();
+		
+		// annyiszor, ahány tick van
+		for (int i = 0; i < ticks; i++) {
+			/*
+			
+			ITERÁTOROS MEGOLDÁS
+			szerintem jobb (Máté)
+			
+			// iterátor
+			java.util.Iterator<GameObject> it = map.getObjects().iterator();
+			
+			// minden objektumra...
+			while (it.hasNext()) {
+				GameObject object = it.next();
+				
+				// alkalmazzuk a tick-et
+				boolean objectIsToBeRemoved = object.applyTick();
+				
+				// ha kell, töröljük az objektumot
+				if (objectIsToBeRemoved) {
+					it.remove();
+				}
+			}
+			
+			*/
+			
+			// minden objektumra...
+			for (int j =0 ; j<map.getObjects().size();j++ ) {
+				GameObject object = map.getObjects().get(j);
+				// alkalmazzuk a tick-et
+				boolean objectIsToBeRemoved = object.applyTick();
+				
+				// ha kell, töröljük az objektumot
+				if (objectIsToBeRemoved) {
+					map.removeObject(object);
+					j--;
+				}
+				
+			}
+			
+			if(Game.lost)
+			{
+				break;
+			}
+		}
+	}
 }
