@@ -66,39 +66,69 @@ public class Game implements Serializable {
 		
 		lost=false;
 		
-		// TODO MAP BETÖLTÉSE !!!
-		//Game.getMap().addNode(new Node());
 		//TÉRKÉP LÉTREHOZÁSA
-		//Kezdõ Nodek
-		Node s1 = new Node(0,100);
-		Node s2 = new Node(0,200);
+	//Kezdõ Nodek
+		Node s1 = new Node(0,500);
+		Node s2 = new Node(200,0);
 		
-		//Köztes Nodek
-		Node n1 = new Node(100,120);
-		Node n2 = new Node(200,150);
+	//Köztes Nodek
 		
-		//Elágazás
-		Node n3 = new Node(250,150);
+		//Alsó fõút
+		Node n1 = new Node(50,500);
+		Node n2 = new Node(200,500);
+		Node n3 = new Node(300,400);
+		Node n4 = new Node(300,600);
+		Node n5 = new Node(500,400);
+		Node n6 = new Node(500,600);
+		Node n7 = new Node(600,500);
 		
-		Node n4 = new Node(300,130);
-		Node n5 = new Node(300,170);
+		//Join
+		Node n8 = new Node(700,500);
+		//Join 2
+		Node n9 = new Node(900,500);
 		
-		//Connection node
-		Node c6 = new Node(400,150);
+		//Középsõ fõút
+		Node n10 = new Node(100,250);
+		Node n11 = new Node(500,250);
+		//Join
+		Node n12 = new Node(700,300);
 		
-		//Finish Node
-		Node f1 = new Node(500,150);
+		//Felsõ fõút
+		Node n13 = new Node(250,100);
+		Node n14 = new Node(700,100);
+		Node n15 = new Node(800,100);
+				
+	//Finish Node
+		Node f1 = new Node(1024,500);
 		
-		//Térkép létrehozása
+	//Térkép létrehozása
 		s1.addNextNode(n1);
-		s2.addNextNode(n2);
+		s2.addNextNode(n13);
+		
+		//Alsó út
 		n1.addNextNode(n2);
+		n1.addNextNode(n10);
 		n2.addNextNode(n3);
-		n3.addNextNode(n4);
+		n2.addNextNode(n4);
 		n3.addNextNode(n5);
-		n4.addNextNode(c6);
-		n5.addNextNode(c6);
-		c6.addNextNode(f1);
+		n4.addNextNode(n6);
+		n5.addNextNode(n7);
+		n6.addNextNode(n7);
+		n7.addNextNode(n8);
+		n8.addNextNode(n9);		
+		n9.addNextNode(f1);
+		
+		//Középsõ út
+		n10.addNextNode(n11);
+		n11.addNextNode(n12);
+		n12.addNextNode(n8);
+		
+		//Felsõ út
+		n13.addNextNode(n14);
+		n14.addNextNode(n15);
+		n14.addNextNode(n12);
+		n15.addNextNode(n9);
+		
 		
 		Game.getMap().addNode(s1);		//Startpontok hozzáadása
 		Game.getMap().addNode(s2);
