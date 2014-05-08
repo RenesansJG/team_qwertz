@@ -31,11 +31,11 @@ public class GameMap implements Serializable {
 	
 	// az összes objektum listájának lekérése
 	public List<GameObject> getObjects() {
-		return Collections.unmodifiableList(objects);
+		return new ArrayList<GameObject>(objects);
 	}
 	
 	// objektum hozzáadása a maphez
-	public void addObject(GameObject object) {
+	public void addObject(GameObject object) {	
 		objects.add(object);
 	}
 	

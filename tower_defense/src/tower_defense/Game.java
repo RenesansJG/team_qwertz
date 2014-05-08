@@ -85,6 +85,8 @@ public class Game implements Serializable {
 	
 	// játék mapjének lekérése
 	public static GameMap getMap() {
+		if(currentGame == null)
+			return null;
 		return currentGame.gameMap;
 	}
 	

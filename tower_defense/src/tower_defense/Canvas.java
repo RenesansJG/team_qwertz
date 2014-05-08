@@ -5,13 +5,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,7 +36,7 @@ public class Canvas extends JPanel {
 	private double mouseY;
 	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 	private String[] imageFilenames = {
-			"edTower",
+			"redTower",
 			"greenTower",
 			"blueTower",
 			"redCrystal",
@@ -52,7 +61,7 @@ public class Canvas extends JPanel {
 		for(String filename : imageFilenames) {
 			try {
 				BufferedImage img = ImageIO.read(new File("src/pic/" + filename + ".bmp"));
-				if(img == null) System.exit(0);
+				img = TransformToTransparent(img);
 				sprites.put(filename, img);
 			} catch (IOException e) {
 				BufferedImage errorImage = sprites.get("error");
@@ -73,6 +82,25 @@ public class Canvas extends JPanel {
 		mouseY = point.getY();
 	}
 	
+	private BufferedImage TransformToTransparent(BufferedImage image)
+	{
+		ImageFilter filter = new RGBImageFilter() {
+			public final int filterRGB(int x, int y, int rgb) {
+				if(rgb == 0xffff008A)
+					return 0x00000000;
+				return rgb;
+			}
+		};
+
+	    ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
+	    Image img = Toolkit.getDefaultToolkit().createImage(ip);
+		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(img, 0, 0, null);
+		bGr.dispose();
+		return bimage;
+	}
+	
 	public void drawBackground() {
 		Graphics bgg = backgroundImage.getGraphics();
 		bgg.setColor(Color.green);
@@ -87,9 +115,10 @@ public class Canvas extends JPanel {
 		List<Node> nodeList = node.getNextNodes();
 		Graphics2D g2d = (Graphics2D) backgroundImage.getGraphics();
 		g2d.setColor(Color.yellow);
-		g2d.setStroke(new BasicStroke(3));
+		g2d.setStroke(new BasicStroke(25));
 		for(Node childNode : nodeList) {
 			g2d.drawLine((int)node.getX(), (int)node.getY(), (int)childNode.getX(), (int)childNode.getY());
+			drawRoad(childNode);
 		}
 	}
 	
@@ -108,15 +137,33 @@ public class Canvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.fillRect(0, this.getHeight() - gui.getHeight(), this.getWidth(), this.getHeight());
-		BufferedImage commandImage = getCommandImage();
-		if(commandImage != null) {
-			g.drawImage(commandImage,
-					(int)(mouseX - commandImage.getWidth()/2),
-					(int)(mouseY - commandImage.getHeight()),
-					this);
-		} else {
-			g.drawString(gui.getLastCommand().toString(), (int)mouseX, (int)mouseY);
+		g.drawImage(backgroundImage, 0, 0, this);
+		if(Game.getMap() != null) {
+			List<GameObject> goList = Game.getMap().getObjects();
+			Collections.sort(goList, new ObjectViewComparator());
+			for(GameObject go : goList) {
+				BufferedImage bi = getImage(go);
+				double biOffsetX = - bi.getWidth()/2;
+				double biOffsetY = - bi.getHeight();
+				g.drawImage(bi, (int)(go.getX() + biOffsetX), (int)(go.getY() + biOffsetY), this);
+				List<Effect> effects = go.getEffects();
+				for(Effect effect : effects) {
+					BufferedImage bie = getImage(effect);
+					double bieOffsetX = biOffsetX + bie.getWidth()/2;
+					double bieOffsetY = biOffsetY + bi.getHeight() + bie.getHeight();
+					g.drawImage(bi, (int)(go.getX() + bieOffsetX), (int)(go.getY() + bieOffsetY), this);
+				}
+			}
+			BufferedImage commandImage = getCommandImage();
+			if(commandImage != null) {
+				g.drawImage(commandImage,
+						(int)(mouseX - commandImage.getWidth()/2),
+						(int)(mouseY - commandImage.getHeight()),
+						this);
+			} else {
+				g.drawString(gui.getLastCommand().toString(), (int)mouseX, (int)mouseY);
+			}
+			g.fillRect(0, this.getHeight() - gui.getHeight(), this.getWidth(), this.getHeight());
 		}
 	}
 	
@@ -186,5 +233,18 @@ public class Canvas extends JPanel {
 			return sprites.get("fog");
 		}
 		return sprites.get("error");
+	}
+}
+
+class ObjectViewComparator implements Comparator<GameObject> {
+	@Override
+	public int compare(GameObject a, GameObject b) {
+		double ay = a.getY();
+		double by = b.getY();
+		if(ay < by)
+			return -1;
+		if(ay > by)
+			return  1;
+		return 0;
 	}
 }

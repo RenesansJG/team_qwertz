@@ -16,7 +16,6 @@ public class GameWindow extends JFrame {
 	
 	private static final long serialVersionUID = 7817024087343251889L;
 	private Container container = new Container(1024, 768);
-
 	private long frameRate = 20;
 	
 	public GameWindow() {

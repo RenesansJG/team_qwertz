@@ -60,7 +60,39 @@ public class GUI extends JPanel {
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(SwingUtilities.isRightMouseButton(e)) {
+				if(SwingUtilities.isLeftMouseButton(e)) {
+					GameMap map = Game.getMap();
+					double x = e.getX();
+					double y = e.getY();
+					switch(lastCommand) {
+						case buildRedTower:
+							map.addObject(new RedTower(x, y));
+							break;
+						case buildGreenTower:
+							map.addObject(new GreenTower(x, y));
+							break;
+						case buildBlueTower:
+							map.addObject(new BlueTower(x, y));
+							break;
+						case buildDamageTrap:
+							map.addObject(new DamageTrap(x, y));
+							break;
+						case buildSlowTrap:
+							map.addObject(new SlowTrap(x, y));
+							break;
+						case useRedCrystal:
+							break;
+						case useBlueCrystal:
+							break;
+						case useGreenCrystal:
+							break;
+						case upgradeTower:
+							break;
+						case noCommand:
+							break;
+					}
+				}
+				else if(SwingUtilities.isRightMouseButton(e)) {
 					lastCommand = Command.noCommand;
 				}
 			}

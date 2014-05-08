@@ -73,4 +73,16 @@ public abstract class GameObject implements ITickable, Serializable {
 	public final String getPosString() {
 		return "(" + x + ", " + y + ")";
 	}
+	
+	public double getX() {
+		return this.x;
+	}
+	
+	public double getY() {
+		return this.y;
+	}
+	
+	public List<Effect> getEffects() {
+		return new ArrayList<Effect>(effects);
+	}
 }
