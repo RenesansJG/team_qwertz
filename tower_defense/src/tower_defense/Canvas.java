@@ -18,7 +18,6 @@ import java.awt.image.RGBImageFilter;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -71,6 +70,8 @@ public class Canvas extends JPanel {
 				BufferedImage bi = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
 				Graphics g = bi.getGraphics();
 				g.drawImage(errorImage, 0, 0, this);
+				g.setColor(Color.black);
+				g.drawString(filename, 0, 0);//TODO nem íródik az error image-re a fájlnév
 				sprites.put(filename, bi);
 			}
 		}
