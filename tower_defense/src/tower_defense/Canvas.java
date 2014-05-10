@@ -92,7 +92,6 @@ public class Canvas extends JPanel {
 				return rgb;
 			}
 		};
-
 	    ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
 	    Image img = Toolkit.getDefaultToolkit().createImage(ip);
 		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
