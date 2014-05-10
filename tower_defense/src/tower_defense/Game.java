@@ -52,6 +52,7 @@ public class Game implements Serializable {
 	private Game() {
 		gameMap = new GameMap();
 		saruman = new Saruman();
+		saruman.setMagicPower(250);
 		
 		random = true;
 		nonRandomNextInt = 0;
@@ -207,6 +208,17 @@ public class Game implements Serializable {
 		currentGame.saruman.setMagicPower(currentGame.saruman.getMagicPower() + power);
 	}
 	
+	public static boolean takeMagicPower(double power){
+		double mana = currentGame.saruman.getMagicPower();
+		
+		if (mana - power >= 0){
+			currentGame.saruman.setMagicPower(mana-power);
+			return true;
+		}
+		else return false;
+	
+	}
+	
 	// random vagy elõre specifikált egész szám
 	public static int nextInt(int n) {
 		if (!currentGame.random) {
@@ -292,4 +304,6 @@ public class Game implements Serializable {
 			loseGame();
 		}
 	}
+			
+	
 }

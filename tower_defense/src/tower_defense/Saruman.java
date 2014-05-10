@@ -6,7 +6,7 @@ public class Saruman implements Serializable {
 	private static final long serialVersionUID = 4476727615006013244L;
 	
 	private double magicPower;
-
+	
 	public double getMagicPower() {
 		return magicPower;
 	}

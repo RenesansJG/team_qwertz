@@ -67,23 +67,23 @@ public class GUI extends JPanel {
 					double y = e.getY();
 					switch(lastCommand) {
 						case buildRedTower:
-							if (canPlaceTower(x,y,canvas))
+							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
 								map.addObject(new RedTower(x, y));
 							break;
 						case buildGreenTower:
-							if (canPlaceTower(x,y,canvas))
+							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
 								map.addObject(new GreenTower(x, y));
 							break;
 						case buildBlueTower:
-							if (canPlaceTower(x,y,canvas))
+							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
 								map.addObject(new BlueTower(x, y));
 							break;
 						case buildDamageTrap:
-							if (canPlaceTrap(x,y,canvas))
+							if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
 								map.addObject(new DamageTrap(x, y));
 							break;
 						case buildSlowTrap:
-							if (canPlaceTrap(x,y,canvas))
+							if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
 								map.addObject(new SlowTrap(x, y));
 							break;
 						case useRedCrystal:
