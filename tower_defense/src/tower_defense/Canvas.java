@@ -104,7 +104,7 @@ public class Canvas extends JPanel {
 	
 	public void drawBackground() {
 		Graphics bgg = backgroundImage.getGraphics();
-		bgg.setColor(Color.green);
+		bgg.setColor(new Color(15,115,0));
 		bgg.fillRect(0, 0, backgroundImage.getWidth(), backgroundImage.getHeight());
 		List<Node> startingNodes = Game.getMap().getNodes();
 		for(Node n : startingNodes) {
@@ -115,7 +115,7 @@ public class Canvas extends JPanel {
 	private void drawRoad(Node node) {
 		List<Node> nodeList = node.getNextNodes();
 		Graphics2D g2d = (Graphics2D) backgroundImage.getGraphics();
-		g2d.setColor(Color.yellow);
+		g2d.setColor(new Color(60,25,0));
 		g2d.setStroke(new BasicStroke(25));
 		for(Node childNode : nodeList) {
 			g2d.drawLine((int)node.getX(), (int)node.getY(), (int)childNode.getX(), (int)childNode.getY());
