@@ -18,4 +18,10 @@ public abstract class Trap extends GameObject {
 	{
 		rangeMultiplier += multiplier;
 	}
+	
+	// override-oljuk az isTrap függvényt
+	@Override
+	public final boolean isTrap() {
+		return true; // trap
+	}
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -66,19 +67,24 @@ public class GUI extends JPanel {
 					double y = e.getY();
 					switch(lastCommand) {
 						case buildRedTower:
-							map.addObject(new RedTower(x, y));
+							if (canPlaceTower(x,y,canvas))
+								map.addObject(new RedTower(x, y));
 							break;
 						case buildGreenTower:
-							map.addObject(new GreenTower(x, y));
+							if (canPlaceTower(x,y,canvas))
+								map.addObject(new GreenTower(x, y));
 							break;
 						case buildBlueTower:
-							map.addObject(new BlueTower(x, y));
+							if (canPlaceTower(x,y,canvas))
+								map.addObject(new BlueTower(x, y));
 							break;
 						case buildDamageTrap:
-							map.addObject(new DamageTrap(x, y));
+							if (canPlaceTrap(x,y,canvas))
+								map.addObject(new DamageTrap(x, y));
 							break;
 						case buildSlowTrap:
-							map.addObject(new SlowTrap(x, y));
+							if (canPlaceTrap(x,y,canvas))
+								map.addObject(new SlowTrap(x, y));
 							break;
 						case useRedCrystal:
 							break;
@@ -106,9 +112,48 @@ public class GUI extends JPanel {
 		});
 	}
 	
+	public boolean canPlaceTower(double x, double y, final Canvas canvas){
+		boolean canplace = true;
+		
+		for (int i=-22; i < 22 && canplace; i++)
+			for (int j=-44; j < 0 && canplace; j++)
+				canplace = !canvas.isOnRoad(x+i, y+j);
+				
+		List<GameObject> objects = Game.getMap().getObjects();
+		RedTower test = new RedTower(x,y);			//Distance ellenõrzéshez kell csinálni egy teszt tornyot
+		
+		for (int i=0; i < objects.size() && canplace; i++){
+			if (objects.get(i).isTower() && test.getDistance(objects.get(i)) < 44)
+				canplace = false;
+		}
+		
+		return canplace;
+	}
+	
+	
+	public boolean canPlaceTrap(double x, double y, final Canvas canvas){
+		boolean canplace = true;
+		
+		for (int i=-5; i < 5 && canplace; i++)
+			for (int j=-5; j < 0 && canplace; j++)
+				canplace = canvas.isOnRoad(x+i, y+j-5);
+				
+		List<GameObject> objects = Game.getMap().getObjects();
+		RedTower test = new RedTower(x,y);			//Distance ellenõrzéshez kell csinálni egy teszt tornyot
+		
+		for (int i=0; i < objects.size() && canplace; i++){
+			if (objects.get(i).isTrap() && test.getDistance(objects.get(i)) < 52)
+				canplace = false;
+		}
+		
+		return canplace;
+	}
+	
+	
 	public Command getLastCommand() {
 		return lastCommand;
 	}
+	
 	
 	public void resetLastCommand() {
 		this.lastCommand = Command.noCommand;

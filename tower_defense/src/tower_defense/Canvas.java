@@ -49,6 +49,8 @@ public class Canvas extends JPanel {
 			"slowTrap",
 			"fog"
 	};
+	private Color roadColor = new Color(60,25,0);
+	private Color grassColor = new Color(15,115,0);
 	
 	public Canvas(int width, int height) {
 		try {
@@ -84,6 +86,18 @@ public class Canvas extends JPanel {
 		mouseY = point.getY();
 	}
 	
+	public boolean isOnRoad(double x, double y){
+		int color = backgroundImage.getRGB((int) x, (int) y);
+
+		int  red = (color & 0x00ff0000) >> 16;
+		int  green = (color & 0x0000ff00) >> 8;
+		int  blue = color & 0x000000ff;
+		
+		return (roadColor.getRed() == red &&
+				roadColor.getGreen() == green &&
+				roadColor.getBlue() == blue);
+	}
+	
 	private BufferedImage TransformToTransparent(BufferedImage image)
 	{
 		ImageFilter filter = new RGBImageFilter() {
@@ -105,7 +119,7 @@ public class Canvas extends JPanel {
 	
 	public void drawBackground() {
 		Graphics bgg = backgroundImage.getGraphics();
-		bgg.setColor(new Color(15,115,0));
+		bgg.setColor(grassColor);
 		bgg.fillRect(0, 0, backgroundImage.getWidth(), backgroundImage.getHeight());
 		List<Node> startingNodes = Game.getMap().getNodes();
 		for(Node n : startingNodes) {
@@ -116,7 +130,7 @@ public class Canvas extends JPanel {
 	private void drawRoad(Node node) {
 		List<Node> nodeList = node.getNextNodes();
 		Graphics2D g2d = (Graphics2D) backgroundImage.getGraphics();
-		g2d.setColor(new Color(60,25,0));
+		g2d.setColor(roadColor);
 		g2d.setStroke(new BasicStroke(25));
 		for(Node childNode : nodeList) {
 			g2d.drawLine((int)node.getX(), (int)node.getY(), (int)childNode.getX(), (int)childNode.getY());

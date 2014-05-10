@@ -137,6 +137,12 @@ public abstract class Tower extends GameObject {
 	public void AoEUpgrade() {
 		projectileAoE += 10;
 	}
+	
+	// override-oljuk az isTower függvényt
+	@Override
+	public final boolean isTower() {
+		return true; // tower
+	}
 
 	
 	

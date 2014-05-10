@@ -67,6 +67,16 @@ public abstract class GameObject implements ITickable, Serializable {
 		return false; // alapból egy GameObject nem ellenséges
 	}
 	
+	// trap-e a gameObject
+	public boolean isTrap() {
+		return false; // alapból egy GameObject nem trap
+	}
+		
+	// tower-e a gameObject
+	public boolean isTower() {
+		return false; // alapból egy GameObject nem tower
+	}
+	
 	@Override
 	public abstract String toString();
 	
