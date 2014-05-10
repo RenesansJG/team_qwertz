@@ -58,21 +58,22 @@ public class Canvas extends JPanel {
 			System.exit(0);
 		}
 		for(String filename : imageFilenames) {
+			BufferedImage img = null;
 			try {
-				BufferedImage img = ImageIO.read(new File("src/pic/" + filename + ".bmp"));
-				img = TransformToTransparent(img);
-				sprites.put(filename, img);
+				img = ImageIO.read(new File("src/pic/" + filename + ".bmp"));
 			} catch (IOException e) {
 				BufferedImage errorImage = sprites.get("error");
 				ColorModel cm = errorImage.getColorModel();
 				boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
 				WritableRaster raster = errorImage.copyData(null);
-				BufferedImage bi = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-				Graphics g = bi.getGraphics();
+				img = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+				Graphics g = img.getGraphics();
 				g.drawImage(errorImage, 0, 0, this);
 				g.setColor(Color.black);
 				g.drawString(filename, 0, 0);//TODO nem íródik az error image-re a fájlnév
-				sprites.put(filename, bi);
+			} finally {
+				img = TransformToTransparent(img);
+				sprites.put(filename, img);
 			}
 		}
 		
