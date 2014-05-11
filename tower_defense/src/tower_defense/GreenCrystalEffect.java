@@ -4,6 +4,11 @@ public class GreenCrystalEffect extends Effect {
 	private static final long serialVersionUID = -8137816837843882726L;
 
 	public GreenCrystalEffect() {
+		
+	}
+	
+	public GreenCrystalEffect(int duration) {
+		remainingTicks = duration;
 	}
 	
 	// effekt alkalmazása tornyon

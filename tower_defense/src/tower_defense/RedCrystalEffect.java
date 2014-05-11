@@ -4,7 +4,11 @@ public class RedCrystalEffect extends Effect {
 	private static final long serialVersionUID = 3343707382553612861L;
 	
 	public RedCrystalEffect() {
-
+		
+	}
+	
+	public RedCrystalEffect(int duration) {
+		remainingTicks = duration;
 	}
 	
 	// effekt alkalmazása tornyon

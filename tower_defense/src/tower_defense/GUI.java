@@ -65,38 +65,44 @@ public class GUI extends JPanel {
 					GameMap map = Game.getMap();
 					double x = e.getX();
 					double y = e.getY();
-					switch(lastCommand) {
-						case buildRedTower:
-							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
-								map.addObject(new RedTower(x, y));
-							break;
-						case buildGreenTower:
-							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
-								map.addObject(new GreenTower(x, y));
-							break;
-						case buildBlueTower:
-							if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
-								map.addObject(new BlueTower(x, y));
-							break;
-						case buildDamageTrap:
-							if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
-								map.addObject(new DamageTrap(x, y));
-							break;
-						case buildSlowTrap:
-							if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
-								map.addObject(new SlowTrap(x, y));
-							break;
-						case useRedCrystal:
-							break;
-						case useBlueCrystal:
-							break;
-						case useGreenCrystal:
-							break;
-						case upgradeTower:
-							break;
-						case noCommand:
-							break;
-					}
+					try{ //isThereTower miatt
+						switch(lastCommand) {
+							case buildRedTower:
+								if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
+									map.addObject(new RedTower(x, y));
+								break;
+							case buildGreenTower:
+								if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
+									map.addObject(new GreenTower(x, y));
+								break;
+							case buildBlueTower:
+								if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
+									map.addObject(new BlueTower(x, y));
+								break;
+							case buildDamageTrap:
+								if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
+									map.addObject(new DamageTrap(x, y));
+								break;
+							case buildSlowTrap:
+								if (canPlaceTrap(x,y,canvas) && Game.takeMagicPower(20))
+									map.addObject(new SlowTrap(x, y));
+								break;
+							case useRedCrystal:
+								//TODO ez így jó?
+								isThereTower(x,y).addEffect(new RedCrystalEffect(10));	
+								
+								break;
+							case useBlueCrystal:
+								break;
+							case useGreenCrystal:
+								break;
+							case upgradeTower:
+								break;
+							case noCommand:
+								break;
+						}
+					}			
+					catch (Exception exc) {}
 				}
 				else if(SwingUtilities.isRightMouseButton(e)) {
 					lastCommand = Command.noCommand;
@@ -112,6 +118,25 @@ public class GUI extends JPanel {
 		});
 	}
 	
+	
+	//Upgrade, crystal effect rárakásához   -van-e a kattintott helyen torony
+	//Null, ha nincs
+	public Tower isThereTower(double x, double y){
+		
+		List<GameObject> objects = Game.getMap().getObjects();
+		RedTower test = new RedTower(x,y); 	//Távolság teszteléséhez
+		
+		for (int i=0; i < objects.size(); i++){								//tower_vastagság/2
+			if (objects.get(i).isTower() && test.getDistance(objects.get(i)) < 22)
+				return (Tower)objects.get(i);
+		}
+		
+		return null;
+		
+	}
+	
+	
+	//Lerakhat-e az adott koordinátákra tornyot
 	public boolean canPlaceTower(double x, double y, final Canvas canvas){
 		boolean canplace = true;
 		
@@ -130,7 +155,7 @@ public class GUI extends JPanel {
 		return canplace;
 	}
 	
-	
+	//Lerakhat-e az adott koordinátákra csapdát
 	public boolean canPlaceTrap(double x, double y, final Canvas canvas){
 		boolean canplace = true;
 		

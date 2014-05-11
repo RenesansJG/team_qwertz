@@ -5,7 +5,11 @@ public class BlueCrystalEffect extends Effect {
 	
 	// konstr.
 	public BlueCrystalEffect() {
-
+		
+	}
+	
+	public BlueCrystalEffect(int duration) {
+		remainingTicks = duration;
 	}
 	
 	// effekt alkalmazása tornyon
