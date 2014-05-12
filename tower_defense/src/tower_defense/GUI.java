@@ -93,28 +93,37 @@ public class GUI extends JPanel {
 								break;
 							case useRedCrystal:
 								
-								if (t != null)
+								if (t != null && Game.takeMagicPower(40))
 									t.addEffect(new RedCrystalEffect());	
-								
+								else{
+									tr = isThereDmgTrap(x,y);
+									if (tr != null && Game.takeMagicPower(40))
+										tr.addEffect(new RedCrystalEffect());
+								}
+									
 								break;
 							case useBlueCrystal:
-								if (t != null)
-									t.addEffect(new BlueCrystalEffect());
-								
+								if (t != null && Game.takeMagicPower(40))
+									t.addEffect(new BlueCrystalEffect());									
+								else{
+									tr = isThereSlowTrap(x,y);
+									if (tr != null && Game.takeMagicPower(40))
+										tr.addEffect(new BlueCrystalEffect());
+								}
 								break;
 							case useGreenCrystal:
-								if (t != null)
+								if (t != null && Game.takeMagicPower(40))
 									t.addEffect(new GreenCrystalEffect());
-								
+								else{
+									tr = isThereTrap(x,y);
+									if (tr != null && Game.takeMagicPower(40))
+										tr.addEffect(new GreenCrystalEffect());
+								}
+									
 								break;
 							case upgradeTower:
 								if (t != null)
 									t.upgrade();
-								else{
-									
-								}
-									
-								
 								break;
 							case noCommand:
 								break;
