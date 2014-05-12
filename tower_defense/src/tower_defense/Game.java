@@ -29,7 +29,7 @@ public class Game implements Serializable {
 	private long tickInterval = 20;
 	private static long ticks = 0;
 	
-	private Timer timer = null;
+	private static Timer timer = null;
 	// *********************************
 	
 	// játék konstruktor
@@ -39,19 +39,20 @@ public class Game implements Serializable {
 		saruman.setMagicPower(250);
 		
 		this.timeOfLastTick = System.currentTimeMillis();
-		if(timer == null)
+		if(timer!= null)
 		{
-			timer = new Timer((int) tickInterval, new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(!lost){
-					Game.this.count();
-					Game.this.spawn();
-					}
-				}
-			});
-			timer.start();
+			timer.stop();
 		}
+		timer = new Timer((int) tickInterval, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!lost){
+				Game.this.count();
+				Game.this.spawn();
+				}
+			}
+		});
+		timer.start();
 	}
 	
 	private void spawn(){
@@ -231,6 +232,7 @@ public class Game implements Serializable {
 	public static void loseGame()
 	{
 		lost=true;
+		timer.stop();
 	}
 	
 	public static void applyTicks() {
