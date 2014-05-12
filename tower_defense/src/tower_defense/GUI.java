@@ -98,11 +98,19 @@ public class GUI extends JPanel {
 								
 								break;
 							case useBlueCrystal:
+								if (t != null)
+									t.addEffect(new RedCrystalEffect(10));
+								
 								break;
 							case useGreenCrystal:
+								if (t != null)
+									t.addEffect(new RedCrystalEffect(10));
 								
 								break;
 							case upgradeTower:
+								if (t != null)
+									t.addEffect(new RedCrystalEffect(10));
+								
 								break;
 							case noCommand:
 								break;
