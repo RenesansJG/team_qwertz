@@ -3,7 +3,7 @@ package tower_defense;
 public class SlowEffect extends Effect {
 	private static final long serialVersionUID = -1864723360268261902L;
 
-	private static int duration = 250;
+	private static int duration = 1;
 	
 	private double slow;
 	
@@ -16,12 +16,12 @@ public class SlowEffect extends Effect {
 	// effekt alkalmazása ellenségen
 	@Override
 	public void apply(Enemy enemy) {
-		enemy.modifyMovementMultiplier(slow);
+		enemy.modifyMovementMultiplier(-slow);
 	}
 	
 	@Override //Effect levétele
 	public void restore(Enemy enemy) {
-		enemy.modifyMovementMultiplier(-slow);
+		enemy.modifyMovementMultiplier(slow);
 	}
 	
 	// toString függvény kiíratáshoz
