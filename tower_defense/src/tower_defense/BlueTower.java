@@ -7,12 +7,12 @@ public class BlueTower extends Tower {
 	public BlueTower(double x, double y) {
 		super(x, y);
 		// projectile sebzésének beáll.
-		projectileDamage = new Damage(0,0,10);
+		projectileDamage = new Damage(0,0,40);
 	}
 	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "blueTower#" + id;
+		return "blueTower";
 	}
 }

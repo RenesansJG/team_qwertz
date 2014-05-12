@@ -7,7 +7,6 @@ import java.util.List;
 
 public abstract class GameObject implements ITickable, Serializable {
 	private static final long serialVersionUID = 8508068704731173934L;
-	protected final int id;
 	
 	protected double x;
 	protected double y;
@@ -15,7 +14,6 @@ public abstract class GameObject implements ITickable, Serializable {
 	
 	//Alap konstruktor mindenkire
 	protected GameObject(double x, double y) {
-		id = Game.getNextObjectId();
 		this.x=x;
 		this.y=y;
 		effects = new ArrayList<Effect>();

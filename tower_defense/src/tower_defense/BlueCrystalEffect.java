@@ -39,6 +39,6 @@ public class BlueCrystalEffect extends Effect {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "blueCrystalEffect#" + id;
+		return "blueCrystalEffect";
 	}
 }

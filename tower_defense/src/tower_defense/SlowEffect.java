@@ -27,6 +27,6 @@ public class SlowEffect extends Effect {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "slowEffect#" + id;
+		return "slowEffect";
 	}
 }

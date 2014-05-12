@@ -5,7 +5,7 @@ public abstract class MovableGameObject extends GameObject {
 	protected double targetX;
 	protected double targetY;
 	protected double movementSpeed;
-	protected double movementSpeedMultiplier;
+	protected double movementSpeedMultiplier  = 1;
 	
 	protected MovableGameObject(double x, double y, double movementSpeed) {
 		super(x, y);

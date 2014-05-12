@@ -19,36 +19,17 @@ public class Game implements Serializable {
 	private static Game currentGame; // aktuális játék
 	
 	// random seed
-	private static Random rndGen = new Random();
+	public static Random rnd = new Random();
 	// direkt privát, kérlek ne módosítsátok, magyarázatért engem kérdezzetek (Máté)
 	
 	private final GameMap gameMap;   // referencia a mapre
 	private final Saruman saruman;
 	
-	private boolean random; // véletlenszerûség be van-e kapcsolva
-	private int nonRandomNextInt; // ha nem, ez adja meg a következõ int-et
-	private boolean nonRandomNextBoolean; // ha nem, ez adja meg a következõ boolean-t
-	
-	// *** darabszámok protohoz ***
-	private int objectCount;
-	private int effectCount;
-	private int nodeCount = 0;
-	
 	private long timeOfLastTick;
 	private long tickInterval = 20;
 	private static long ticks = 0;
 	
-	public static int getNextObjectId() {
-		return currentGame.objectCount++;
-	}
-	
-	public static int getNextEffectId() {
-		return currentGame.effectCount++;
-	}
-	
-	public static int getNextNodeId() {
-		return currentGame.nodeCount++;
-	}
+	private Timer timer = null;
 	// *********************************
 	
 	// játék konstruktor
@@ -57,27 +38,40 @@ public class Game implements Serializable {
 		saruman = new Saruman();
 		saruman.setMagicPower(250);
 		
-		random = true;
-		nonRandomNextInt = 0;
-		nonRandomNextBoolean = false;
-		
-		objectCount = 0;
-		effectCount = 0;
-		nodeCount = 0;
-		
 		this.timeOfLastTick = System.currentTimeMillis();
-		new Timer((int) tickInterval, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Game.this.count();
-				Game.this.spawn();
-			}
-		}).start();
+		if(timer == null)
+		{
+			timer = new Timer((int) tickInterval, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(!lost){
+					Game.this.count();
+					Game.this.spawn();
+					}
+				}
+			});
+			timer.start();
+		}
 	}
 	
 	private void spawn(){
-		if(ticks%500==499){
-			gameMap.addObject(new Elf(gameMap.getNodes().get(rndGen.nextInt(2)),1));
+		if(ticks%30==29){
+			int a = rnd.nextInt(4);
+			switch(a)
+			{
+				case 0:
+					gameMap.addObject(new Elf(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					break;
+				case 1:
+					gameMap.addObject(new Human(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					break;
+				case 2:
+					gameMap.addObject(new Hobbit(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					break;
+				case 3:
+					gameMap.addObject(new Dwarf(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					break;
+			}
 		}
 	}
 	
@@ -106,7 +100,6 @@ public class Game implements Serializable {
 	public static void newGame() {
 		currentGame = new Game();
 		
-		lost=false;
 		
 		//TÉRKÉP LÉTREHOZÁSA
 	//Kezdõ Nodek
@@ -176,6 +169,7 @@ public class Game implements Serializable {
 		Game.getMap().addNode(s2);
 		
 		ticks = 0;
+		lost=false;
 	}
 	
 	// játék betöltése fájlból
@@ -232,63 +226,7 @@ public class Game implements Serializable {
 	
 	}
 	
-	// random vagy elõre specifikált egész szám
-	public static int nextInt(int n) {
-		if (!currentGame.random) {
-			int nonRandomNextInt = currentGame.nonRandomNextInt;
-			nonRandomNextInt = Math.max(0, nonRandomNextInt);
-			nonRandomNextInt = Math.min(nonRandomNextInt, n);
-			
-			return nonRandomNextInt;
-		} else {
-			return rndGen.nextInt(n);
-		}
-	}
-	
-	// random vagy elõre specifikált boolean érték
-	// paraméter: true esélye (0 = nincs esély, 1 = biztos)
-	public static boolean nextBoolean(double chanceOfTrue) {
-		if (!currentGame.random) {
-			return currentGame.nonRandomNextBoolean;
-		}
-		
-		chanceOfTrue = Math.max(0.0, chanceOfTrue);
-		chanceOfTrue = Math.min(chanceOfTrue, 1.0);
-		
-		return rndGen.nextDouble() <= chanceOfTrue;
-	}
-	
-	// be van-e kapcsolva a véletlenszerûség
-	public static boolean isRandom() {
-		return currentGame.random;
-	}
-	
-	// véletlenszerûség beállítása
-	public static void setRandom(boolean random) {
-		currentGame.random = random;
-	}
-	
-	// nem random következõ int lekérdezése
-	public static int getNonRandomNextInt() {
-		return currentGame.nonRandomNextInt;
-	}
-	
-	// nem random következõ boolean lekérdezése
-	public static boolean getNonRandomNextBoolean() {
-		return currentGame.nonRandomNextBoolean;
-	}
-	
-	// következõ (nem véletlen) int beállítása
-	public static void setNonRandomNextInt(int n) {
-		currentGame.nonRandomNextInt = n;
-	}
-	
-	// következõ (nem véletlen) boolean beállítása
-	public static void setNonRandomNextBoolean(boolean b) {
-		currentGame.nonRandomNextBoolean = b;
-	}
-	
-	public static boolean lost;
+	public static boolean lost=true;
 	
 	public static void loseGame()
 	{

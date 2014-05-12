@@ -4,13 +4,11 @@ import java.io.Serializable;
 
 public abstract class Effect implements ITickable, Serializable {
 	private static final long serialVersionUID = -1973848083850121683L;
-	protected final int id; // effekt ID
 	
 	protected int remainingTicks; // hány tick van még míg akítv az effect
 	
 	//megadható, mennyi ideig legyen fenn
 	public Effect(int duration) {
-		id = Game.getNextEffectId();
 		remainingTicks = duration;
 	}
 	

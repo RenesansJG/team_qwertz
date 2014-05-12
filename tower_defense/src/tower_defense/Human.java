@@ -6,7 +6,7 @@ public class Human extends Enemy {
 	private static double baseHP = 100;
 	private static double levelHP = 5;
 	private static double levelRes = 0.05;
-	private static double baseMove = 3;
+	private static double baseMove = 0.7;
 
 	protected Human(Node targetNode, int level) {
 		super(targetNode,baseMove, level);
@@ -20,7 +20,7 @@ public class Human extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "human#" + id;
+		return "human";
 	}
 
 	@Override

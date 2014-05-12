@@ -47,7 +47,9 @@ public class Canvas extends JPanel {
 			"hobbit",
 			"damageTrap",
 			"slowTrap",
-			"fog"
+			"fog",
+			"cannonBall",
+			"upgrade"
 	};
 	private Color roadColor = new Color(60,25,0);
 	private Color grassColor = new Color(15,115,0);
@@ -179,7 +181,7 @@ public class Canvas extends JPanel {
 			} else {
 				g.drawString(gui.getLastCommand().toString(), (int)mouseX, (int)mouseY);
 			}
-			g.drawString(Double.toString(Game.getMagicPower()), 10, 10);
+			g.drawString(Double.toString(Game.getMagicPower()), 0, 20);
 		}
 	}
 	
@@ -202,7 +204,7 @@ public class Canvas extends JPanel {
 			case useGreenCrystal:
 				return sprites.get("blueCrystal");
 			case upgradeTower:
-				return null;
+				return sprites.get("upgrade");
 			default:
 				return null;
 		}
@@ -247,6 +249,9 @@ public class Canvas extends JPanel {
 		}
 		else if(go instanceof FogEffect) {
 			return sprites.get("fog");
+		}
+		else if(go instanceof Projectile) {
+			return sprites.get("cannonBall");
 		}
 		return sprites.get("error");
 	}

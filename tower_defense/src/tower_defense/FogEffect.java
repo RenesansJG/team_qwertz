@@ -23,6 +23,6 @@ public class FogEffect extends Effect {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "fogEffect#" + id;
+		return "fogEffect";
 	}
 }

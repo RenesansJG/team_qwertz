@@ -48,6 +48,6 @@ public class GreenCrystalEffect extends Effect {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "greenCrystalEffect#" + id;
+		return "greenCrystalEffect";
 	}
 }

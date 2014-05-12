@@ -8,7 +8,7 @@ public class Dwarf extends Enemy {
 	private static double levelHP = 5;
 	private static double baseRes = 0.25;
 	private static double levelRes = 0.05;
-	private static double baseMove = 3;
+	private static double baseMove = 0.6;
 
 	// dwarf ctor
 	protected Dwarf(Node targetNode, int level) {
@@ -24,7 +24,7 @@ public class Dwarf extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "dwarf#" + id;
+		return "dwarf";
 	}
 
 	// kapott varázserõ

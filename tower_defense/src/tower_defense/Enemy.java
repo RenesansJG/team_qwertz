@@ -16,7 +16,6 @@ public abstract class Enemy extends MovableGameObject {
 		targetX=startNode.getX();
 		targetY=startNode.getY();
 		this.level=level;
-		this.movementSpeedMultiplier=1;
 	}
 	
 	// enemy copy ctor
@@ -36,7 +35,7 @@ public abstract class Enemy extends MovableGameObject {
 	public final void takeDamage(Damage damage, double modifier) {
 		// a HP objetumán meghívja a sebzõdést
 		hp.takeDamage(damage, modifier);
-		if (Game.nextBoolean(0.05)) // szétesés
+		if (Game.rnd.nextDouble()<=0.05) // szétesés
 		{
 			Game.getMap().addObject(Copy(this));
 		}
@@ -75,7 +74,7 @@ public abstract class Enemy extends MovableGameObject {
 					return true;
 				}
 				// amúgy következõ node kérése
-				targetNode= nodes.get(Game.nextInt(nodes.size()));
+				targetNode= nodes.get(Game.rnd.nextInt(nodes.size()));
 				// új cél
 				targetX=targetNode.getX();
 				targetY=targetNode.getY();

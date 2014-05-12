@@ -8,8 +8,8 @@ public class Elf extends Enemy {
 	private static double levelHP = 5;
 	private static double baseRes = 0.25;
 	private static double levelRes = 0.05;
-	private static double baseMove = 3;
-	private static double levelMove = 0.2;
+	private static double baseMove = 0.9;
+	private static double levelMove = 0.06;
 
 	// elf ctor
 	protected Elf(Node targetNode, int level) {
@@ -25,7 +25,7 @@ public class Elf extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "elf#" + id;
+		return "elf";
 	}
 
 	@Override

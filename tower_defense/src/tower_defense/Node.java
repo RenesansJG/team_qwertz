@@ -7,14 +7,12 @@ import java.util.List;
 
 public class Node implements Serializable {
 	private static final long serialVersionUID = 6423495891562787370L;
-	protected final int id;
 	
 	private final double x;
 	private final double y;
 	private final List<Node> nextNodes; // következõ node-ok listája
 	
 	public Node(double x, double y) {
-		id = Game.getNextNodeId();
 		this.x=x;
 		this.y=y;
 		nextNodes = new ArrayList<Node>();
@@ -44,6 +42,6 @@ public class Node implements Serializable {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "node#" + id;
+		return "node";
 	}
 }

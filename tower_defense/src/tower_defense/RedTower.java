@@ -6,12 +6,12 @@ public class RedTower extends Tower {
 
 	protected RedTower(double x, double y) {
 		super(x, y);
-		projectileDamage = new Damage(10,0,0);
+		projectileDamage = new Damage(40,0,0);
 	}
 	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "redTower#" + id;
+		return "redTower";
 	}
 }

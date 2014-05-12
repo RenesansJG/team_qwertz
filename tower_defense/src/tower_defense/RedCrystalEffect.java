@@ -36,6 +36,6 @@ public class RedCrystalEffect extends Effect {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "redCrystalEffect#" + id;
+		return "redCrystalEffect";
 	}
 }

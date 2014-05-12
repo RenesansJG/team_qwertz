@@ -24,9 +24,9 @@ public abstract class Tower extends GameObject {
 		projectileDamageMultiplier = 1;
 		
 		range = 100;
-		attackSpeed = 1;		//Másodpercenként ennyit lõ
-		projectileSpeed = 50;
-		projectileAoE = 10;
+		attackSpeed = 50;		// ennyi tickenként lõ
+		projectileSpeed = 5;
+		projectileAoE = 15;
 		
 	}	
 	
@@ -55,43 +55,40 @@ public abstract class Tower extends GameObject {
 	// torony tevékenysége
 	@Override
 	public final boolean action(){
-		if(true){ 
-			
-			//Target választás
-			tickCount += 1;
-			
-			List<GameObject> objects = Game.getMap().getObjects();
-	
-			boolean targetfound = false;
-			int closestindex=-1;
-			for(int i=0;i<objects.size();i++){	//Ha még nincs valid target
-				if(closestindex==-1 && objects.get(i).isEnemy())
-				{
-					closestindex=i;
-					targetfound = true;
-				}
-												//Egyébként   (enemy, és közelebb van mint az eddigi)
-				else if(objects.get(i).isEnemy() && getDistance(objects.get(i))<=getDistance(objects.get(closestindex)))
-				{
-					closestindex=i;
-					targetfound = true;
-				}
-			}
+		//Target választás
+		tickCount += 1;
+		
+		List<GameObject> objects = Game.getMap().getObjects();
 
-			
-			//Lövés
-			if(targetfound)
-			{												//TimerTick --> timer hány ms-ra van állítva
-				GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
-				if(getDistance(closest)<=range * rangeMultiplier && 
-						tickCount >= 1000/1000/(attackSpeed*attackSpeedMultiplier))
-				{
-					Game.getMap().addObject(new Projectile(x,y,
-							closest.x,closest.y,
-							projectileSpeed,projectileAoE,
-							calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
-					tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
-				}
+		boolean targetfound = false;
+		int closestindex=-1;
+		for(int i=0;i<objects.size();i++){	//Ha még nincs valid target
+			if(closestindex==-1 && objects.get(i).isEnemy())
+			{
+				closestindex=i;
+				targetfound = true;
+			}
+											//Egyébként   (enemy, és közelebb van mint az eddigi)
+			else if(objects.get(i).isEnemy() && getDistance(objects.get(i))<=getDistance(objects.get(closestindex)))
+			{
+				closestindex=i;
+				targetfound = true;
+			}
+		}
+
+		
+		//Lövés
+		if(targetfound)
+		{												//TimerTick --> timer hány ms-ra van állítva
+			GameObject closest = objects.get(closestindex);					//  1000/TimerTick/attackspeed
+			if(getDistance(closest)<=range * rangeMultiplier && 
+					tickCount >= (attackSpeed/attackSpeedMultiplier))
+			{
+				Game.getMap().addObject(new Projectile(x,y,
+						closest.x,closest.y,
+						projectileSpeed,projectileAoE,
+						calculateProjectileDamage(projectileDamage, projectileDamageMultiplier)));
+				tickCount = 0;   //Mivel lõttünk, újraindul a számlálás
 			}
 		}
 		return false;
@@ -135,7 +132,7 @@ public abstract class Tower extends GameObject {
 	}
 
 	public void attackSpeedUpgrade() {
-		attackSpeed += 0.2;
+		attackSpeed -= 2;
 	}
 	
 	public void projectileSpeedUpgrade() {
@@ -143,7 +140,7 @@ public abstract class Tower extends GameObject {
 	}
 	
 	public void AoEUpgrade() {
-		projectileAoE += 10;
+		projectileAoE += 5;
 	}
 	
 	// override-oljuk az isTower függvényt

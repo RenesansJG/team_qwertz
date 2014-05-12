@@ -5,12 +5,12 @@ public class GreenTower extends Tower {
 
 	public GreenTower(double x, double y) {
 		super(x, y);
-		projectileDamage = new Damage(0,10,0);		//Csak zöldet sebez
+		projectileDamage = new Damage(0,40,0);		//Csak zöldet sebez
 	}
 	
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "greenTower#" + id;
+		return "greenTower";
 	}
 }

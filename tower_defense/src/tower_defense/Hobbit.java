@@ -7,7 +7,7 @@ public class Hobbit extends Enemy {
 	private static double levelHP = 5;
 	private static double baseRes = 0.25;		//Alap statok
 	private static double levelRes = 0.05;
-	private static double baseMove = 3;
+	private static double baseMove = 0.6;
 
 	//Honnan lépjen be és a szintje
 	protected Hobbit(Node targetNode, int level) {
@@ -22,7 +22,7 @@ public class Hobbit extends Enemy {
 	// toString függvény kiíratáshoz
 	@Override
 	public String toString() {
-		return "hobbit#" + id;
+		return "hobbit";
 	}
 
 	@Override
