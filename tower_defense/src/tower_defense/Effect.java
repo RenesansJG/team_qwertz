@@ -8,11 +8,6 @@ public abstract class Effect implements ITickable, Serializable {
 	
 	protected int remainingTicks; // hány tick van még míg akítv az effect
 	
-	// effekt id megszerzése
-	protected Effect() {
-		id = Game.getNextEffectId();
-	}
-	
 	//megadható, mennyi ideig legyen fenn
 	public Effect(int duration) {
 		id = Game.getNextEffectId();

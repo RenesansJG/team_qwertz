@@ -3,12 +3,10 @@ package tower_defense;
 public class GreenCrystalEffect extends Effect {
 	private static final long serialVersionUID = -8137816837843882726L;
 
-	public GreenCrystalEffect() {
-		
-	}
+	private static int duration = 250;
 	
-	public GreenCrystalEffect(int duration) {
-		remainingTicks = duration;
+	public GreenCrystalEffect() {
+		super(duration);
 	}
 	
 	// effekt alkalmazása tornyon

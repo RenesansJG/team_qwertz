@@ -3,12 +3,10 @@ package tower_defense;
 public class RedCrystalEffect extends Effect {
 	private static final long serialVersionUID = 3343707382553612861L;
 	
-	public RedCrystalEffect() {
-		
-	}
+	private static int duration = 250;
 	
-	public RedCrystalEffect(int duration) {
-		remainingTicks = duration;
+	public RedCrystalEffect() {
+		super(duration);
 	}
 	
 	// effekt alkalmazása tornyon

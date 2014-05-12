@@ -2,9 +2,11 @@ package tower_defense;
 
 public class FogEffect extends Effect {
 	private static final long serialVersionUID = 4116855433168657924L;
-
+	
+	private static int duration = 250;
+	
 	public FogEffect() {
-
+		super(duration);
 	}
 	
 	// effekt alkalmazása tornyon

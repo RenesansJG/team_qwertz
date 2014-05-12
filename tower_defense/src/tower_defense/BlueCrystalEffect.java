@@ -3,13 +3,10 @@ package tower_defense;
 public class BlueCrystalEffect extends Effect {
 	private static final long serialVersionUID = 2922468267291618074L;
 	
-	// konstr.
-	public BlueCrystalEffect() {
-		
-	}
+	private static int duration = 250;
 	
-	public BlueCrystalEffect(int duration) {
-		remainingTicks = duration;
+	public BlueCrystalEffect() {
+		super(duration);
 	}
 	
 	// effekt alkalmazása tornyon
