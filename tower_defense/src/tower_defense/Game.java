@@ -34,6 +34,7 @@ public class Game implements Serializable {
 	
 	private long timeOfLastTick;
 	private long tickInterval = 20;
+	private static long ticks = 0;
 	
 	public static int getNextObjectId() {
 		return currentGame.objectCount++;
@@ -67,8 +68,15 @@ public class Game implements Serializable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Game.this.count();
+				Game.this.spawn();
 			}
 		}).start();
+	}
+	
+	private void spawn(){
+		if(ticks%500==499){
+			gameMap.addObject(new Elf(gameMap.getNodes().get(rndGen.nextInt(2)),1));
+		}
 	}
 	
 	private void count() {
@@ -79,6 +87,7 @@ public class Game implements Serializable {
 			do {
 				Game.applyTicks();
 				delta -= tickInterval;
+				ticks++;
 			} while(delta >= tickInterval);
 			timeOfLastTick = currentTime;
 		}
@@ -163,6 +172,8 @@ public class Game implements Serializable {
 		
 		Game.getMap().addNode(s1);		//Startpontok hozzáadása
 		Game.getMap().addNode(s2);
+		
+		ticks = 0;
 	}
 	
 	// játék betöltése fájlból
