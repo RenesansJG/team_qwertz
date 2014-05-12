@@ -179,7 +179,6 @@ public class Canvas extends JPanel {
 			} else {
 				g.drawString(gui.getLastCommand().toString(), (int)mouseX, (int)mouseY);
 			}
-			g.fillRect(0, this.getHeight() - gui.getHeight(), this.getWidth(), this.getHeight());
 		}
 	}
 	

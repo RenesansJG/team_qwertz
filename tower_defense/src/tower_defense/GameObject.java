@@ -26,19 +26,14 @@ public abstract class GameObject implements ITickable, Serializable {
 	
 	// összes effekt léptetése (applyTick minden effecten)
 	public final void effect() {
-		Iterator<Effect> effectIt = effects.iterator();
-		
-		// minden effektre a listában
-		while (effectIt.hasNext()) {
-			Effect effect = effectIt.next();
-			
-			// alkalmazzuk a ticket, és megnézzük hogy lejárt-e
-			boolean effectIsToBeRemoved = effect.applyTick();
-			
-			// ha lejárt, töröljük
-			if (effectIsToBeRemoved) {
-				effectIt.remove();
+		List<Effect> expiredEffects = new ArrayList<Effect>();
+		for(Effect e : effects) {
+			if(e.applyTick()) {
+				expiredEffects.add(e);
 			}
+		}
+		for(Effect e : expiredEffects) {
+			effects.remove(e);
 		}
 	}
 	

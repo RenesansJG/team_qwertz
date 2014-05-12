@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -295,20 +297,14 @@ public class Game implements Serializable {
 	
 	public static void applyTicks() {
 		GameMap map = Game.getMap();
-		// iterátor
-		java.util.Iterator<GameObject> it = map.getObjects().iterator();
-		
-		// minden objektumra...
-		while (it.hasNext()) {
-			GameObject object = it.next();
-			
-			// alkalmazzuk a tick-et
-			boolean objectIsToBeRemoved = object.applyTick();
-			
-			// ha kell, töröljük az objektumot
-			if (objectIsToBeRemoved) {
-				it.remove();
+		List<GameObject> deadmanList = new ArrayList<GameObject>();
+		for(GameObject go : map.getObjects()) {
+			if(go.applyTick()) {
+				deadmanList.add(go);
 			}
+		}
+		for(GameObject go : deadmanList) {
+			map.removeObject(go);
 		}
 		
 		if(Game.lost) {
