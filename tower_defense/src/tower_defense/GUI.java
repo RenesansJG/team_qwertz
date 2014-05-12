@@ -65,7 +65,11 @@ public class GUI extends JPanel {
 					GameMap map = Game.getMap();
 					double x = e.getX();
 					double y = e.getY();
-					try{ //isThereTower miatt
+					Tower t = new RedTower(1,1);
+					Trap tr = new DamageTrap(1,1);
+					t = isThereTower(x,y);
+					
+					
 						switch(lastCommand) {
 							case buildRedTower:
 								if (canPlaceTower(x,y,canvas) && Game.takeMagicPower(50))
@@ -88,21 +92,22 @@ public class GUI extends JPanel {
 									map.addObject(new SlowTrap(x, y));
 								break;
 							case useRedCrystal:
-								//TODO ez így jó?
-								isThereTower(x,y).addEffect(new RedCrystalEffect(10));	
+								
+								if (t != null)
+									t.addEffect(new RedCrystalEffect(10));	
 								
 								break;
 							case useBlueCrystal:
 								break;
 							case useGreenCrystal:
+								
 								break;
 							case upgradeTower:
 								break;
 							case noCommand:
 								break;
 						}
-					}			
-					catch (Exception exc) {}
+					
 				}
 				else if(SwingUtilities.isRightMouseButton(e)) {
 					lastCommand = Command.noCommand;
@@ -129,6 +134,48 @@ public class GUI extends JPanel {
 		for (int i=0; i < objects.size(); i++){								//tower_vastagság/2
 			if (objects.get(i).isTower() && test.getDistance(objects.get(i)) < 22)
 				return (Tower)objects.get(i);
+		}
+		
+		return null;
+		
+	}
+	
+	public Trap isThereTrap(double x, double y){
+			
+			List<GameObject> objects = Game.getMap().getObjects();
+			RedTower test = new RedTower(x,y); 	//Távolság teszteléséhez
+			
+			for (int i=0; i < objects.size(); i++){								//trap_vastagság/2
+				if (objects.get(i).isTrap() && test.getDistance(objects.get(i)) < 12)
+					return (Trap)objects.get(i);
+			}
+			
+			return null;
+			
+		}
+	
+	public DamageTrap isThereDmgTrap(double x, double y){
+		
+		List<GameObject> objects = Game.getMap().getObjects();
+		RedTower test = new RedTower(x,y); 	//Távolság teszteléséhez
+		
+		for (int i=0; i < objects.size(); i++){								//trap_vastagság/2
+			if ((objects.get(i) instanceof DamageTrap) && test.getDistance(objects.get(i)) < 12)
+				return (DamageTrap)objects.get(i);
+		}
+		
+		return null;
+		
+	}
+	
+	public SlowTrap isThereSlowTrap(double x, double y){
+		
+		List<GameObject> objects = Game.getMap().getObjects();
+		RedTower test = new RedTower(x,y); 	//Távolság teszteléséhez
+		
+		for (int i=0; i < objects.size(); i++){								//trap_vastagság/2
+			if ((objects.get(i) instanceof SlowTrap) && test.getDistance(objects.get(i)) < 12)
+				return (SlowTrap)objects.get(i);
 		}
 		
 		return null;
