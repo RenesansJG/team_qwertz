@@ -121,6 +121,14 @@ public abstract class Tower extends GameObject {
 		projectileDamage = temp;
 	}
 	
+	public void upgrade(){
+		rangeUpgrade();
+		damageUpgrade();
+		attackSpeedUpgrade();
+		AoEUpgrade();
+		projectileSpeedUpgrade();
+		
+	}
 	
 	public void rangeUpgrade() {
 		range += 10;
