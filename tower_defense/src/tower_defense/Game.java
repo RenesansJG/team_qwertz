@@ -58,21 +58,25 @@ public class Game implements Serializable {
 	private void spawn(){
 		if(ticks%30==29){
 			int a = rnd.nextInt(4);
+			GameObject go=null;
+			int level = (int)(ticks/150);
 			switch(a)
 			{
 				case 0:
-					gameMap.addObject(new Elf(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					go = new Elf(gameMap.getNodes().get(rnd.nextInt(gameMap.getNodes().size())),level);
 					break;
 				case 1:
-					gameMap.addObject(new Human(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					go = new Human(gameMap.getNodes().get(rnd.nextInt(gameMap.getNodes().size())),level);
 					break;
 				case 2:
-					gameMap.addObject(new Hobbit(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					go = new Hobbit(gameMap.getNodes().get(rnd.nextInt(gameMap.getNodes().size())),level);
 					break;
 				case 3:
-					gameMap.addObject(new Dwarf(gameMap.getNodes().get(rnd.nextInt(2)),1));
+					go = new Dwarf(gameMap.getNodes().get(rnd.nextInt(gameMap.getNodes().size())),level);
 					break;
 			}
+
+			gameMap.addObject(go);
 		}
 	}
 	

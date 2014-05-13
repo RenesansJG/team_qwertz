@@ -122,7 +122,7 @@ public class GUI extends JPanel {
 									
 								break;
 							case upgradeTower:
-								if (t != null && Game.takeMagicPower(40)){
+								if (t != null && Game.takeMagicPower(80)){
 									t.upgrade();
 								}
 								break;

@@ -31,7 +31,7 @@ public class Elf extends Enemy {
 	@Override
 	public double getMagicPower() {
 		// TODO hogyan számítsuk a kapott varázserõt?
-		return level * 10.0;
+		return level + 10.0;
 	}
 	
 	// elf másolása

@@ -27,7 +27,7 @@ public class Hobbit extends Enemy {
 
 	@Override
 	public double getMagicPower() {
-		return level * 10.0;
+		return level + 10.0;
 	}
 	
 	protected Enemy Copy(Enemy source){
