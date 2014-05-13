@@ -121,12 +121,20 @@ public class Canvas extends JPanel {
 	
 	public void drawBackground() {
 		Graphics bgg = backgroundImage.getGraphics();
+		
 		bgg.setColor(grassColor);
 		bgg.fillRect(0, 0, backgroundImage.getWidth(), backgroundImage.getHeight());
+		
+		/*try {
+			bgg.drawImage(ImageIO.read(new File("src/pic/" + "map.jpg")), 0, 0, this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
 		List<Node> startingNodes = Game.getMap().getNodes();
 		for(Node n : startingNodes) {
 			drawRoad(n);
-		}
+		} 
 	}
 	
 	private void drawRoad(Node node) {
