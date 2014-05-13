@@ -12,12 +12,12 @@ public class FogEffect extends Effect {
 	// effekt alkalmazása tornyon
 	@Override
 	public void apply(Tower tower) {
-		tower.modifyRange(-100);
+		tower.modifyRange(-50);
 	}
 	
 	@Override	//Effect levétele
 	public void restore(Tower tower) {
-		tower.modifyRange(100);
+		tower.modifyRange(50);
 	}
 	
 	// toString függvény kiíratáshoz

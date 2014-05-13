@@ -265,7 +265,7 @@ public class Game implements Serializable {
 			map.removeObject(go);
 		}
 
-		if(rnd.nextDouble() < 0.00001*ticks){
+		if(rnd.nextDouble() < 0.000002*ticks){
 			List<GameObject> towers = new ArrayList<GameObject>();
 			for(GameObject go : map.getObjects()){
 				if(go instanceof Tower){
@@ -273,7 +273,10 @@ public class Game implements Serializable {
 				}
 			}
 			if(towers.size()>0){
-				towers.get(rnd.nextInt(towers.size())).addEffect(new FogEffect());;
+				GameObject go = towers.get(rnd.nextInt(towers.size()));
+				FogEffect fog = new FogEffect();
+				go.addEffect(fog);
+				go.affect(fog);
 			}
 		}
 		if(Game.lost) {

@@ -5,7 +5,7 @@ import java.util.List;
 public class DamageTrap extends Trap {
 
 	private static final long serialVersionUID = 9047501422958390396L;
-	private static final Damage damage = new Damage(3,3,3);
+	private static final Damage damage = new Damage(0.5,0.5,0.5);
 	private double damageMultiplier = 1;
 	
 	
