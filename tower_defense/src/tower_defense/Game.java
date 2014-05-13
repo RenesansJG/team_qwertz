@@ -238,34 +238,33 @@ public class Game implements Serializable {
 	
 	public static void loseGame()
 	{
-		lost=true;
-		timer.stop();
-		try {
-			Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=KaqC5FnvAEc"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		if(!lost){
+			lost=true;
+			timer.stop();
+			try {
+				Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=KaqC5FnvAEc"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
 		}
-		
 	}
 	
 	public static void applyTicks() {
-		if(!lost){
-			GameMap map = Game.getMap();
-			List<GameObject> deadmanList = new ArrayList<GameObject>();
-			for(GameObject go : map.getObjects()) {
-				if(go.applyTick()) {
-					deadmanList.add(go);
-				}
+		GameMap map = Game.getMap();
+		List<GameObject> deadmanList = new ArrayList<GameObject>();
+		for(GameObject go : map.getObjects()) {
+			if(go.applyTick()) {
+				deadmanList.add(go);
 			}
-			for(GameObject go : deadmanList) {
-				map.removeObject(go);
-			}
-			
-			if(Game.lost) {
-				loseGame();
-			}
+		}
+		for(GameObject go : deadmanList) {
+			map.removeObject(go);
+		}
+		
+		if(Game.lost) {
+			loseGame();
 		}
 	}
 			
