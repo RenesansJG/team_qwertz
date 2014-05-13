@@ -2,7 +2,6 @@ package tower_defense;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class GameObject implements ITickable, Serializable {
@@ -31,6 +30,16 @@ public abstract class GameObject implements ITickable, Serializable {
 			}
 		}
 		for(Effect e : expiredEffects) {
+			if(this instanceof Tower) {
+				e.restore((Tower)this);
+			} else if(this instanceof DamageTrap) {
+				e.restore((DamageTrap)this);
+			} else if(this instanceof SlowTrap) {
+				e.restore((DamageTrap)this);
+			}
+			 else if(this instanceof Enemy) {
+					e.restore((Enemy)this);
+				}
 			effects.remove(e);
 		}
 	}
@@ -44,9 +53,8 @@ public abstract class GameObject implements ITickable, Serializable {
 	@Override
 	public final boolean applyTick(){
 		// effektek léptetése és az objektum tevékenységének meghívása
-		effect();                         // léptetés
 		boolean isToBeRemoved = action(); // tevékenység, visszatér, hogy törlendõ-e az objektum
-		
+		effect();                         // léptetés
 		return isToBeRemoved; // visszatérünk, hogy törlendõ-e
 	}
 	

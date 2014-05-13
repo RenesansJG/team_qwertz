@@ -265,7 +265,7 @@ public class Game implements Serializable {
 			map.removeObject(go);
 		}
 
-		if(ticks%5000==4999){
+		if(rnd.nextDouble() < 0.00001*ticks){
 			List<GameObject> towers = new ArrayList<GameObject>();
 			for(GameObject go : map.getObjects()){
 				if(go instanceof Tower){

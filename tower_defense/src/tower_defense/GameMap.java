@@ -36,7 +36,8 @@ public class GameMap implements Serializable {
 	
 	// objektum hozzáadása a maphez
 	public void addObject(GameObject object) {	
-		objects.add(object);
+		if(object.isEnemy()) objects.add(0, object);
+		else objects.add(object);
 	}
 	
 	// objektum eltávolítása a maprõl

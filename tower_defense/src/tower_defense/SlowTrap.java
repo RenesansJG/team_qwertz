@@ -6,7 +6,7 @@ public class SlowTrap extends Trap {
 
 	private static final long serialVersionUID = 8010869721215614573L;
 	
-	private static final double slow = 0.8;
+	private static final double slow = 0.65;
 	public double slowMultiplier = 1;
 	
 	// lassító csapda konstruktor

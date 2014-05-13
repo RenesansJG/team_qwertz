@@ -214,11 +214,11 @@ public class Canvas extends JPanel {
 			case buildSlowTrap:
 				return sprites.get("slowTrap");
 			case useRedCrystal:
-				return sprites.get("redCrystal");
+				return sprites.get("redCrystalEffect");
 			case useBlueCrystal:
-				return sprites.get("blueCrystal");
+				return sprites.get("blueCrystalEffect");
 			case useGreenCrystal:
-				return sprites.get("greenCrystal");
+				return sprites.get("greenCrystalEffect");
 			case upgradeTower:
 				return sprites.get("upgrade");
 			default:
@@ -237,13 +237,13 @@ public class Canvas extends JPanel {
 			return sprites.get("blueTower");
 		}
 		else if(go instanceof RedCrystalEffect) {
-			return sprites.get("redCrystal");
+			return sprites.get("redCrystalEffect");
 		}
 		else if(go instanceof GreenCrystalEffect) {
-			return sprites.get("greenCrystal");
+			return sprites.get("greenCrystalEffect");
 		}
 		else if(go instanceof BlueCrystalEffect) {
-			return sprites.get("blueCrystal");
+			return sprites.get("blueCrystalEffect");
 		}
 		else if(go instanceof SlowEffect) {
 			return sprites.get("slowEffect");
