@@ -22,7 +22,7 @@ public class Game implements Serializable {
 	private static Game currentGame; // aktuális játék
 	
 	// random seed
-	public static Random rnd = new Random();
+	public final static Random rnd = new Random();
 	// direkt privát, kérlek ne módosítsátok, magyarázatért engem kérdezzetek (Máté)
 	
 	private final GameMap gameMap;   // referencia a mapre
@@ -63,6 +63,8 @@ public class Game implements Serializable {
 			int a = rnd.nextInt(4);
 			GameObject go=null;
 			int level = (int)(ticks/150);
+			if(level>10)
+				level=10;
 			switch(a)
 			{
 				case 0:
@@ -262,7 +264,18 @@ public class Game implements Serializable {
 		for(GameObject go : deadmanList) {
 			map.removeObject(go);
 		}
-		
+
+		if(ticks%5000==4999){
+			List<GameObject> towers = new ArrayList<GameObject>();
+			for(GameObject go : map.getObjects()){
+				if(go instanceof Tower){
+					towers.add(go);
+				}
+			}
+			if(towers.size()>0){
+				towers.get(rnd.nextInt(towers.size())).addEffect(new FogEffect());;
+			}
+		}
 		if(Game.lost) {
 			loseGame();
 		}

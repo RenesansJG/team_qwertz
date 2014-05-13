@@ -148,8 +148,4 @@ public abstract class Tower extends GameObject {
 	public final boolean isTower() {
 		return true; // tower
 	}
-
-	
-	
-	
 }
