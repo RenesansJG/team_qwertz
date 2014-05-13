@@ -128,19 +128,19 @@ public abstract class Tower extends GameObject {
 	}
 	
 	public void rangeUpgrade() {
-		range += 10;
+		range += 4;
 	}
 
 	public void attackSpeedUpgrade() {
-		attackSpeed -= 2;
+		attackSpeed -= 1;
 	}
 	
 	public void projectileSpeedUpgrade() {
-		projectileSpeed += 10;
+		projectileSpeed += 1;
 	}
 	
 	public void AoEUpgrade() {
-		projectileAoE += 5;
+		projectileAoE += 3;
 	}
 	
 	// override-oljuk az isTower függvényt
