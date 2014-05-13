@@ -3,7 +3,7 @@ package tower_defense;
 public class SlowEffect extends Effect {
 	private static final long serialVersionUID = -1864723360268261902L;
 
-	private static int duration = 1;
+	private static int duration = 0;
 	
 	private double slow;
 	

@@ -38,9 +38,11 @@ public class Canvas extends JPanel {
 			"redTower",
 			"greenTower",
 			"blueTower",
-			"redCrystal",
-			"greenCrystal",
-			"blueCrystal",
+			"redCrystalEffect",
+			"greenCrystalEffect",
+			"blueCrystalEffect",
+			"blueCrystalEffect",
+			"slowEffect",
 			"elf",
 			"dwarf",
 			"human",
@@ -173,11 +175,17 @@ public class Canvas extends JPanel {
 				double biOffsetY = - bi.getHeight();
 				g.drawImage(bi, (int)(go.getX() + biOffsetX), (int)(go.getY() + biOffsetY), this);
 				List<Effect> effects = go.getEffects();
+				int effectsOffsetX = 0;
+				for(Effect effect : effects) {
+					effectsOffsetX += getImage(effect).getWidth();
+				}
+				effectsOffsetX /= -2;
 				for(Effect effect : effects) {
 					BufferedImage bie = getImage(effect);
-					double bieOffsetX = biOffsetX + bie.getWidth()/2;
-					double bieOffsetY = biOffsetY + bi.getHeight() + bie.getHeight();
-					g.drawImage(bi, (int)(go.getX() + bieOffsetX), (int)(go.getY() + bieOffsetY), this);
+					double bieOffsetX = effectsOffsetX;
+					double bieOffsetY = - bie.getHeight() + biOffsetY;
+					g.drawImage(bie, (int)(go.getX() + bieOffsetX), (int)(go.getY() + bieOffsetY), this);
+					effectsOffsetX += bie.getWidth();
 				}
 			}
 			BufferedImage commandImage = getCommandImage();
@@ -208,9 +216,9 @@ public class Canvas extends JPanel {
 			case useRedCrystal:
 				return sprites.get("redCrystal");
 			case useBlueCrystal:
-				return sprites.get("greenCrystal");
-			case useGreenCrystal:
 				return sprites.get("blueCrystal");
+			case useGreenCrystal:
+				return sprites.get("greenCrystal");
 			case upgradeTower:
 				return sprites.get("upgrade");
 			default:
@@ -236,6 +244,9 @@ public class Canvas extends JPanel {
 		}
 		else if(go instanceof BlueCrystalEffect) {
 			return sprites.get("blueCrystal");
+		}
+		else if(go instanceof SlowEffect) {
+			return sprites.get("slowEffect");
 		}
 		else if(go instanceof Elf) {
 			return sprites.get("elf");

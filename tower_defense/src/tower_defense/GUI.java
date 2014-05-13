@@ -23,8 +23,8 @@ public class GUI extends JPanel {
 		buildDamageTrap,
 		buildSlowTrap,
 		useRedCrystal,
-		useBlueCrystal,
 		useGreenCrystal,
+		useBlueCrystal,
 		upgradeTower,
 		noCommand
 	}
