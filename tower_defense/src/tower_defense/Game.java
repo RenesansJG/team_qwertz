@@ -251,19 +251,21 @@ public class Game implements Serializable {
 	}
 	
 	public static void applyTicks() {
-		GameMap map = Game.getMap();
-		List<GameObject> deadmanList = new ArrayList<GameObject>();
-		for(GameObject go : map.getObjects()) {
-			if(go.applyTick()) {
-				deadmanList.add(go);
+		if(!lost){
+			GameMap map = Game.getMap();
+			List<GameObject> deadmanList = new ArrayList<GameObject>();
+			for(GameObject go : map.getObjects()) {
+				if(go.applyTick()) {
+					deadmanList.add(go);
+				}
 			}
-		}
-		for(GameObject go : deadmanList) {
-			map.removeObject(go);
-		}
-		
-		if(Game.lost) {
-			loseGame();
+			for(GameObject go : deadmanList) {
+				map.removeObject(go);
+			}
+			
+			if(Game.lost) {
+				loseGame();
+			}
 		}
 	}
 			
