@@ -1,5 +1,6 @@
 package tower_defense;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -237,6 +240,14 @@ public class Game implements Serializable {
 	{
 		lost=true;
 		timer.stop();
+		try {
+			Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=KaqC5FnvAEc"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void applyTicks() {
